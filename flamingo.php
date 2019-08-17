@@ -12,6 +12,8 @@ define( 'FLAMINGO_VERSION', '2.0' );
 
 define( 'FLAMINGO_PLUGIN', __FILE__ );
 
+define( 'FLAMINGO_MOVE_TRASH_DAYS', 30 );
+
 define( 'FLAMINGO_PLUGIN_BASENAME',
 	plugin_basename( FLAMINGO_PLUGIN ) );
 
@@ -35,6 +37,7 @@ require_once FLAMINGO_PLUGIN_DIR . '/includes/class-outbound-message.php';
 require_once FLAMINGO_PLUGIN_DIR . '/includes/user.php';
 require_once FLAMINGO_PLUGIN_DIR . '/includes/comment.php';
 require_once FLAMINGO_PLUGIN_DIR . '/includes/akismet.php';
+require_once FLAMINGO_PLUGIN_DIR . '/includes/cron.php';
 
 if ( is_admin() ) {
 	require_once FLAMINGO_PLUGIN_DIR . '/admin/admin.php';
