@@ -1,7 +1,7 @@
 === Flamingo ===
 Contributors: takayukister, megumithemes
 Tags: bird, contact, mail, crm
-Requires at least: 5.0
+Requires at least: 5.2
 Tested up to: 5.2
 Stable tag: 2.0
 License: GPLv2 or later
