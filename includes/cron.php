@@ -48,6 +48,7 @@ function flamingo_schedule_deactivate() {
 
 // hook flamingo_schedule_function to schedule event
 add_action( 'flamingo_daily_cron_job', 'flamingo_schedule_function', 10, 0 );
+
 /**
  * Function to run for cron job
  *
