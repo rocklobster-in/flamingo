@@ -8,6 +8,9 @@
  */
 
 
+// call when WP loads
+add_action( 'wp', 'flamingo_schedule_activation', 10, 0 );
+
 /**
  * Create schedule event for cron job, if its already not exists
  *
@@ -22,9 +25,9 @@ function flamingo_schedule_activation() {
 	}
 }
 
-// call when WP loads
-add_action( 'wp', 'flamingo_schedule_activation' );
 
+// deactivate cron job on deactivation of the plugin on plugin's deactivation
+register_deactivation_hook( __FILE__, 'flamingo_schedule_deactivate' );
 
 /**
  * Function to deactivate the cron job
@@ -42,10 +45,9 @@ function flamingo_schedule_deactivate() {
 	wp_unschedule_event( $timestamp, 'flamingo_daily_cron_job' );
 }
 
-// deactivate cron job on deactivation of the plugin on plugin's deactivation
-register_deactivation_hook( __FILE__, 'flamingo_schedule_deactivate' );
 
-
+// hook flamingo_schedule_function to schedule event
+add_action( 'flamingo_daily_cron_job', 'flamingo_schedule_function', 10, 0 );
 /**
  * Function to run for cron job
  *
@@ -58,6 +60,3 @@ function flamingo_schedule_function() {
 	// run function move spam to trash
 	flamingo_schedule_move_trash();
 }
-
-// hook flamingo_schedule_function to schedule event
-add_action( 'flamingo_daily_cron_job', 'flamingo_schedule_function' );
