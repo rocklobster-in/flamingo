@@ -276,7 +276,7 @@ function flamingo_inbound_recaptcha_meta_box( $post ) {
 <?php foreach ( (array) $post->recaptcha as $key => $value ) : ?>
 <tr>
 <td class="field-title"><?php echo esc_html( $key ); ?></td>
-<td class="field-value"><?php echo esc_html( json_encode( $value ) ); ?></td>
+<td class="field-value"><?php echo esc_html( json_encode( $value, JSON_PRETTY_PRINT ) ); ?></td>
 </tr>
 <?php endforeach; ?>
 
