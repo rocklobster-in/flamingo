@@ -3,7 +3,7 @@
 /**
  * The file that defines the cron job functionality
  *
- * @since 3.0
+ * @since 2.1
  *
  */
 
@@ -14,7 +14,7 @@ add_action( 'wp', 'flamingo_schedule_activation', 10, 0 );
 /**
  * Create schedule event for cron job, if its already not exists
  *
- * @since 3.0
+ * @since 2.1
  *
  * @see wp_next_scheduled(), wp_schedule_event()
  *
@@ -32,7 +32,7 @@ register_deactivation_hook( __FILE__, 'flamingo_schedule_deactivate' );
 /**
  * Function to deactivate the cron job
  *
- * @since 3.0
+ * @since 2.1
  *
  * @see wp_next_scheduled(), wp_unschedule_event()
  *
@@ -52,7 +52,7 @@ add_action( 'flamingo_daily_cron_job', 'flamingo_schedule_function', 10, 0 );
 /**
  * Function to run for cron job
  *
- * @since 3.0
+ * @since 2.1
  *
  * @see flamingo_schedule_move_trash()
  *

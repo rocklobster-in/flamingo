@@ -27,7 +27,7 @@ function flamingo_array_flatten( $input ) {
 /**
  * Move a spam to the Trash
  *
- * @since 3.0
+ * @since 2.1
  *
  * @see wp_trash_post()
  *
