@@ -33,6 +33,12 @@ function flamingo_array_flatten( $input ) {
  *
  */
 function flamingo_schedule_move_trash() {
+
+	// abort if FLAMINGO_MOVE_TRASH_DAYS is set to zero or in minus
+	if ( (int) FLAMINGO_MOVE_TRASH_DAYS <= 0 ) {
+		return true;
+	}
+
 	global $wpdb;
 	$move_timestamp = time() - ( DAY_IN_SECONDS * FLAMINGO_MOVE_TRASH_DAYS );
 	// get posts ids Array to move to the trash

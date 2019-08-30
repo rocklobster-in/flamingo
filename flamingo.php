@@ -10,7 +10,9 @@ Version: 2.1
 
 define( 'FLAMINGO_VERSION', '2.1' );
 
-define( 'FLAMINGO_MOVE_TRASH_DAYS', 30 );
+if ( ! defined( 'FLAMINGO_MOVE_TRASH_DAYS' ) ) {
+	define( 'FLAMINGO_MOVE_TRASH_DAYS', 30 );
+}
 
 define( 'FLAMINGO_PLUGIN', __FILE__ );
 
