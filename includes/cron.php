@@ -38,6 +38,7 @@ register_deactivation_hook( __FILE__, 'flamingo_schedule_deactivate' );
  *
  */
 function flamingo_schedule_deactivate() {
+
 	// when the last event was scheduled
 	$timestamp = wp_next_scheduled( 'flamingo_daily_cron_job' );
 
@@ -58,6 +59,7 @@ add_action( 'flamingo_daily_cron_job', 'flamingo_schedule_function', 10, 0 );
  *
  */
 function flamingo_schedule_function() {
+
 	// run function move spam to trash
 	flamingo_schedule_move_trash();
 }
