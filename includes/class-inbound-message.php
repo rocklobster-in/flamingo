@@ -231,9 +231,11 @@ class Flamingo_Inbound_Message {
 			$this->id = $post_id;
 
 			if ( $post_status == self::spam_status ) {
+
 				// set spam meta time for later use to trash
 				update_post_meta( $post_id, '_spam_meta_time', time() );
 			} else {
+
 				// delete spam meta time to stop trashing in cron job
 				delete_post_meta( $post_id, '_spam_meta_time' );
 			}
