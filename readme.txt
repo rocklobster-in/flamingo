@@ -1,5 +1,5 @@
 === Flamingo ===
-Contributors: takayukister, megumithemes
+Contributors: takayukister, megumithemes, itpixelz
 Tags: bird, contact, mail, crm
 Requires at least: 5.2
 Tested up to: 5.2
