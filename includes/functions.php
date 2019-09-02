@@ -43,11 +43,11 @@ function flamingo_schedule_move_trash() {
 	$move_timestamp = time() - ( DAY_IN_SECONDS * FLAMINGO_MOVE_TRASH_DAYS );
 
 	// get posts ids Array to move to the trash
-	$posts_to_move = $wpdb->get_results( $wpdb->prepare( "SELECT post_id FROM $wpdb->postmeta WHERE meta_key = '_spam_meta_time' AND meta_value < %d", $move_timestamp ), ARRAY_A );
+	$posts_to_move = $wpdb->get_col( $wpdb->prepare( "SELECT post_id FROM $wpdb->postmeta WHERE meta_key = '_spam_meta_time' AND meta_value < %d", $move_timestamp ) );
 
 	// post id's loop
-	foreach ( (array) $posts_to_move as $post ) {
-		$post_id = (int) $post['post_id'];
+	foreach ( (array) $posts_to_move as $post_id ) {
+		$post_id = (int) $post_id;
 		if ( ! $post_id ) {
 			continue;
 		}
