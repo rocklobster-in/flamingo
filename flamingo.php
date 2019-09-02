@@ -10,10 +10,6 @@ Version: 2.1
 
 define( 'FLAMINGO_VERSION', '2.1' );
 
-if ( ! defined( 'FLAMINGO_MOVE_TRASH_DAYS' ) ) {
-	define( 'FLAMINGO_MOVE_TRASH_DAYS', 30 );
-}
-
 define( 'FLAMINGO_PLUGIN', __FILE__ );
 
 define( 'FLAMINGO_PLUGIN_BASENAME',
@@ -24,6 +20,10 @@ define( 'FLAMINGO_PLUGIN_NAME',
 
 define( 'FLAMINGO_PLUGIN_DIR',
 	untrailingslashit( dirname( FLAMINGO_PLUGIN ) ) );
+
+if ( ! defined( 'FLAMINGO_MOVE_TRASH_DAYS' ) ) {
+	define( 'FLAMINGO_MOVE_TRASH_DAYS', 30 );
+}
 
 // Deprecated, not used in the plugin core. Use flamingo_plugin_url() instead.
 define( 'FLAMINGO_PLUGIN_URL',
