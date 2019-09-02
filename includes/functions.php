@@ -48,6 +48,7 @@ function flamingo_schedule_move_trash() {
 	// post id's loop
 	foreach ( (array) $posts_to_move as $post_id ) {
 		$post_id = (int) $post_id;
+
 		if ( ! $post_id ) {
 			continue;
 		}
