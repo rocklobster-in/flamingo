@@ -32,13 +32,12 @@ This plugin stores submission data collected through contact forms, which may in
 
 == Changelog ==
 
+= 2.1 =
+
+* UI improvements in displaying JSON reCAPTCHA logs in the Inbound Message editor page.
+* Moves to trash automatically after every 30 days of the creation of spam messages.
+
 = 2.0 =
 
 * Displays spam logs in the Inbound Message editor page.
 * Displays reCAPTCHA logs in the Inbound Message editor page.
-
-= 1.9 =
-
-* The admin screen UI has been updated.
-* Enables to search Inbound Messages by keywords used in the Consent and Meta sections.
-* Introduces personal data eraser for Address Book and Inbound Messages data.
