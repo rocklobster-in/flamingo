@@ -39,21 +39,21 @@ function flamingo_schedule_move_trash() {
 		return true;
 	}
 
-	global $wpdb;
-	$move_timestamp = time() - ( DAY_IN_SECONDS * FLAMINGO_MOVE_TRASH_DAYS );
+	$posts_to_move = Flamingo_Inbound_Message::find( array(
+		'posts_per_page' => 100,
+		'meta_key' => '_spam_meta_time',
+		'meta_value' => time() - ( DAY_IN_SECONDS * FLAMINGO_MOVE_TRASH_DAYS ),
+		'meta_compare' => '<',
+		'post_status' => Flamingo_Inbound_Message::spam_status,
+	) );
 
-	// get posts ids Array to move to the trash
-	$posts_to_move = $wpdb->get_col( $wpdb->prepare( "SELECT post_id FROM $wpdb->postmeta WHERE meta_key = '_spam_meta_time' AND meta_value < %d", $move_timestamp ) );
+	foreach ( $posts_to_move as $post ) {
 
-	// post id's loop
-	foreach ( (array) $posts_to_move as $post_id ) {
-		$post_id = (int) $post_id;
+		if ( $post->trash() ) {
 
-		if ( ! $post_id ) {
-			continue;
+			// delete spam meta time to stop trashing in cron job
+			delete_post_meta( $post->id, '_spam_meta_time' );
 		}
 
-		// trash it now
-		wp_trash_post( $post_id );
 	}
 }
