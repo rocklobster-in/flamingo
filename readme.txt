@@ -3,7 +3,7 @@ Contributors: takayukister, megumithemes, itpixelz
 Tags: bird, contact, mail, crm
 Requires at least: 5.2
 Tested up to: 5.2
-Stable tag: 2.0
+Stable tag: 2.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,13 +32,12 @@ This plugin stores submission data collected through contact forms, which may in
 
 == Changelog ==
 
+= 2.1 =
+
+* UI improvements in displaying JSON reCAPTCHA logs in the Inbound Message editor page.
+* Moves to trash automatically after every 30 days of the creation of spam messages.
+
 = 2.0 =
 
 * Displays spam logs in the Inbound Message editor page.
 * Displays reCAPTCHA logs in the Inbound Message editor page.
-
-= 1.9 =
-
-* The admin screen UI has been updated.
-* Enables to search Inbound Messages by keywords used in the Consent and Meta sections.
-* Introduces personal data eraser for Address Book and Inbound Messages data.
