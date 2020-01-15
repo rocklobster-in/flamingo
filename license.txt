@@ -1,4 +1,4 @@
-Flamingo - WordPress Plugin, 2012-2019 Takayuki Miyoshi
+Flamingo - WordPress Plugin, 2012-2020 Takayuki Miyoshi
 Flamingo is distributed under the terms of the GNU GPL
 
 This program is free software; you can redistribute it and/or modify
