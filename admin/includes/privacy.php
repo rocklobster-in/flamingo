@@ -20,10 +20,10 @@ function flamingo_privacy_contact_eraser( $email_address, $page = 1 ) {
 	$number = 100;
 
 	$posts = Flamingo_Contact::find( array(
-		'meta_key' => '_email',
-		'meta_value' => $email_address,
+		'meta_key'       => '_email',
+		'meta_value'     => $email_address,
 		'posts_per_page' => $number,
-		'paged' => (int) $page,
+		'paged'          => (int) $page,
 	) );
 
 	$items_removed = false;
@@ -51,10 +51,10 @@ function flamingo_privacy_contact_eraser( $email_address, $page = 1 ) {
 	$done = Flamingo_Contact::$found_items < $number;
 
 	return array(
-		'items_removed' => $items_removed,
+		'items_removed'  => $items_removed,
 		'items_retained' => $items_retained,
-		'messages' => array_map( 'esc_html', (array) $messages ),
-		'done' => $done,
+		'messages'       => array_map( 'esc_html', (array) $messages ),
+		'done'           => $done,
 	);
 }
 
@@ -62,10 +62,10 @@ function flamingo_privacy_inbound_eraser( $email_address, $page = 1 ) {
 	$number = 100;
 
 	$posts = Flamingo_Inbound_Message::find( array(
-		'meta_key' => '_from_email',
-		'meta_value' => $email_address,
+		'meta_key'       => '_from_email',
+		'meta_value'     => $email_address,
 		'posts_per_page' => $number,
-		'paged' => (int) $page,
+		'paged'          => (int) $page,
 	) );
 
 	$items_removed = false;
@@ -93,9 +93,9 @@ function flamingo_privacy_inbound_eraser( $email_address, $page = 1 ) {
 	$done = Flamingo_Inbound_Message::$found_items < $number;
 
 	return array(
-		'items_removed' => $items_removed,
+		'items_removed'  => $items_removed,
 		'items_retained' => $items_retained,
-		'messages' => array_map( 'esc_html', (array) $messages ),
-		'done' => $done,
+		'messages'       => array_map( 'esc_html', (array) $messages ),
+		'done'           => $done,
 	);
 }

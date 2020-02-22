@@ -8,11 +8,11 @@ class Flamingo_Contacts_List_Table extends WP_List_Table {
 
 	public static function define_columns() {
 		$columns = array(
-			'cb' => '<input type="checkbox" />',
-			'email' => __( 'Email', 'flamingo' ),
-			'full_name' => __( 'Name', 'flamingo' ),
-			'tags' => __( 'Tags', 'flamingo' ),
-			'history' => __( 'History', 'flamingo' ),
+			'cb' 			 => '<input type="checkbox" />',
+			'email'			 => __( 'Email', 'flamingo' ),
+			'full_name' 	 => __( 'Name', 'flamingo' ),
+			'tags' 			 => __( 'Tags', 'flamingo' ),
+			'history'		 => __( 'History', 'flamingo' ),
 			'last_contacted' => __( 'Last Contact', 'flamingo' ),
 		);
 
@@ -25,8 +25,8 @@ class Flamingo_Contacts_List_Table extends WP_List_Table {
 	public function __construct() {
 		parent::__construct( array(
 			'singular' => 'post',
-			'plural' => 'posts',
-			'ajax' => false,
+			'plural'   => 'posts',
+			'ajax'     => false,
 		) );
 	}
 
@@ -36,10 +36,10 @@ class Flamingo_Contacts_List_Table extends WP_List_Table {
 
 		$args = array(
 			'posts_per_page' => $per_page,
-			'offset' => ( $this->get_pagenum() - 1 ) * $per_page,
-			'orderby' => 'meta_value',
-			'order' => 'DESC',
-			'meta_key' => '_last_contacted',
+			'offset' 		 => ( $this->get_pagenum() - 1 ) * $per_page,
+			'orderby'        => 'meta_value',
+			'order'          => 'DESC',
+			'meta_key'       => '_last_contacted',
 		);
 
 		if ( ! empty( $_REQUEST['s'] ) ) {
@@ -71,7 +71,7 @@ class Flamingo_Contacts_List_Table extends WP_List_Table {
 		$this->set_pagination_args( array(
 			'total_items' => $total_items,
 			'total_pages' => $total_pages,
-			'per_page' => $per_page,
+			'per_page'    => $per_page,
 		) );
 	}
 
@@ -81,8 +81,8 @@ class Flamingo_Contacts_List_Table extends WP_List_Table {
 
 	protected function get_sortable_columns() {
 		$columns = array(
-			'email' => array( 'email', false ),
-			'full_name' => array( 'name', false ),
+			'email'          => array( 'email', false ),
+			'full_name'      => array( 'name', false ),
 			'last_contacted' => array( 'last_contacted', true ),
 		);
 
@@ -91,7 +91,7 @@ class Flamingo_Contacts_List_Table extends WP_List_Table {
 
 	protected function get_bulk_actions() {
 		$actions = array(
-			'delete' => __( 'Delete', 'flamingo' ),
+			'delete' 		 => __( 'Delete', 'flamingo' ),
 		);
 
 		return $actions;
@@ -115,13 +115,13 @@ class Flamingo_Contacts_List_Table extends WP_List_Table {
 <?php
 		if ( 'top' == $which ) {
 			wp_dropdown_categories( array(
-				'taxonomy' => Flamingo_Contact::contact_tag_taxonomy,
-				'name' => 'contact_tag_id',
+				'taxonomy' 		  => Flamingo_Contact::contact_tag_taxonomy,
+				'name'            => 'contact_tag_id',
 				'show_option_all' => __( 'View all tags', 'flamingo' ),
-				'hide_empty' => 1,
-				'hide_if_empty' => 1,
-				'orderby' => 'name',
-				'selected' => $tag,
+				'hide_empty'      => 1,
+				'hide_if_empty'   => 1,
+				'orderby'         => 'name',
+				'selected'        => $tag,
 			) );
 
 			submit_button( __( 'Filter', 'flamingo' ),
@@ -150,7 +150,7 @@ class Flamingo_Contacts_List_Table extends WP_List_Table {
 	protected function column_email( $item ) {
 		$edit_link = add_query_arg(
 			array(
-				'post' => $item->id,
+				'post'   => $item->id,
 				'action' => 'edit',
 			),
 			menu_page_url( 'flamingo', false )
@@ -183,7 +183,7 @@ class Flamingo_Contacts_List_Table extends WP_List_Table {
 
 		$link = add_query_arg(
 			array(
-				'post' => $item->id,
+				'post'   => $item->id,
 				'action' => 'edit',
 			),
 			menu_page_url( 'flamingo', false )
@@ -245,7 +245,7 @@ class Flamingo_Contacts_List_Table extends WP_List_Table {
 
 		// User
 		if ( $user = get_user_by( 'email', $item->email ) ) {
-			$link = sprintf( 'user-edit.php?user_id=%d', $user->ID );
+			 $link = sprintf( 'user-edit.php?user_id=%d', $user->ID );
 
 			$history[] = sprintf(
 				'<a href="%2$s">%1$s</a>',
@@ -256,10 +256,10 @@ class Flamingo_Contacts_List_Table extends WP_List_Table {
 
 		// Comment
 		$comment_count = (int) get_comments( array(
-			'count' => true,
+			'count'        => true,
 			'author_email' => $item->email,
-			'status' => 'approve',
-			'type' => 'comment',
+			'status'       => 'approve',
+			'type'         => 'comment',
 		) );
 
 		if ( 0 < $comment_count ) {
@@ -275,14 +275,14 @@ class Flamingo_Contacts_List_Table extends WP_List_Table {
 			);
 		}
 
-		// Contact channels
+		// Contact channels.
 		$terms = get_terms( Flamingo_Inbound_Message::channel_taxonomy );
 
 		if ( ! empty( $terms ) and ! is_wp_error( $terms ) ) {
 			foreach ( (array) $terms as $term ) {
 				Flamingo_Inbound_Message::find( array(
 					'channel' => $term->slug,
-					's' => $item->email,
+					's'       => $item->email,
 				) );
 
 				$count = (int) Flamingo_Inbound_Message::$found_items;
@@ -294,7 +294,7 @@ class Flamingo_Contacts_List_Table extends WP_List_Table {
 				$link = add_query_arg(
 					array(
 						'channel' => $term->slug,
-						's' => $item->email,
+						's'       => $item->email,
 					),
 					menu_page_url( 'flamingo_inbound', false )
 				);

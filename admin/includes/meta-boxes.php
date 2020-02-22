@@ -12,7 +12,7 @@ function flamingo_contact_submit_meta_box( $post ) {
 
 		$delete_link = add_query_arg(
 			array(
-				'post' => $post->id,
+				'post'   => $post->id,
 				'action' => 'delete',
 			),
 			menu_page_url( 'flamingo', false )
@@ -61,10 +61,10 @@ function flamingo_contact_tags_meta_box( $post ) {
 
 	$most_used_tags = get_terms( Flamingo_Contact::contact_tag_taxonomy, array(
 		'orderby' => 'count',
-		'order' => 'DESC',
-		'number' => 10,
+		'order'   => 'DESC',
+		'number'  => 10,
 		'exclude' => $tag_ids,
-		'fields' => 'names',
+		'fields'  => 'names',
 	) );
 
 	if ( is_wp_error( $most_used_tags ) ) {
@@ -174,7 +174,7 @@ function flamingo_inbound_submit_meta_box( $post ) {
 
 		$delete_link = add_query_arg(
 			array(
-				'post' => $post->id,
+				'post'   => $post->id,
 				'action' => 'trash',
 			),
 			menu_page_url( 'flamingo_inbound', false )

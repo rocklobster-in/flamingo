@@ -34,7 +34,7 @@ function flamingo_array_flatten( $input ) {
  */
 function flamingo_schedule_move_trash() {
 
-	// abort if FLAMINGO_MOVE_TRASH_DAYS is set to zero or in minus
+	// Abort if FLAMINGO_MOVE_TRASH_DAYS is set to zero or in minus.
 	if ( (int) FLAMINGO_MOVE_TRASH_DAYS <= 0 ) {
 		return true;
 	}
@@ -51,7 +51,7 @@ function flamingo_schedule_move_trash() {
 
 		if ( $post->trash() ) {
 
-			// delete spam meta time to stop trashing in cron job
+			// Delete spam meta time to stop trashing in cron job.
 			delete_post_meta( $post->id, '_spam_meta_time' );
 		}
 

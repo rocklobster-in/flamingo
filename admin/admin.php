@@ -141,8 +141,8 @@ function flamingo_load_contact_admin() {
 
 			$redirect_to = add_query_arg(
 				array(
-					'action' => 'edit',
-					'post' => $post->id,
+					'action'  => 'edit',
+					'post'    => $post->id,
 					'message' => 'contactupdated',
 				), $redirect_to
 			);
@@ -211,9 +211,9 @@ function flamingo_load_contact_admin() {
 
 		$args = array(
 			'posts_per_page' => -1,
-			'orderby' => 'meta_value',
-			'order' => 'ASC',
-			'meta_key' => '_email',
+			'orderby'        => 'meta_value',
+			'order'          => 'ASC',
+			'meta_key'       => '_email',
 		);
 
 		if ( ! empty( $_GET['s'] ) ) {
@@ -301,7 +301,7 @@ function flamingo_load_contact_admin() {
 			array( 'Flamingo_Contacts_List_Table', 'define_columns' ) );
 
 		add_screen_option( 'per_page', array(
-			'label' => __( 'Contacts', 'flamingo' ),
+			'label'   => __( 'Contacts', 'flamingo' ),
 			'default' => 20,
 		) );
 	}
@@ -385,8 +385,8 @@ function flamingo_load_inbound_admin() {
 
 			$redirect_to = add_query_arg(
 				array(
-					'action' => 'edit',
-					'post' => $post->id,
+					'action'  => 'edit',
+					'post'    => $post->id,
 					'message' => 'inboundupdated',
 				), $redirect_to
 			);

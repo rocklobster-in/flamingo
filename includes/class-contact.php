@@ -17,7 +17,7 @@ class Flamingo_Contact {
 	public static function register_post_type() {
 		register_post_type( self::post_type, array(
 			'labels' => array(
-				'name' => __( 'Flamingo Contacts', 'flamingo' ),
+				'name'          => __( 'Flamingo Contacts', 'flamingo' ),
 				'singular_name' => __( 'Flamingo Contact', 'flamingo' ),
 			),
 			'rewrite' => false,
@@ -26,11 +26,11 @@ class Flamingo_Contact {
 
 		register_taxonomy( self::contact_tag_taxonomy, self::post_type, array(
 			'labels' => array(
-				'name' => __( 'Flamingo Contact Tags', 'flamingo' ),
+				'name'          => __( 'Flamingo Contact Tags', 'flamingo' ),
 				'singular_name' => __( 'Flamingo Contact Tag', 'flamingo' ),
 			),
-			'public' => false,
-			'rewrite' => false,
+			'public'    => false,
+			'rewrite'   => false,
 			'query_var' => false,
 		) );
 	}
@@ -38,13 +38,13 @@ class Flamingo_Contact {
 	public static function find( $args = '' ) {
 		$defaults = array(
 			'posts_per_page' => 10,
-			'offset' => 0,
-			'orderby' => 'ID',
-			'order' => 'ASC',
-			'meta_key' => '',
-			'meta_value' => '',
-			'post_status' => 'any',
-			'tax_query' => array(),
+			'offset'         => 0,
+			'orderby'        => 'ID',
+			'order'          => 'ASC',
+			'meta_key'       => '',
+			'meta_value'     => '',
+			'post_status'    => 'any',
+			'tax_query'      => array(),
 			'contact_tag_id' => '',
 		);
 
@@ -54,9 +54,9 @@ class Flamingo_Contact {
 
 		if ( ! empty( $args['contact_tag_id'] ) ) {
 			$args['tax_query'][] = array(
-				'taxonomy' => self::contact_tag_taxonomy,
-				'terms' => $args['contact_tag_id'],
-				'field' => 'term_id',
+				'taxonomy'   => self::contact_tag_taxonomy,
+				'terms'      => $args['contact_tag_id'],
+				'field'      => 'term_id',
 			);
 		}
 
@@ -77,9 +77,9 @@ class Flamingo_Contact {
 	public static function search_by_email( $email ) {
 		$objs = self::find( array(
 			'posts_per_page' => 1,
-			'orderby' => 'ID',
-			'meta_key' => '_email',
-			'meta_value' => $email,
+			'orderby'        => 'ID',
+			'meta_key'       => '_email',
+			'meta_value'     => $email,
 		) );
 
 		if ( empty( $objs ) ) {
@@ -92,7 +92,7 @@ class Flamingo_Contact {
 	public static function add( $args = '' ) {
 		$defaults = array(
 			'email' => '',
-			'name' => '',
+			'name'  => '',
 			'props' => array(),
 		);
 
@@ -109,7 +109,7 @@ class Flamingo_Contact {
 			$obj = new self();
 
 			$obj->email = $args['email'];
-			$obj->name = $args['name'];
+			$obj->name  = $args['name'];
 			$obj->props = (array) $args['props'];
 		}
 
@@ -126,9 +126,9 @@ class Flamingo_Contact {
 
 	public function __construct( $post = null ) {
 		if ( ! empty( $post ) && ( $post = get_post( $post ) ) ) {
-			$this->id = $post->ID;
+			$this->id    = $post->ID;
 			$this->email = get_post_meta( $post->ID, '_email', true );
-			$this->name = get_post_meta( $post->ID, '_name', true );
+			$this->name  = get_post_meta( $post->ID, '_name', true );
 			$this->props = get_post_meta( $post->ID, '_props', true );
 			$this->last_contacted =
 				get_post_meta( $post->ID, '_last_contacted', true );
@@ -156,10 +156,10 @@ class Flamingo_Contact {
 
 		$postarr = array(
 			'ID' => absint( $this->id ),
-			'post_type' => self::post_type,
-			'post_status' => 'publish',
-			'post_title' => $post_title,
-			'post_name' => $post_name,
+			'post_type'    => self::post_type,
+			'post_status'  => 'publish',
+			'post_title'   => $post_title,
+			'post_name'    => $post_name,
 			'post_content' => $post_content,
 		);
 

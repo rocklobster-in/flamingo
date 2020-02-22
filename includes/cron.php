@@ -26,7 +26,7 @@ function flamingo_schedule_activation() {
 }
 
 
-// deactivate cron job on deactivation of the plugin on plugin's deactivation
+// Deactivate cron job on deactivation of the plugin on plugin's deactivation.
 register_deactivation_hook( __FILE__, 'flamingo_schedule_deactivate' );
 
 /**
@@ -39,15 +39,15 @@ register_deactivation_hook( __FILE__, 'flamingo_schedule_deactivate' );
  */
 function flamingo_schedule_deactivate() {
 
-	// when the last event was scheduled
+	// When the last event was scheduled.
 	$timestamp = wp_next_scheduled( 'flamingo_daily_cron_job' );
 
-	// unschedule previous event if any
+	// Unscheduled previous event if any.
 	wp_unschedule_event( $timestamp, 'flamingo_daily_cron_job' );
 }
 
 
-// hook flamingo_schedule_function to schedule event
+// Hook flamingo_schedule_function to schedule event.
 add_action( 'flamingo_daily_cron_job', 'flamingo_schedule_function', 10, 0 );
 
 /**
@@ -60,6 +60,6 @@ add_action( 'flamingo_daily_cron_job', 'flamingo_schedule_function', 10, 0 );
  */
 function flamingo_schedule_function() {
 
-	// run function move spam to trash
+	// Run function move spam to trash.
 	flamingo_schedule_move_trash();
 }

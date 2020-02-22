@@ -26,45 +26,45 @@ class Flamingo_Inbound_Message {
 	public static function register_post_type() {
 		register_post_type( self::post_type, array(
 			'labels' => array(
-				'name' => __( 'Flamingo Inbound Messages', 'flamingo' ),
+				'name'          => __( 'Flamingo Inbound Messages', 'flamingo' ),
 				'singular_name' => __( 'Flamingo Inbound Message', 'flamingo' ),
 			),
-			'rewrite' => false,
+			'rewrite'   => false,
 			'query_var' => false,
 		) );
 
 		register_post_status( self::spam_status, array(
-			'label' => __( 'Spam', 'flamingo' ),
-			'public' => false,
-			'exclude_from_search' => true,
-			'show_in_admin_all_list' => false,
+			'label'                     => __( 'Spam', 'flamingo' ),
+			'public'                    => false,
+			'exclude_from_search'       => true,
+			'show_in_admin_all_list'    => false,
 			'show_in_admin_status_list' => true,
 		) );
 
 		register_taxonomy( self::channel_taxonomy, self::post_type, array(
 			'labels' => array(
-				'name' => __( 'Flamingo Inbound Message Channels', 'flamingo' ),
+				'name'          => __( 'Flamingo Inbound Message Channels', 'flamingo' ),
 				'singular_name' => __( 'Flamingo Inbound Message Channel', 'flamingo' ),
 			),
-			'public' => false,
+			'public'       => false,
 			'hierarchical' => true,
-			'rewrite' => false,
-			'query_var' => false,
+			'rewrite'      => false,
+			'query_var'    => false,
 		) );
 	}
 
 	public static function find( $args = '' ) {
 		$defaults = array(
 			'posts_per_page' => 10,
-			'offset' => 0,
-			'orderby' => 'ID',
-			'order' => 'ASC',
-			'meta_key' => '',
-			'meta_value' => '',
-			'post_status' => 'any',
-			'tax_query' => array(),
-			'channel' => '',
-			'channel_id' => 0,
+			'offset'         => 0,
+			'orderby'        => 'ID',
+			'order'          => 'ASC',
+			'meta_key'       => '',
+			'meta_value'     => '',
+			'post_status'    => 'any',
+			'tax_query'      => array(),
+			'channel'        => '',
+			'channel_id'     => 0,
 		);
 
 		$args = wp_parse_args( $args, $defaults );
@@ -74,16 +74,16 @@ class Flamingo_Inbound_Message {
 		if ( ! empty( $args['channel_id'] ) ) {
 			$args['tax_query'][] = array(
 				'taxonomy' => self::channel_taxonomy,
-				'terms' => absint( $args['channel_id'] ),
-				'field' => 'term_id',
+				'terms'    => absint( $args['channel_id'] ),
+				'field'    => 'term_id',
 			);
 		}
 
 		if ( ! empty( $args['channel'] ) ) {
 			$args['tax_query'][] = array(
 				'taxonomy' => self::channel_taxonomy,
-				'terms' => $args['channel'],
-				'field' => 'slug',
+				'terms'    => $args['channel'],
+				'field'    => 'slug',
 			);
 		}
 
@@ -103,9 +103,9 @@ class Flamingo_Inbound_Message {
 
 	public static function count( $args = '' ) {
 		$args = wp_parse_args( $args, array(
-			'offset' => 0,
-			'channel' => '',
-			'channel_id' => 0,
+			'offset'      => 0,
+			'channel'     => '',
+			'channel_id'  => 0,
 			'post_status' => 'publish',
 		) );
 
@@ -116,18 +116,18 @@ class Flamingo_Inbound_Message {
 
 	public static function add( $args = '' ) {
 		$defaults = array(
-			'channel' => '',
-			'subject' => '',
-			'from' => '',
-			'from_name' => '',
+			'channel'    => '',
+			'subject'    => '',
+			'from'       => '',
+			'from_name'  => '',
 			'from_email' => '',
-			'fields' => array(),
-			'meta' => array(),
-			'akismet' => array(),
-			'recaptcha' => array(),
-			'spam' => false,
-			'spam_log' => array(),
-			'consent' => array(),
+			'fields'     => array(),
+			'meta'       => array(),
+			'akismet'    => array(),
+			'recaptcha'  => array(),
+			'spam'       => false,
+			'spam_log'   => array(),
+			'consent'    => array(),
 		);
 
 		$args = apply_filters( 'flamingo_add_inbound',
@@ -177,11 +177,11 @@ class Flamingo_Inbound_Message {
 				}
 			}
 
-			$this->meta = get_post_meta( $post->ID, '_meta', true );
-			$this->akismet = get_post_meta( $post->ID, '_akismet', true );
+			$this->meta      = get_post_meta( $post->ID, '_meta', true );
+			$this->akismet   = get_post_meta( $post->ID, '_akismet', true );
 			$this->recaptcha = get_post_meta( $post->ID, '_recaptcha', true );
-			$this->spam_log = get_post_meta( $post->ID, '_spam_log', true );
-			$this->consent = get_post_meta( $post->ID, '_consent', true );
+			$this->spam_log  = get_post_meta( $post->ID, '_spam_log', true );
+			$this->consent   = get_post_meta( $post->ID, '_consent', true );
 
 			$terms = wp_get_object_terms( $this->id, self::channel_taxonomy );
 
@@ -217,12 +217,12 @@ class Flamingo_Inbound_Message {
 		$post_status = $this->spam ? self::spam_status : 'publish';
 
 		$postarr = array(
-			'ID' => absint( $this->id ),
-			'post_type' => self::post_type,
-			'post_status' => $post_status,
-			'post_title' => $post_title,
+			'ID'           => absint( $this->id ),
+			'post_type'    => self::post_type,
+			'post_status'  => $post_status,
+			'post_title'   => $post_title,
 			'post_content' => $post_content,
-			'post_date' => $this->get_post_date(),
+			'post_date'    => $this->get_post_date(),
 		);
 
 		$post_id = wp_insert_post( $postarr );
@@ -232,11 +232,11 @@ class Flamingo_Inbound_Message {
 
 			if ( $post_status == self::spam_status ) {
 
-				// set spam meta time for later use to trash
+				// Set spam meta time for later use to trash.
 				update_post_meta( $post_id, '_spam_meta_time', time() );
 			} else {
 
-				// delete spam meta time to stop trashing in cron job
+				// Delete spam meta time to stop trashing in cron job.
 				delete_post_meta( $post_id, '_spam_meta_time' );
 			}
 

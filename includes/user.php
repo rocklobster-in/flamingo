@@ -7,21 +7,21 @@ add_action( 'profile_update', 'flamingo_user_profile_update' );
 add_action( 'user_register', 'flamingo_user_profile_update' );
 
 function flamingo_user_profile_update( $user_id ) {
-	$user = new WP_User( $user_id );
+	$user  = new WP_User( $user_id );
 
 	$email = $user->user_email;
-	$name = $user->display_name;
+	$name  = $user->display_name;
 
 	$props = array(
-		'first_name' => $user->first_name,
-		'last_name' => $user->last_name,
+		'first_name'  => $user->first_name,
+		'last_name'   => $user->last_name,
 	);
 
 	if ( ! empty( $email ) ) {
 		Flamingo_Contact::add( array(
-			'email' => $email,
-			'name' => $name,
-			'props' => $props,
+			'email'   => $email,
+			'name'    => $name,
+			'props'   => $props,
 			'channel' => 'user',
 		) );
 	}
@@ -46,14 +46,14 @@ function flamingo_collect_contacts_from_users() {
 
 		$props = array(
 			'first_name' => empty( $user->first_name ) ? '' : $user->first_name,
-			'last_name' => empty( $user->last_name ) ? '' : $user->last_name,
+			'last_name'  => empty( $user->last_name ) ? '' : $user->last_name,
 		);
 
 		Flamingo_Contact::add( array(
-			'email' => $email,
-			'name' => $name,
-			'props' => $props,
-			'channel' => 'user',
+			'email'      => $email,
+			'name'       => $name,
+			'props'      => $props,
+			'channel'    => 'user',
 		) );
 	}
 }

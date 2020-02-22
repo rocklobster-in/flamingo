@@ -13,8 +13,8 @@ function flamingo_insert_comment( $comment_id ) {
 	}
 
 	Flamingo_Contact::add( array(
-		'email' => $comment->comment_author_email,
-		'name' => $comment->comment_author,
+		'email'   => $comment->comment_author_email,
+		'name'    => $comment->comment_author,
 		'channel' => 'comment',
 	) );
 }
@@ -31,8 +31,8 @@ function flamingo_transition_comment_status( $new_status, $old_status, $comment 
 	$name = $comment->comment_author;
 
 	Flamingo_Contact::add( array(
-		'email' => $email,
-		'name' => $name,
+		'email'   => $email,
+		'name'    => $name,
 		'channel' => 'comment',
 	) );
 }
@@ -44,7 +44,7 @@ add_action( 'activate_' . FLAMINGO_PLUGIN_BASENAME,
 function flamingo_collect_contacts_from_comments() {
 	$comments = get_comments( array(
 		'status' => 'approve',
-		'type' => 'comment',
+		'type'   => 'comment',
 		'number' => 20,
 	) );
 
@@ -57,8 +57,8 @@ function flamingo_collect_contacts_from_comments() {
 		}
 
 		Flamingo_Contact::add( array(
-			'email' => $email,
-			'name' => $name,
+			'email'   => $email,
+			'name'    => $name,
 			'channel' => 'comment',
 		) );
 	}

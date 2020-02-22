@@ -16,11 +16,11 @@ class Flamingo_Outbound_Message {
 
 	public static function register_post_type() {
 		register_post_type( self::post_type, array(
-			'labels' => array(
-				'name' => __( 'Flamingo Outbound Messages', 'flamingo' ),
+			'labels'            => array(
+				'name'          => __( 'Flamingo Outbound Messages', 'flamingo' ),
 				'singular_name' => __( 'Flamingo Outbound Message', 'flamingo' ),
 			),
-			'rewrite' => false,
+			'rewrite'   => false,
 			'query_var' => false,
 		) );
 	}
@@ -28,13 +28,13 @@ class Flamingo_Outbound_Message {
 	public static function find( $args = '' ) {
 		$defaults = array(
 			'posts_per_page' => 10,
-			'offset' => 0,
-			'orderby' => 'ID',
-			'order' => 'ASC',
-			'meta_key' => '',
-			'meta_value' => '',
-			'post_status' => 'any',
-			'tax_query' => array(),
+			'offset'         => 0,
+			'orderby'        => 'ID',
+			'order'          => 'ASC',
+			'meta_key'       => '',
+			'meta_value'     => '',
+			'post_status'    => 'any',
+			'tax_query'      => array(),
 		);
 
 		$args = wp_parse_args( $args, $defaults );
@@ -57,11 +57,11 @@ class Flamingo_Outbound_Message {
 
 	public static function add( $args = '' ) {
 		$defaults = array(
-			'to' => '',
-			'from' => '',
+			'to'      => '',
+			'from'    => '',
 			'subject' => '',
-			'body' => '',
-			'meta' => array(),
+			'body'    => '',
+			'meta'    => array(),
 		);
 
 		$args = wp_parse_args( $args, $defaults );
@@ -104,10 +104,10 @@ class Flamingo_Outbound_Message {
 		$post_status = 'publish';
 
 		$postarr = array(
-			'ID' => absint( $this->id ),
-			'post_type' => self::post_type,
-			'post_status' => $post_status,
-			'post_title' => $post_title,
+			'ID'           => absint( $this->id ),
+			'post_type'    => self::post_type,
+			'post_status'  => $post_status,
+			'post_title'   => $post_title,
 			'post_content' => $post_content,
 		);
 

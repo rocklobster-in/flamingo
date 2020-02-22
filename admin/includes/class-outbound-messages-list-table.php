@@ -10,10 +10,10 @@ class Flamingo_Outbound_Messages_List_Table extends WP_List_Table {
 
 	public static function define_columns() {
 		$columns = array(
-			'cb' => '<input type="checkbox" />',
+			'cb'      => '<input type="checkbox" />',
 			'subject' => __( 'Subject', 'flamingo' ),
-			'from' => __( 'From', 'flamingo' ),
-			'date' => __( 'Date', 'flamingo' ),
+			'from'    => __( 'From', 'flamingo' ),
+			'date'    => __( 'Date', 'flamingo' ),
 		);
 
 		$columns = apply_filters(
@@ -25,8 +25,8 @@ class Flamingo_Outbound_Messages_List_Table extends WP_List_Table {
 	public function __construct() {
 		parent::__construct( array(
 			'singular' => 'post',
-			'plural' => 'posts',
-			'ajax' => false,
+			'plural'   => 'posts',
+			'ajax'     => false,
 		) );
 	}
 
@@ -36,9 +36,9 @@ class Flamingo_Outbound_Messages_List_Table extends WP_List_Table {
 
 		$args = array(
 			'posts_per_page' => $per_page,
-			'offset' => ( $this->get_pagenum() - 1 ) * $per_page,
-			'orderby' => 'date',
-			'order' => 'DESC',
+			'offset'         => ( $this->get_pagenum() - 1 ) * $per_page,
+			'orderby'        => 'date',
+			'order'          => 'DESC',
 		);
 
 		if ( ! empty( $_REQUEST['s'] ) ) {
@@ -79,7 +79,7 @@ class Flamingo_Outbound_Messages_List_Table extends WP_List_Table {
 		$this->set_pagination_args( array(
 			'total_items' => $total_items,
 			'total_pages' => $total_pages,
-			'per_page' => $per_page,
+			'per_page'    => $per_page,
 		) );
 	}
 
@@ -94,7 +94,7 @@ class Flamingo_Outbound_Messages_List_Table extends WP_List_Table {
 
 		$inbox = sprintf(
 			_nx( 'Inbox <span class="count">(%s)</span>',
-				'Inbox <span class="count">(%s)</span>',
+				 'Inbox <span class="count">(%s)</span>',
 				$posts_in_inbox, 'posts', 'flamingo' ),
 			number_format_i18n( $posts_in_inbox ) );
 
@@ -113,7 +113,7 @@ class Flamingo_Outbound_Messages_List_Table extends WP_List_Table {
 
 		$trash = sprintf(
 			_nx( 'Trash <span class="count">(%s)</span>',
-				'Trash <span class="count">(%s)</span>',
+				 'Trash <span class="count">(%s)</span>',
 				$posts_in_trash, 'posts', 'flamingo' ),
 			number_format_i18n( $posts_in_trash ) );
 
@@ -137,8 +137,8 @@ class Flamingo_Outbound_Messages_List_Table extends WP_List_Table {
 	protected function get_sortable_columns() {
 		$columns = array(
 			'subject' => array( 'subject', false ),
-			'from' => array( 'from', false ),
-			'date' => array( 'date', true ),
+			'from'    => array( 'from', false ),
+			'date'    => array( 'date', true ),
 		);
 
 		return $columns;
@@ -203,7 +203,7 @@ class Flamingo_Outbound_Messages_List_Table extends WP_List_Table {
 
 		$edit_link = add_query_arg(
 			array(
-				'post' => $post_id,
+				'post'   => $post_id,
 				'action' => 'edit',
 			),
 			menu_page_url( 'flamingo_outbound', false )

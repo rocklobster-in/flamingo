@@ -11,11 +11,11 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 
 	public static function define_columns() {
 		$columns = array(
-			'cb' => '<input type="checkbox" />',
+			'cb'      => '<input type="checkbox" />',
 			'subject' => __( 'Subject', 'flamingo' ),
-			'from' => __( 'From', 'flamingo' ),
+			'from'    => __( 'From', 'flamingo' ),
 			'channel' => __( 'Channel', 'flamingo' ),
-			'date' => __( 'Date', 'flamingo' ),
+			'date'    => __( 'Date', 'flamingo' ),
 		);
 
 		$columns = apply_filters(
@@ -38,9 +38,9 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 
 		$args = array(
 			'posts_per_page' => $per_page,
-			'offset' => ( $this->get_pagenum() - 1 ) * $per_page,
-			'orderby' => 'date',
-			'order' => 'DESC',
+			'offset'         => ( $this->get_pagenum() - 1 ) * $per_page,
+			'orderby'        => 'date',
+			'order'          => 'DESC',
 		);
 
 		if ( ! empty( $_REQUEST['s'] ) ) {
@@ -92,13 +92,13 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 		$this->set_pagination_args( array(
 			'total_items' => $total_items,
 			'total_pages' => $total_pages,
-			'per_page' => $per_page,
+			'per_page'    => $per_page,
 		) );
 	}
 
 	protected function get_views() {
 		$status_links = array();
-		$post_status = empty( $_REQUEST['post_status'] )
+		$post_status  = empty( $_REQUEST['post_status'] )
 			? '' : $_REQUEST['post_status'];
 
 		// Inbox
@@ -129,7 +129,7 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 
 		$spam = sprintf(
 			_nx( 'Spam <span class="count">(%s)</span>',
-				'Spam <span class="count">(%s)</span>',
+				 'Spam <span class="count">(%s)</span>',
 				$posts_in_spam, 'posts', 'flamingo' ),
 			number_format_i18n( $posts_in_spam )
 		);
@@ -158,7 +158,7 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 
 		$trash = sprintf(
 			_nx( 'Trash <span class="count">(%s)</span>',
-				'Trash <span class="count">(%s)</span>',
+				 'Trash <span class="count">(%s)</span>',
 				$posts_in_trash, 'posts', 'flamingo' ),
 			number_format_i18n( $posts_in_trash )
 		);
@@ -184,8 +184,8 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 	protected function get_sortable_columns() {
 		$columns = array(
 			'subject' => array( 'subject', false ),
-			'from' => array( 'from', false ),
-			'date' => array( 'date', true ),
+			'from'    => array( 'from', false ),
+			'date'    => array( 'date', true ),
 		);
 
 		return $columns;
@@ -199,15 +199,15 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 		}
 
 		if ( $this->is_trash or ! EMPTY_TRASH_DAYS ) {
-			$actions['delete'] = __( 'Delete Permanently', 'flamingo' );
+			$actions['delete']  = __( 'Delete Permanently', 'flamingo' );
 		} else {
-			$actions['trash'] = __( 'Move to Trash', 'flamingo' );
+			$actions['trash']   = __( 'Move to Trash', 'flamingo' );
 		}
 
 		if ( $this->is_spam ) {
-			$actions['unspam'] = __( 'Not Spam', 'flamingo' );
+			$actions['unspam']  = __( 'Not Spam', 'flamingo' );
 		} else {
-			$actions['spam'] = __( 'Mark as Spam', 'flamingo' );
+			$actions['spam']    = __( 'Mark as Spam', 'flamingo' );
 		}
 
 		return $actions;
@@ -242,15 +242,15 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 			$this->months_dropdown( Flamingo_Inbound_Message::post_type );
 
 			wp_dropdown_categories( array(
-				'taxonomy' => Flamingo_Inbound_Message::channel_taxonomy,
-				'name' => 'channel_id',
+				'taxonomy'        => Flamingo_Inbound_Message::channel_taxonomy,
+				'name'            => 'channel_id',
 				'show_option_all' => __( 'View all channels', 'flamingo' ),
-				'show_count' => 1,
-				'hide_empty' => 0,
-				'hide_if_empty' => 1,
-				'orderby' => 'name',
-				'hierarchical' => 1,
-				'selected' => $channel,
+				'show_count'      => 1,
+				'hide_empty'      => 0,
+				'hide_if_empty'   => 1,
+				'orderby'         => 'name',
+				'hierarchical'    => 1,
+				'selected'        => $channel,
 			) );
 
 			submit_button( __( 'Filter', 'flamingo' ),
@@ -293,7 +293,7 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 		if ( current_user_can( 'flamingo_edit_inbound_message', $item->id ) ) {
 			$edit_link = add_query_arg(
 				array(
-					'post' => $item->id,
+					'post'   => $item->id,
 					'action' => 'edit',
 				),
 				menu_page_url( 'flamingo_inbound', false )
@@ -325,7 +325,7 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 		if ( current_user_can( 'flamingo_edit_inbound_message', $item->id ) ) {
 			$link = add_query_arg(
 				array(
-					'post' => $item->id,
+					'post'   => $item->id,
 					'action' => 'edit',
 				),
 				menu_page_url( 'flamingo_inbound', false )
@@ -341,7 +341,7 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 		and current_user_can( 'flamingo_unspam_inbound_message', $item->id ) ) {
 			$link = add_query_arg(
 				array(
-					'post' => $item->id,
+					'post'   => $item->id,
 					'action' => 'unspam',
 				),
 				menu_page_url( 'flamingo_inbound', false )
@@ -360,7 +360,7 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 		and current_user_can( 'flamingo_spam_inbound_message', $item->id ) ) {
 			$link = add_query_arg(
 				array(
-					'post' => $item->id,
+					'post'   => $item->id,
 					'action' => 'spam',
 				),
 				menu_page_url( 'flamingo_inbound', false )
