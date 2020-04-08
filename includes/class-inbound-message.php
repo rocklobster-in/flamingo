@@ -205,9 +205,9 @@ class Flamingo_Inbound_Message {
 		}
 
 		$post_content = array_merge(
-			$this->fields,
-			$this->consent,
-			$this->meta
+			(array) $this->fields,
+			(array) $this->consent,
+			(array) $this->meta
 		);
 
 		$post_content = flamingo_array_flatten( $post_content );
