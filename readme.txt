@@ -2,8 +2,8 @@
 Contributors: takayukister, megumithemes, itpixelz
 Tags: bird, contact, mail, crm
 Requires at least: 5.2
-Tested up to: 5.2
-Stable tag: 2.1
+Tested up to: 5.3
+Stable tag: 2.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,6 +31,11 @@ This plugin stores submission data collected through contact forms, which may in
 == Screenshots ==
 
 == Changelog ==
+
+= 2.1.1 =
+
+* Security enhancement, CSV: Prefixes a field when its value begins with `=`, `+`, `-`, or `@`. See https://contactform7.com/2020/01/15/heads-up-about-spreadsheet-vulnerabilities/ for details.
+* New filter hook: flamingo_csv_field_prefix
 
 = 2.1 =
 

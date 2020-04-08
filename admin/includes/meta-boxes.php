@@ -20,7 +20,7 @@ function flamingo_contact_submit_meta_box( $post ) {
 
 		$delete_link = wp_nonce_url( $delete_link, 'flamingo-delete-contact_' . $post->id );
 
-?><a class="submitdelete deletion" href="<?php echo esc_url( $delete_link ); ?>" onclick="if (confirm('<?php echo esc_js( sprintf( __( "You are about to delete this contact '%s'\n 'Cancel' to stop, 'OK' to delete." ), $post->email ) ); ?>')) {return true;} return false;"><?php echo esc_html( $delete_text ); ?></a><?php } ?>
+?><a class="submitdelete deletion" href="<?php echo esc_url( $delete_link ); ?>" onclick="if (confirm('<?php echo esc_js( sprintf( __( "You are about to delete this contact '%s'\n 'Cancel' to stop, 'OK' to delete.", 'flamingo' ), $post->email ) ); ?>')) {return true;} return false;"><?php echo esc_html( $delete_text ); ?></a><?php } ?>
 </div>
 
 <div id="publishing-action">

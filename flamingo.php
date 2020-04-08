@@ -5,10 +5,10 @@ Description: A trustworthy message storage plugin for Contact Form 7.
 Author: Takayuki Miyoshi
 Text Domain: flamingo
 Domain Path: /languages/
-Version: 2.1
+Version: 2.1.1
 */
 
-define( 'FLAMINGO_VERSION', '2.1' );
+define( 'FLAMINGO_VERSION', '2.1.1' );
 
 define( 'FLAMINGO_PLUGIN', __FILE__ );
 
