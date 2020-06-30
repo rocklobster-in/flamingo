@@ -22,6 +22,7 @@ class Flamingo_Inbound_Message {
 	public $spam;
 	public $spam_log;
 	public $consent;
+	private $timestamp = null;
 
 	public static function register_post_type() {
 		register_post_type( self::post_type, array(
@@ -128,10 +129,12 @@ class Flamingo_Inbound_Message {
 			'spam' => false,
 			'spam_log' => array(),
 			'consent' => array(),
+			'timestamp' => null,
 		);
 
 		$args = apply_filters( 'flamingo_add_inbound',
-			wp_parse_args( $args, $defaults ) );
+			wp_parse_args( $args, $defaults )
+		);
 
 		$obj = new self();
 
@@ -147,6 +150,10 @@ class Flamingo_Inbound_Message {
 		$obj->spam = $args['spam'];
 		$obj->spam_log = $args['spam_log'];
 		$obj->consent = $args['consent'];
+
+		if ( $args['timestamp'] ) {
+			$obj->timestamp = $args['timestamp'];
+		}
 
 		$obj->save();
 
@@ -224,6 +231,10 @@ class Flamingo_Inbound_Message {
 			'post_content' => $post_content,
 			'post_date' => $this->get_post_date(),
 		);
+
+		if ( $this->timestamp ) {
+			$postarr['post_date'] = wp_date( 'Y-m-d H:i:s', $this->timestamp );
+		}
 
 		$post_id = wp_insert_post( $postarr );
 
