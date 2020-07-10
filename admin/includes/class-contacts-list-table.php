@@ -322,26 +322,30 @@ class Flamingo_Contacts_List_Table extends WP_List_Table {
 	}
 
 	protected function column_last_contacted( $item ) {
-		if ( empty( $item->last_contacted ) ) {
+		if ( empty( $item->last_contacted )
+		or '0000-00-00 00:00:00' === $item->last_contacted ) {
 			return '';
 		}
 
-		$t_time = mysql2date( __( 'Y/m/d g:i:s A', 'flamingo' ), $item->last_contacted, true );
-		$m_time = $item->last_contacted;
-		$time = mysql2date( 'G', $item->last_contacted )
-			- get_option( 'gmt_offset' ) * 3600;
+		$datetime = date_create_immutable_from_format(
+			'Y-m-d H:i:s',
+			$item->last_contacted,
+			wp_timezone()
+		);
 
-		$time_diff = time() - $time;
-
-		if ( $time_diff > 0 and $time_diff < 24*60*60 ) {
-			$h_time = sprintf( __( '%s ago', 'flamingo' ), human_time_diff( $time ) );
-		} else {
-			$h_time = mysql2date( __( 'Y/m/d', 'flamingo' ), $m_time );
+		if ( false === $datetime ) {
+			return '';
 		}
 
-		return sprintf( '<abbr aria-label="%2$s">%1$s</abbr>',
-			esc_html( $h_time ),
-			esc_attr( $t_time )
+		$t_time = sprintf(
+			/* translators: 1: date, 2: time */
+			__( '%1$s at %2$s', 'flamingo' ),
+			/* translators: date format, see https://www.php.net/date */
+			$datetime->format( __( 'Y/m/d', 'flamingo' ) ),
+			/* translators: time format, see https://www.php.net/date */
+			$datetime->format( __( 'g:i a', 'flamingo' ) ),
 		);
+
+		return $t_time;
 	}
 }
