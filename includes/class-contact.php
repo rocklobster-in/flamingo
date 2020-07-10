@@ -116,7 +116,7 @@ class Flamingo_Contact {
 		if ( ! empty( $args['last_contacted'] ) ) {
 			$obj->last_contacted = $args['last_contacted'];
 		} else {
-			$obj->last_contacted = current_time( 'mysql' );
+			$obj->last_contacted = wp_date( 'Y-m-d H:i:s' );
 		}
 
 		$obj->save();
