@@ -152,9 +152,9 @@ class Flamingo_Outbound_Messages_List_Table extends WP_List_Table {
 		}
 
 		if ( $this->is_trash or ! EMPTY_TRASH_DAYS ) {
-			$actions['delete'] = __( 'Delete Permanently', 'flamingo' );
+			$actions['delete'] = __( 'Delete permanently', 'flamingo' );
 		} else {
-			$actions['trash'] = __( 'Move to Trash', 'flamingo' );
+			$actions['trash'] = __( 'Move to trash', 'flamingo' );
 		}
 
 		return $actions;
@@ -173,7 +173,7 @@ class Flamingo_Outbound_Messages_List_Table extends WP_List_Table {
 
 		if ( $this->is_trash
 		and current_user_can( 'flamingo_delete_outbound_messages' ) ) {
-			submit_button( __( 'Empty Trash', 'flamingo' ),
+			submit_button( __( 'Empty trash', 'flamingo' ),
 				'button-secondary apply', 'delete_all', false );
 		}
 ?>

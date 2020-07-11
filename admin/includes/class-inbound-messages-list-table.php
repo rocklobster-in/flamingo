@@ -199,15 +199,15 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 		}
 
 		if ( $this->is_trash or ! EMPTY_TRASH_DAYS ) {
-			$actions['delete'] = __( 'Delete Permanently', 'flamingo' );
+			$actions['delete'] = __( 'Delete permanently', 'flamingo' );
 		} else {
-			$actions['trash'] = __( 'Move to Trash', 'flamingo' );
+			$actions['trash'] = __( 'Move to trash', 'flamingo' );
 		}
 
 		if ( $this->is_spam ) {
-			$actions['unspam'] = __( 'Not Spam', 'flamingo' );
+			$actions['unspam'] = __( 'Not spam', 'flamingo' );
 		} else {
-			$actions['spam'] = __( 'Mark as Spam', 'flamingo' );
+			$actions['spam'] = __( 'Mark as spam', 'flamingo' );
 		}
 
 		return $actions;
@@ -264,7 +264,7 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 
 		if ( $this->is_trash
 		and current_user_can( 'flamingo_delete_inbound_messages' ) ) {
-			submit_button( __( 'Empty Trash', 'flamingo' ),
+			submit_button( __( 'Empty trash', 'flamingo' ),
 				'button-secondary apply', 'delete_all', false );
 		}
 ?>
@@ -352,7 +352,7 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 
 			$actions['unspam'] = sprintf( '<a href="%1$s">%2$s</a>',
 				esc_url( $link ),
-				esc_html( __( 'Not Spam', 'flamingo' ) )
+				esc_html( __( 'Not spam', 'flamingo' ) )
 			);
 		}
 
