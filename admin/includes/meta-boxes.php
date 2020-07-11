@@ -50,7 +50,7 @@ function flamingo_contact_tags_meta_box( $post ) {
 	$tags = wp_get_post_terms( $post->id, $taxonomy->name );
 	$tag_names = $tag_ids = array();
 
-	if ( ! empty( $tags ) && ! is_wp_error( $tags ) ) {
+	if ( ! empty( $tags ) and ! is_wp_error( $tags ) ) {
 		foreach( $tags as $tag ) {
 			$tag_names[] = $tag->name;
 			$tag_ids[] = $tag->term_id;
@@ -312,7 +312,7 @@ function flamingo_outbound_submit_meta_box( $post ) {
 
 <div id="minor-publishing-actions">
 <div id="save-action">
-<?php if ( $initial || 'publish' != $post->post_status ) : ?>
+<?php if ( $initial or 'publish' != $post->post_status ) : ?>
 <input type="submit" name="save" id="save-post" value="<?php echo esc_attr( __( 'Save Draft', 'flamingo' ) ); ?>" class="button" />
 <span class="spinner"></span>
 <?php endif; ?>

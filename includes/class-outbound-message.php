@@ -79,7 +79,7 @@ class Flamingo_Outbound_Message {
 	}
 
 	public function __construct( $post = null ) {
-		if ( ! empty( $post ) && ( $post = get_post( $post ) ) ) {
+		if ( ! empty( $post ) and $post = get_post( $post ) ) {
 			$this->id = $post->ID;
 
 			$this->date = get_the_time(
