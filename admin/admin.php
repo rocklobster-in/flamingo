@@ -337,7 +337,7 @@ function flamingo_contact_admin_page() {
 
 <form method="get" action="">
 	<input type="hidden" name="page" value="<?php echo esc_attr( $_REQUEST['page'] ); ?>" />
-	<?php $list_table->search_box( __( 'Search Contacts', 'flamingo' ), 'flamingo-contact' ); ?>
+	<?php $list_table->search_box( __( 'Search contacts', 'flamingo' ), 'flamingo-contact' ); ?>
 	<?php $list_table->display(); ?>
 </form>
 
@@ -759,7 +759,7 @@ function flamingo_inbound_admin_page() {
 
 <form method="get" action="">
 	<input type="hidden" name="page" value="<?php echo esc_attr( $_REQUEST['page'] ); ?>" />
-	<?php $list_table->search_box( __( 'Search Messages', 'flamingo' ), 'flamingo-inbound' ); ?>
+	<?php $list_table->search_box( __( 'Search messages', 'flamingo' ), 'flamingo-inbound' ); ?>
 	<?php $list_table->display(); ?>
 </form>
 
@@ -876,7 +876,7 @@ function flamingo_outbound_admin_page() {
 
 <form method="get" action="">
 	<input type="hidden" name="page" value="<?php echo esc_attr( $_REQUEST['page'] ); ?>" />
-	<?php $list_table->search_box( __( 'Search Messages', 'flamingo' ), 'flamingo-outbound' ); ?>
+	<?php $list_table->search_box( __( 'Search messages', 'flamingo' ), 'flamingo-outbound' ); ?>
 	<?php $list_table->display(); ?>
 </form>
 

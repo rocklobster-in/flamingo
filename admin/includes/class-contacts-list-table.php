@@ -13,7 +13,7 @@ class Flamingo_Contacts_List_Table extends WP_List_Table {
 			'full_name' => __( 'Name', 'flamingo' ),
 			'tags' => __( 'Tags', 'flamingo' ),
 			'history' => __( 'History', 'flamingo' ),
-			'last_contacted' => __( 'Last Contact', 'flamingo' ),
+			'last_contacted' => __( 'Last contact', 'flamingo' ),
 		);
 
 		$columns = apply_filters(
@@ -206,7 +206,7 @@ class Flamingo_Contacts_List_Table extends WP_List_Table {
 
 	protected function column_tags( $item ) {
 		if ( empty( $item->tags ) ) {
-			return esc_html( __( 'No Tags', 'flamingo' ) );
+			return esc_html( __( 'No tags', 'flamingo' ) );
 		}
 
 		$output = '';
