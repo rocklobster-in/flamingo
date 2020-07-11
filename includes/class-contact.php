@@ -99,7 +99,7 @@ class Flamingo_Contact {
 		$args = apply_filters( 'flamingo_add_contact',
 			wp_parse_args( $args, $defaults ) );
 
-		if ( empty( $args['email'] ) || ! is_email( $args['email'] ) ) {
+		if ( empty( $args['email'] ) or ! is_email( $args['email'] ) ) {
 			return;
 		}
 
@@ -125,7 +125,7 @@ class Flamingo_Contact {
 	}
 
 	public function __construct( $post = null ) {
-		if ( ! empty( $post ) && ( $post = get_post( $post ) ) ) {
+		if ( ! empty( $post ) and $post = get_post( $post ) ) {
 			$this->id = $post->ID;
 			$this->email = get_post_meta( $post->ID, '_email', true );
 			$this->name = get_post_meta( $post->ID, '_name', true );
@@ -135,7 +135,7 @@ class Flamingo_Contact {
 
 			$terms = wp_get_object_terms( $this->id, self::contact_tag_taxonomy );
 
-			if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+			if ( ! empty( $terms ) and ! is_wp_error( $terms ) ) {
 				foreach ( $terms as $term ) {
 					$this->tags[] = $term->name;
 				}

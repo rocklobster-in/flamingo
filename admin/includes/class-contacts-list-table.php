@@ -55,7 +55,7 @@ class Flamingo_Contacts_List_Table extends WP_List_Table {
 		}
 
 		if ( ! empty( $_REQUEST['order'] )
-		&& 'asc' == strtolower( $_REQUEST['order'] ) ) {
+		and 'asc' == strtolower( $_REQUEST['order'] ) ) {
 			$args['order'] = 'ASC';
 		}
 

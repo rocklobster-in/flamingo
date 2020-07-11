@@ -161,7 +161,7 @@ class Flamingo_Inbound_Message {
 	}
 
 	public function __construct( $post = null ) {
-		if ( ! empty( $post ) && ( $post = get_post( $post ) ) ) {
+		if ( ! empty( $post ) and $post = get_post( $post ) ) {
 			$this->id = $post->ID;
 
 			$this->date = get_the_time(
@@ -192,7 +192,7 @@ class Flamingo_Inbound_Message {
 
 			$terms = wp_get_object_terms( $this->id, self::channel_taxonomy );
 
-			if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+			if ( ! empty( $terms ) and ! is_wp_error( $terms ) ) {
 				$this->channel = $terms[0]->slug;
 			}
 
@@ -241,7 +241,7 @@ class Flamingo_Inbound_Message {
 		if ( $post_id ) {
 			$this->id = $post_id;
 
-			if ( $post_status == self::spam_status ) {
+			if ( $post_status === self::spam_status ) {
 
 				// set spam meta time for later use to trash
 				update_post_meta( $post_id, '_spam_meta_time', time() );
@@ -359,11 +359,11 @@ class Flamingo_Inbound_Message {
 	}
 
 	public function akismet_submit_spam() {
-		if ( empty( $this->id ) || empty( $this->akismet ) ) {
+		if ( empty( $this->id ) or empty( $this->akismet ) ) {
 			return;
 		}
 
-		if ( isset( $this->akismet['spam'] ) && $this->akismet['spam'] ) {
+		if ( isset( $this->akismet['spam'] ) and $this->akismet['spam'] ) {
 			return;
 		}
 
@@ -390,11 +390,11 @@ class Flamingo_Inbound_Message {
 	}
 
 	public function akismet_submit_ham() {
-		if ( empty( $this->id ) || empty( $this->akismet ) ) {
+		if ( empty( $this->id ) or empty( $this->akismet ) ) {
 			return;
 		}
 
-		if ( isset( $this->akismet['spam'] ) && ! $this->akismet['spam'] ) {
+		if ( isset( $this->akismet['spam'] ) and ! $this->akismet['spam'] ) {
 			return;
 		}
 
