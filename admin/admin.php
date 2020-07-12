@@ -3,7 +3,7 @@
 require_once FLAMINGO_PLUGIN_DIR . '/admin/admin-functions.php';
 require_once FLAMINGO_PLUGIN_DIR . '/admin/includes/privacy.php';
 
-add_action( 'admin_menu', 'flamingo_admin_menu', 8 );
+add_action( 'admin_menu', 'flamingo_admin_menu', 8, 0 );
 
 function flamingo_admin_menu() {
 	global $_wp_last_object_menu;
@@ -25,7 +25,7 @@ function flamingo_admin_menu() {
 		'flamingo_contact_admin_page'
 	);
 
-	add_action( 'load-' . $contact_admin, 'flamingo_load_contact_admin' );
+	add_action( 'load-' . $contact_admin, 'flamingo_load_contact_admin', 10, 0 );
 
 	$inbound_admin = add_submenu_page( 'flamingo',
 		__( 'Flamingo Inbound Messages', 'flamingo' ),
@@ -34,7 +34,7 @@ function flamingo_admin_menu() {
 		'flamingo_inbound_admin_page'
 	);
 
-	add_action( 'load-' . $inbound_admin, 'flamingo_load_inbound_admin' );
+	add_action( 'load-' . $inbound_admin, 'flamingo_load_inbound_admin', 10, 0 );
 }
 
 add_filter( 'set-screen-option', 'flamingo_set_screen_options', 10, 3 );
@@ -52,7 +52,7 @@ function flamingo_set_screen_options( $result, $option, $value ) {
 	return $result;
 }
 
-add_action( 'admin_enqueue_scripts', 'flamingo_admin_enqueue_scripts' );
+add_action( 'admin_enqueue_scripts', 'flamingo_admin_enqueue_scripts', 10, 1 );
 
 function flamingo_admin_enqueue_scripts( $hook_suffix ) {
 	if ( false === strpos( $hook_suffix, 'flamingo' ) ) {
@@ -83,7 +83,9 @@ function flamingo_admin_enqueue_scripts( $hook_suffix ) {
 /* Updated Message */
 
 add_action( 'flamingo_admin_updated_message',
-	'flamingo_admin_updated_message' );
+	'flamingo_admin_updated_message',
+	10, 0
+);
 
 function flamingo_admin_updated_message() {
 	if ( empty( $_REQUEST['message'] ) ) {
@@ -305,7 +307,9 @@ function flamingo_load_contact_admin() {
 		$current_screen = get_current_screen();
 
 		add_filter( 'manage_' . $current_screen->id . '_columns',
-			array( 'Flamingo_Contacts_List_Table', 'define_columns' ) );
+			array( 'Flamingo_Contacts_List_Table', 'define_columns' ),
+			10, 0
+		);
 
 		add_screen_option( 'per_page', array(
 			'label' => __( 'Contacts', 'flamingo' ),
@@ -726,7 +730,9 @@ function flamingo_load_inbound_admin() {
 		$current_screen = get_current_screen();
 
 		add_filter( 'manage_' . $current_screen->id . '_columns',
-			array( 'Flamingo_Inbound_Messages_List_Table', 'define_columns' ) );
+			array( 'Flamingo_Inbound_Messages_List_Table', 'define_columns' ),
+		 	10, 0
+		);
 
 		add_screen_option( 'per_page', array(
 			'label' => __( 'Messages', 'flamingo' ),
@@ -843,7 +849,9 @@ function flamingo_load_outbound_admin() {
 		$current_screen = get_current_screen();
 
 		add_filter( 'manage_' . $current_screen->id . '_columns',
-			array( 'Flamingo_Outbound_Messages_List_Table', 'define_columns' ) );
+			array( 'Flamingo_Outbound_Messages_List_Table', 'define_columns' ),
+			10, 0
+		);
 
 		add_screen_option( 'per_page', array(
 			'label' => __( 'Messages', 'flamingo' ),

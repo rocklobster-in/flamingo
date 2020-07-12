@@ -3,7 +3,7 @@
 ** Module for WordPress comment.
 **/
 
-add_action( 'wp_insert_comment', 'flamingo_insert_comment' );
+add_action( 'wp_insert_comment', 'flamingo_insert_comment', 10, 1 );
 
 function flamingo_insert_comment( $comment_id ) {
 	$comment = get_comment( $comment_id );
@@ -20,7 +20,9 @@ function flamingo_insert_comment( $comment_id ) {
 }
 
 add_action( 'transition_comment_status',
-	'flamingo_transition_comment_status', 10, 3 );
+	'flamingo_transition_comment_status',
+	10, 3
+);
 
 function flamingo_transition_comment_status( $new_status, $old_status, $comment ) {
 	if ( 'approved' != $new_status ) {
@@ -39,7 +41,9 @@ function flamingo_transition_comment_status( $new_status, $old_status, $comment 
 
 /* Collect contact info from existing comments when activating plugin */
 add_action( 'activate_' . FLAMINGO_PLUGIN_BASENAME,
-	'flamingo_collect_contacts_from_comments' );
+	'flamingo_collect_contacts_from_comments',
+	10, 0
+);
 
 function flamingo_collect_contacts_from_comments() {
 	$comments = get_comments( array(

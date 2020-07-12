@@ -47,10 +47,7 @@ if ( is_admin() ) {
 
 /* Init */
 
-add_action( 'init', 'flamingo_init' );
-
-function flamingo_init() {
-
+add_action( 'init', function() {
 	/* L10N */
 	load_plugin_textdomain( 'flamingo', false, 'flamingo/languages' );
 
@@ -60,4 +57,4 @@ function flamingo_init() {
 	Flamingo_Outbound_Message::register_post_type();
 
 	do_action( 'flamingo_init' );
-}
+}, 10, 0 );

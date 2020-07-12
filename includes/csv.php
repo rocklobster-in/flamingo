@@ -12,7 +12,7 @@ function flamingo_csv_row( $inputs = array() ) {
 	return implode( $separator, $row );
 }
 
-add_filter( 'flamingo_csv_quotation', 'flamingo_csv_quote' );
+add_filter( 'flamingo_csv_quotation', 'flamingo_csv_quote', 10, 1 );
 
 function flamingo_csv_quote( $input ) {
 	$prefix = apply_filters( 'flamingo_csv_field_prefix', '', $input );
@@ -24,7 +24,8 @@ function flamingo_csv_quote( $input ) {
 /*
  * https://contactform7.com/2020/01/15/heads-up-about-spreadsheet-vulnerabilities/
  */
-add_filter( 'flamingo_csv_field_prefix', 'flamingo_csv_field_prefix_text',
+add_filter( 'flamingo_csv_field_prefix',
+	'flamingo_csv_field_prefix_text',
 	10, 2
 );
 
