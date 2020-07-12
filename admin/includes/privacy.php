@@ -1,7 +1,9 @@
 <?php
 
 add_filter( 'wp_privacy_personal_data_erasers',
-	'flamingo_privacy_register_personal_data_erasers', 10, 1 );
+	'flamingo_privacy_register_personal_data_erasers',
+	10, 1
+);
 
 function flamingo_privacy_register_personal_data_erasers( $erasers ) {
 	return array_merge( (array) $erasers, array(

@@ -3,8 +3,8 @@
 ** Module for WordPress user.
 **/
 
-add_action( 'profile_update', 'flamingo_user_profile_update' );
-add_action( 'user_register', 'flamingo_user_profile_update' );
+add_action( 'profile_update', 'flamingo_user_profile_update', 10, 1 );
+add_action( 'user_register', 'flamingo_user_profile_update', 10, 1 );
 
 function flamingo_user_profile_update( $user_id ) {
 	$user = new WP_User( $user_id );
@@ -29,7 +29,9 @@ function flamingo_user_profile_update( $user_id ) {
 
 /* Collect contact info from existing users when activating plugin */
 add_action( 'activate_' . FLAMINGO_PLUGIN_BASENAME,
-	'flamingo_collect_contacts_from_users' );
+	'flamingo_collect_contacts_from_users',
+	10, 0
+);
 
 function flamingo_collect_contacts_from_users() {
 	$users = get_users( array(
