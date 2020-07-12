@@ -200,7 +200,7 @@ function flamingo_load_contact_admin() {
 		$sitename = sanitize_key( get_bloginfo( 'name' ) );
 
 		$filename = ( empty( $sitename ) ? '' : $sitename . '-' )
-			. sprintf( 'flamingo-contact-%s.csv', date( 'Y-m-d' ) );
+			. sprintf( 'flamingo-contact-%s.csv', wp_date( 'Y-m-d' ) );
 
 		header( 'Content-Description: File Transfer' );
 		header( "Content-Disposition: attachment; filename=$filename" );
@@ -603,7 +603,7 @@ function flamingo_load_inbound_admin() {
 		$sitename = sanitize_key( get_bloginfo( 'name' ) );
 
 		$filename = ( empty( $sitename ) ? '' : $sitename . '-' )
-			. sprintf( 'flamingo-inbound-%s.csv', date( 'Y-m-d' ) );
+			. sprintf( 'flamingo-inbound-%s.csv', wp_date( 'Y-m-d' ) );
 
 		header( 'Content-Description: File Transfer' );
 		header( "Content-Disposition: attachment; filename=$filename" );
