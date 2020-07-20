@@ -31,8 +31,9 @@ class Flamingo_Contacts_List_Table extends WP_List_Table {
 	}
 
 	public function prepare_items() {
-		$current_screen = get_current_screen();
-		$per_page = $this->get_items_per_page( $current_screen->id . '_per_page' );
+		$per_page = $this->get_items_per_page(
+			'flamingo_contacts_per_page'
+		);
 
 		$args = array(
 			'posts_per_page' => $per_page,
