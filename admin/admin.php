@@ -39,10 +39,23 @@ function flamingo_admin_menu() {
 
 add_filter( 'set-screen-option', 'flamingo_set_screen_options', 10, 3 );
 
+add_filter( 'set_screen_option_flamingo_contacts_per_page',
+	'flamingo_set_screen_options', 10, 3
+);
+
+add_filter( 'set_screen_option_flamingo_inbound_messages_per_page',
+	'flamingo_set_screen_options', 10, 3
+);
+
+add_filter( 'set_screen_option_flamingo_outbound_messages_per_page',
+	'flamingo_set_screen_options', 10, 3
+);
+
 function flamingo_set_screen_options( $result, $option, $value ) {
 	$flamingo_screens = array(
-		'toplevel_page_flamingo_per_page',
-		'flamingo_page_flamingo_inbound_per_page',
+		'flamingo_contacts_per_page',
+		'flamingo_inbound_messages_per_page',
+		'flamingo_outbound_messages_per_page',
 	);
 
 	if ( in_array( $option, $flamingo_screens ) ) {
@@ -312,8 +325,8 @@ function flamingo_load_contact_admin() {
 		);
 
 		add_screen_option( 'per_page', array(
-			'label' => __( 'Contacts', 'flamingo' ),
 			'default' => 20,
+			'option' => 'flamingo_contacts_per_page',
 		) );
 	}
 }
@@ -731,12 +744,12 @@ function flamingo_load_inbound_admin() {
 
 		add_filter( 'manage_' . $current_screen->id . '_columns',
 			array( 'Flamingo_Inbound_Messages_List_Table', 'define_columns' ),
-		 	10, 0
+			10, 0
 		);
 
 		add_screen_option( 'per_page', array(
-			'label' => __( 'Messages', 'flamingo' ),
 			'default' => 20,
+			'option' => 'flamingo_inbound_messages_per_page',
 		) );
 	}
 }
@@ -854,8 +867,8 @@ function flamingo_load_outbound_admin() {
 		);
 
 		add_screen_option( 'per_page', array(
-			'label' => __( 'Messages', 'flamingo' ),
 			'default' => 20,
+			'option' => 'flamingo_outbound_messages_per_page',
 		) );
 	}
 }
