@@ -123,10 +123,27 @@ function flamingo_inbound_submit_meta_box( $post ) {
 	<div class="misc-pub-section curtime misc-pub-curtime">
 	<span id="timestamp">
 <?php
+	$submitted_timestamp = get_post_timestamp( $post->id );
+
+	$submitted_on = sprintf(
+		/* translators: Publish box date string. 1: Date, 2: Time. */
+		__( '%1$s at %2$s', 'flamingo' ),
+		wp_date(
+			/* translators: Publish box date format, see https://www.php.net/date */
+			_x( 'M j, Y', 'publish box date format', 'flamingo' ),
+			$submitted_timestamp
+		),
+		wp_date(
+			/* translators: Publish box time format, see https://www.php.net/date */
+			_x( 'H:i', 'publish box time format', 'flamingo' ),
+			$submitted_timestamp
+		)
+	);
+
 	echo sprintf(
 		/* translators: %s: message submission date */
 		esc_html( __( 'Submitted on: %s', 'flamingo' ) ),
-		'<b>' . esc_html( $post->date ) . '</b>'
+		'<b>' . esc_html( $submitted_on ) . '</b>'
 	);
 ?>
 	</span>
