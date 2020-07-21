@@ -10,7 +10,6 @@ class Flamingo_Inbound_Message {
 
 	public $id;
 	public $channel;
-	public $date;
 	public $subject;
 	public $from;
 	public $from_name;
@@ -163,10 +162,6 @@ class Flamingo_Inbound_Message {
 	public function __construct( $post = null ) {
 		if ( ! empty( $post ) and $post = get_post( $post ) ) {
 			$this->id = $post->ID;
-
-			$this->date = get_the_time(
-				/* translators: date format, see https://php.net/date */
-				__( 'M j, Y @ H:i', 'flamingo' ), $this->id );
 			$this->subject = get_post_meta( $post->ID, '_subject', true );
 			$this->from = get_post_meta( $post->ID, '_from', true );
 			$this->from_name = get_post_meta( $post->ID, '_from_name', true );

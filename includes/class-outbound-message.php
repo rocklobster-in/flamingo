@@ -7,7 +7,6 @@ class Flamingo_Outbound_Message {
 	public static $found_items = 0;
 
 	public $id;
-	public $date;
 	public $to;
 	public $from;
 	public $subject;
@@ -81,9 +80,6 @@ class Flamingo_Outbound_Message {
 	public function __construct( $post = null ) {
 		if ( ! empty( $post ) and $post = get_post( $post ) ) {
 			$this->id = $post->ID;
-
-			$this->date = get_the_time(
-				__( 'Y/m/d g:i:s A', 'flamingo' ), $this->id );
 			$this->to = get_post_meta( $post->ID, '_to', true );
 			$this->from = get_post_meta( $post->ID, '_from', true );
 			$this->subject = get_post_meta( $post->ID, '_subject', true );
