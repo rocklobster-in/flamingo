@@ -45,7 +45,7 @@ table.message-fields td.field-value li {
 }
 
 .tablenav .actions input.button {
-	margin: 1px 8px 0 0;
+	margin: 0 8px 0 0;
 }
 
 #misc-publishing-actions .spam-log .dashicons-before::before {
