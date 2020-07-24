@@ -786,6 +786,7 @@ function flamingo_inbound_admin_page() {
 
 <form method="get" action="">
 	<input type="hidden" name="page" value="<?php echo esc_attr( $_REQUEST['page'] ); ?>" />
+	<input type="hidden" name="post_status" value="<?php echo esc_attr( $_REQUEST['post_status'] ); ?>" />
 	<?php $list_table->search_box( __( 'Search messages', 'flamingo' ), 'flamingo-inbound' ); ?>
 	<?php $list_table->display(); ?>
 </form>
