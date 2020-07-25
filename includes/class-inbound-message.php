@@ -201,6 +201,10 @@ class Flamingo_Inbound_Message {
 		}
 	}
 
+	public function id() {
+		return $this->id;
+	}
+
 	public function save() {
 		if ( ! empty( $this->subject ) ) {
 			$post_title = $this->subject;

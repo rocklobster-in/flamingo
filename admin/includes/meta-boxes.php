@@ -7,25 +7,28 @@ function flamingo_contact_submit_meta_box( $post ) {
 
 <div id="delete-action">
 <?php
-	if ( current_user_can( 'flamingo_delete_contact', $post->id ) ) {
+	if ( current_user_can( 'flamingo_delete_contact', $post->id() ) ) {
 		$delete_text = __( 'Delete', 'flamingo' );
 
 		$delete_link = add_query_arg(
 			array(
-				'post' => $post->id,
+				'post' => $post->id(),
 				'action' => 'delete',
 			),
 			menu_page_url( 'flamingo', false )
 		);
 
-		$delete_link = wp_nonce_url( $delete_link, 'flamingo-delete-contact_' . $post->id );
+		$delete_link = wp_nonce_url(
+			$delete_link,
+			'flamingo-delete-contact_' . $post->id()
+		);
 
 ?><a class="submitdelete deletion" href="<?php echo esc_url( $delete_link ); ?>" onclick="if (confirm('<?php echo esc_js( sprintf( __( "You are about to delete this contact '%s'\n 'Cancel' to stop, 'OK' to delete.", 'flamingo' ), $post->email ) ); ?>')) {return true;} return false;"><?php echo esc_html( $delete_text ); ?></a><?php } ?>
 </div>
 
 <div id="publishing-action">
 <span class="spinner"></span>
-<?php if ( ! empty( $post->id ) ) : ?>
+<?php if ( ! empty( $post->id() ) ) : ?>
 	<input name="save" type="submit" class="button-primary" id="publish" tabindex="4" accesskey="p" value="<?php echo esc_attr( __( 'Update contact', 'flamingo' ) ); ?>" />
 <?php else : ?>
 	<input name="save" type="submit" class="button-primary" id="publish" tabindex="4" accesskey="p" value="<?php echo esc_attr( __( 'Add contact', 'flamingo' ) ); ?>" />
@@ -47,7 +50,7 @@ function flamingo_contact_tags_meta_box( $post ) {
 		return;
 	}
 
-	$tags = wp_get_post_terms( $post->id, $taxonomy->name );
+	$tags = wp_get_post_terms( $post->id(), $taxonomy->name );
 	$tag_names = $tag_ids = array();
 
 	if ( ! empty( $tags ) and ! is_wp_error( $tags ) ) {
@@ -123,7 +126,7 @@ function flamingo_inbound_submit_meta_box( $post ) {
 	<div class="misc-pub-section curtime misc-pub-curtime">
 	<span id="timestamp">
 <?php
-	$submitted_timestamp = get_post_timestamp( $post->id );
+	$submitted_timestamp = get_post_timestamp( $post->id() );
 
 	$submitted_on = sprintf(
 		/* translators: Publish box date string. 1: Date, 2: Time. */
@@ -182,7 +185,7 @@ function flamingo_inbound_submit_meta_box( $post ) {
 <div id="major-publishing-actions">
 	<div id="delete-action">
 <?php
-	if ( current_user_can( 'flamingo_delete_inbound_message', $post->id ) ) {
+	if ( current_user_can( 'flamingo_delete_inbound_message', $post->id() ) ) {
 		if ( ! EMPTY_TRASH_DAYS ) {
 			$delete_text = __( 'Delete permanently', 'flamingo' );
 		} else {
@@ -191,14 +194,16 @@ function flamingo_inbound_submit_meta_box( $post ) {
 
 		$delete_link = add_query_arg(
 			array(
-				'post' => $post->id,
+				'post' => $post->id(),
 				'action' => 'trash',
 			),
 			menu_page_url( 'flamingo_inbound', false )
 		);
 
-		$delete_link = wp_nonce_url( $delete_link,
-			'flamingo-trash-inbound-message_' . $post->id );
+		$delete_link = wp_nonce_url(
+			$delete_link,
+			'flamingo-trash-inbound-message_' . $post->id()
+		);
 
 		echo sprintf( '<a href="%1$s" class="submitdelete deletion">%2$s</a>',
 			esc_url( $delete_link ),
@@ -348,7 +353,7 @@ function flamingo_outbound_submit_meta_box( $post ) {
 <?php if ( ! $initial ) : ?>
 <div id="delete-action">
 <?php
-	if ( current_user_can( 'flamingo_delete_outbound_message', $post->id ) ) {
+	if ( current_user_can( 'flamingo_delete_outbound_message', $post->id() ) ) {
 		if ( ! EMPTY_TRASH_DAYS ) {
 			$delete_text = __( 'Delete permanently', 'flamingo' );
 		} else {
@@ -357,14 +362,16 @@ function flamingo_outbound_submit_meta_box( $post ) {
 
 		$delete_link = add_query_arg(
 			array(
-				'post' => $post->id,
+				'post' => $post->id(),
 				'action' => 'trash',
 			),
 			menu_page_url( 'flamingo_outbound', false )
 		);
 
-		$delete_link = wp_nonce_url( $delete_link,
-			'flamingo-trash-outbound-message_' . $post->id );
+		$delete_link = wp_nonce_url(
+			$delete_link,
+			'flamingo-trash-outbound-message_' . $post->id()
+		);
 
 ?><a class="submitdelete deletion" href="<?php echo esc_url( $delete_link ); ?>"><?php echo esc_html( $delete_text ); ?></a><?php } ?>
 </div>

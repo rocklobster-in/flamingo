@@ -5,8 +5,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die( '-1' );
 }
 
-if ( ! empty( $post->id ) ) {
-	$nonce_action = 'flamingo-update-inbound_' . $post->id;
+if ( ! empty( $post->id() ) ) {
+	$nonce_action = 'flamingo-update-inbound_' . $post->id();
 } else {
 	$nonce_action = 'flamingo-add-inbound';
 }
@@ -18,7 +18,7 @@ if ( ! empty( $post->id ) ) {
 
 <?php do_action( 'flamingo_admin_updated_message', $post ); ?>
 
-<form name="editinbound" id="editinbound" method="post" action="<?php echo esc_url( add_query_arg( array( 'post' => $post->id ), menu_page_url( 'flamingo_inbound', false ) ) ); ?>">
+<form name="editinbound" id="editinbound" method="post" action="<?php echo esc_url( add_query_arg( array( 'post' => $post->id() ), menu_page_url( 'flamingo_inbound', false ) ) ); ?>">
 <?php
 wp_nonce_field( $nonce_action );
 wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false );
@@ -71,9 +71,9 @@ wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce', false );
 
 </div><!-- #poststuff -->
 
-<?php if ( $post->id ) : ?>
+<?php if ( $post->id() ) : ?>
 <input type="hidden" name="action" value="save" />
-<input type="hidden" name="post" value="<?php echo (int) $post->id; ?>" />
+<input type="hidden" name="post" value="<?php echo (int) $post->id(); ?>" />
 <?php else: ?>
 <input type="hidden" name="action" value="add" />
 <?php endif; ?>
