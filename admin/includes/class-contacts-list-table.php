@@ -66,7 +66,7 @@ class Flamingo_Contacts_List_Table extends WP_List_Table {
 
 		$this->items = Flamingo_Contact::find( $args );
 
-		$total_items = Flamingo_Contact::$found_items;
+		$total_items = Flamingo_Contact::count();
 		$total_pages = ceil( $total_items / $per_page );
 
 		$this->set_pagination_args( array(
@@ -286,7 +286,7 @@ class Flamingo_Contacts_List_Table extends WP_List_Table {
 					's' => $item->email,
 				) );
 
-				$count = (int) Flamingo_Inbound_Message::$found_items;
+				$count = (int) Flamingo_Inbound_Message::count();
 
 				if ( ! $count ) {
 					continue;

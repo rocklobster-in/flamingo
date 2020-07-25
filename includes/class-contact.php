@@ -5,7 +5,7 @@ class Flamingo_Contact {
 	const post_type = 'flamingo_contact';
 	const contact_tag_taxonomy = 'flamingo_contact_tag';
 
-	public static $found_items = 0;
+	private static $found_items = 0;
 
 	public $id;
 	public $email;
@@ -72,6 +72,19 @@ class Flamingo_Contact {
 		}
 
 		return $objs;
+	}
+
+	public static function count( $args = '' ) {
+		if ( $args ) {
+			$args = wp_parse_args( $args, array(
+				'offset' => 0,
+				'post_status' => 'publish',
+			) );
+
+			self::find( $args );
+		}
+
+		return absint( self::$found_items );
 	}
 
 	public static function search_by_email( $email ) {

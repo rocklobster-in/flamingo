@@ -74,7 +74,7 @@ class Flamingo_Outbound_Messages_List_Table extends WP_List_Table {
 
 		$this->items = Flamingo_Outbound_Message::find( $args );
 
-		$total_items = Flamingo_Outbound_Message::$found_items;
+		$total_items = Flamingo_Outbound_Message::count();
 		$total_pages = ceil( $total_items / $per_page );
 
 		$this->set_pagination_args( array(
@@ -91,7 +91,7 @@ class Flamingo_Outbound_Messages_List_Table extends WP_List_Table {
 
 		// Inbox
 		Flamingo_Outbound_Message::find( array( 'post_status' => 'any' ) );
-		$posts_in_inbox = Flamingo_Outbound_Message::$found_items;
+		$posts_in_inbox = Flamingo_Outbound_Message::count();
 
 		$inbox = sprintf(
 			_nx( 'Inbox <span class="count">(%s)</span>',
@@ -106,7 +106,7 @@ class Flamingo_Outbound_Messages_List_Table extends WP_List_Table {
 
 		// Trash
 		Flamingo_Outbound_Message::find( array( 'post_status' => 'trash' ) );
-		$posts_in_trash = Flamingo_Outbound_Message::$found_items;
+		$posts_in_trash = Flamingo_Outbound_Message::count();
 
 		if ( empty( $posts_in_trash ) ) {
 			return $status_links;

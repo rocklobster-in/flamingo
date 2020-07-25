@@ -6,7 +6,7 @@ class Flamingo_Inbound_Message {
 	const spam_status = 'flamingo-spam';
 	const channel_taxonomy = 'flamingo_inbound_channel';
 
-	public static $found_items = 0;
+	private static $found_items = 0;
 
 	public $id;
 	public $channel;
@@ -102,14 +102,16 @@ class Flamingo_Inbound_Message {
 	}
 
 	public static function count( $args = '' ) {
-		$args = wp_parse_args( $args, array(
-			'offset' => 0,
-			'channel' => '',
-			'channel_id' => 0,
-			'post_status' => 'publish',
-		) );
+		if ( $args ) {
+			$args = wp_parse_args( $args, array(
+				'offset' => 0,
+				'channel' => '',
+				'channel_id' => 0,
+				'post_status' => 'publish',
+			) );
 
-		self::find( $args );
+			self::find( $args );
+		}
 
 		return absint( self::$found_items );
 	}

@@ -50,7 +50,7 @@ function flamingo_privacy_contact_eraser( $email_address, $page = 1 ) {
 		}
 	}
 
-	$done = Flamingo_Contact::$found_items < $number;
+	$done = Flamingo_Contact::count() < $number;
 
 	return array(
 		'items_removed' => $items_removed,
@@ -92,7 +92,7 @@ function flamingo_privacy_inbound_eraser( $email_address, $page = 1 ) {
 		}
 	}
 
-	$done = Flamingo_Inbound_Message::$found_items < $number;
+	$done = Flamingo_Inbound_Message::count() < $number;
 
 	return array(
 		'items_removed' => $items_removed,
