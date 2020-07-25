@@ -275,14 +275,15 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 
 	protected function column_default( $item, $column_name ) {
 		do_action( 'manage_flamingo_inbound_posts_custom_column',
-			$column_name, $item->id );
+			$column_name, $item->id()
+		);
 	}
 
 	protected function column_cb( $item ) {
 		return sprintf(
 			'<input type="checkbox" name="%1$s[]" value="%2$s" />',
 			$this->_args['singular'],
-			$item->id
+			$item->id()
 		);
 	}
 
@@ -291,10 +292,10 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 			return sprintf( '<strong>%s</strong>', esc_html( $item->subject ) );
 		}
 
-		if ( current_user_can( 'flamingo_edit_inbound_message', $item->id ) ) {
+		if ( current_user_can( 'flamingo_edit_inbound_message', $item->id() ) ) {
 			$edit_link = add_query_arg(
 				array(
-					'post' => $item->id,
+					'post' => $item->id(),
 					'action' => 'edit',
 				),
 				menu_page_url( 'flamingo_inbound', false )
@@ -323,10 +324,10 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 
 		$actions = array();
 
-		if ( current_user_can( 'flamingo_edit_inbound_message', $item->id ) ) {
+		if ( current_user_can( 'flamingo_edit_inbound_message', $item->id() ) ) {
 			$link = add_query_arg(
 				array(
-					'post' => $item->id,
+					'post' => $item->id(),
 					'action' => 'edit',
 				),
 				menu_page_url( 'flamingo_inbound', false )
@@ -339,17 +340,18 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 		}
 
 		if ( $item->spam
-		and current_user_can( 'flamingo_unspam_inbound_message', $item->id ) ) {
+		and current_user_can( 'flamingo_unspam_inbound_message', $item->id() ) ) {
 			$link = add_query_arg(
 				array(
-					'post' => $item->id,
+					'post' => $item->id(),
 					'action' => 'unspam',
 				),
 				menu_page_url( 'flamingo_inbound', false )
 			);
 
 			$link = wp_nonce_url( $link,
-				'flamingo-unspam-inbound-message_' . $item->id );
+				'flamingo-unspam-inbound-message_' . $item->id()
+			);
 
 			$actions['unspam'] = sprintf( '<a href="%1$s">%2$s</a>',
 				esc_url( $link ),
@@ -358,17 +360,18 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 		}
 
 		if ( ! $item->spam
-		and current_user_can( 'flamingo_spam_inbound_message', $item->id ) ) {
+		and current_user_can( 'flamingo_spam_inbound_message', $item->id() ) ) {
 			$link = add_query_arg(
 				array(
-					'post' => $item->id,
+					'post' => $item->id(),
 					'action' => 'spam',
 				),
 				menu_page_url( 'flamingo_inbound', false )
 			);
 
 			$link = wp_nonce_url( $link,
-				'flamingo-spam-inbound-message_' . $item->id );
+				'flamingo-spam-inbound-message_' . $item->id()
+			);
 
 			$actions['spam'] = sprintf( '<a href="%1$s">%2$s</a>',
 				esc_url( $link ),
@@ -438,7 +441,7 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 	}
 
 	protected function column_date( $item ) {
-		$datetime = get_post_datetime( $item->id );
+		$datetime = get_post_datetime( $item->id() );
 
 		if ( false === $datetime ) {
 			return '';

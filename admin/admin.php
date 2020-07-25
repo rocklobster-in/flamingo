@@ -144,11 +144,11 @@ function flamingo_load_contact_admin() {
 		$post = new Flamingo_Contact( $_REQUEST['post'] );
 
 		if ( ! empty( $post ) ) {
-			if ( ! current_user_can( 'flamingo_edit_contact', $post->id ) ) {
+			if ( ! current_user_can( 'flamingo_edit_contact', $post->id() ) ) {
 				wp_die( __( 'You are not allowed to edit this item.', 'flamingo' ) );
 			}
 
-			check_admin_referer( 'flamingo-update-contact_' . $post->id );
+			check_admin_referer( 'flamingo-update-contact_' . $post->id() );
 
 			$post->props = (array) $_POST['contact'];
 
@@ -163,7 +163,7 @@ function flamingo_load_contact_admin() {
 			$redirect_to = add_query_arg(
 				array(
 					'action' => 'edit',
-					'post' => $post->id,
+					'post' => $post->id(),
 					'message' => 'contactupdated',
 				), $redirect_to
 			);
@@ -189,7 +189,7 @@ function flamingo_load_contact_admin() {
 				continue;
 			}
 
-			if ( ! current_user_can( 'flamingo_delete_contact', $post->id ) ) {
+			if ( ! current_user_can( 'flamingo_delete_contact', $post->id() ) ) {
 				wp_die( __( 'You are not allowed to delete this item.', 'flamingo' ) );
 			}
 
@@ -392,11 +392,11 @@ function flamingo_load_inbound_admin() {
 		$post = new Flamingo_Inbound_Message( $_REQUEST['post'] );
 
 		if ( ! empty( $post ) ) {
-			if ( ! current_user_can( 'flamingo_edit_inbound_message', $post->id ) ) {
+			if ( ! current_user_can( 'flamingo_edit_inbound_message', $post->id() ) ) {
 				wp_die( __( 'You are not allowed to edit this item.', 'flamingo' ) );
 			}
 
-			check_admin_referer( 'flamingo-update-inbound_' . $post->id );
+			check_admin_referer( 'flamingo-update-inbound_' . $post->id() );
 
 			$status = isset( $_POST['inbound']['status'] )
 				? $_POST['inbound']['status'] : '';
@@ -410,7 +410,7 @@ function flamingo_load_inbound_admin() {
 			$redirect_to = add_query_arg(
 				array(
 					'action' => 'edit',
-					'post' => $post->id,
+					'post' => $post->id(),
 					'message' => 'inboundupdated',
 				), $redirect_to
 			);
@@ -438,7 +438,7 @@ function flamingo_load_inbound_admin() {
 			}
 
 			if ( ! current_user_can(
-			'flamingo_delete_inbound_message', $post->id ) ) {
+			'flamingo_delete_inbound_message', $post->id() ) ) {
 				wp_die( __( 'You are not allowed to move this item to the Trash.', 'flamingo' ) );
 			}
 
@@ -476,7 +476,7 @@ function flamingo_load_inbound_admin() {
 			}
 
 			if ( ! current_user_can(
-			'flamingo_delete_inbound_message', $post->id ) ) {
+			'flamingo_delete_inbound_message', $post->id() ) ) {
 				wp_die( __( 'You are not allowed to restore this item from the Trash.', 'flamingo' ) );
 			}
 
@@ -523,7 +523,7 @@ function flamingo_load_inbound_admin() {
 			}
 
 			if ( ! current_user_can(
-			'flamingo_delete_inbound_message', $post->id ) ) {
+			'flamingo_delete_inbound_message', $post->id() ) ) {
 				wp_die( __( 'You are not allowed to delete this item.', 'flamingo' ) );
 			}
 
@@ -560,7 +560,7 @@ function flamingo_load_inbound_admin() {
 				continue;
 			}
 
-			if ( ! current_user_can( 'flamingo_spam_inbound_message', $post->id ) ) {
+			if ( ! current_user_can( 'flamingo_spam_inbound_message', $post->id() ) ) {
 				wp_die( __( 'You are not allowed to spam this item.', 'flamingo' ) );
 			}
 
@@ -596,7 +596,7 @@ function flamingo_load_inbound_admin() {
 			}
 
 			if ( ! current_user_can(
-			'flamingo_unspam_inbound_message', $post->id ) ) {
+			'flamingo_unspam_inbound_message', $post->id() ) ) {
 				wp_die( __( 'You are not allowed to unspam this item.', 'flamingo' ) );
 			}
 
@@ -689,7 +689,7 @@ function flamingo_load_inbound_admin() {
 				$row[] = $col;
 			}
 
-			$row[] = get_post_time( 'c', true, $item->id ); // Date
+			$row[] = get_post_time( 'c', true, $item->id() ); // Date
 
 			echo "\r\n" . flamingo_csv_row( $row );
 		}
@@ -842,7 +842,7 @@ function flamingo_load_outbound_admin() {
 		$redirect_to = add_query_arg(
 			array(
 				'action' => 'edit',
-				//'post' => $post->id,
+				//'post' => $post->id(),
 				'message' => 'outboundupdated',
 			), $redirect_to
 		);

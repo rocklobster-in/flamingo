@@ -5,8 +5,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die( '-1' );
 }
 
-if ( ! empty( $post->id ) ) {
-	$nonce_action = 'flamingo-update-contact_' . $post->id;
+if ( ! empty( $post->id() ) ) {
+	$nonce_action = 'flamingo-update-contact_' . $post->id();
 } else {
 	$nonce_action = 'flamingo-add-contact';
 }
@@ -18,7 +18,7 @@ if ( ! empty( $post->id ) ) {
 
 <?php do_action( 'flamingo_admin_updated_message', $post ); ?>
 
-<form name="editcontact" id="editcontact" method="post" action="<?php echo esc_url( add_query_arg( array( 'post' => $post->id ), menu_page_url( 'flamingo', false ) ) ); ?>">
+<form name="editcontact" id="editcontact" method="post" action="<?php echo esc_url( add_query_arg( array( 'post' => $post->id() ), menu_page_url( 'flamingo', false ) ) ); ?>">
 <?php
 wp_nonce_field( $nonce_action );
 wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false );
@@ -31,7 +31,7 @@ wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce', false );
 <div id="post-body-content">
 	<div id="titlediv">
 	<div id="titlewrap">
-	<?php if ( ! empty( $post->id ) ) : ?>
+	<?php if ( ! empty( $post->id() ) ) : ?>
 	<input type="text" name="post_title" size="30" tabindex="1" value="<?php echo esc_attr( $post->email ); ?>" id="title" disabled="disabled" />
 	<?php else : ?>
 	<label class="hide-if-no-js" style="visibility:hidden" id="title-prompt-text" for="title"><?php echo esc_html( __( 'Enter email here', 'flamingo' ) ); ?></label>
@@ -59,9 +59,9 @@ wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce', false );
 
 </div><!-- #poststuff -->
 
-<?php if ( $post->id ) : ?>
+<?php if ( $post->id() ) : ?>
 <input type="hidden" name="action" value="save" />
-<input type="hidden" name="post" value="<?php echo (int) $post->id; ?>" />
+<input type="hidden" name="post" value="<?php echo (int) $post->id(); ?>" />
 <?php else: ?>
 <input type="hidden" name="action" value="add" />
 <?php endif; ?>

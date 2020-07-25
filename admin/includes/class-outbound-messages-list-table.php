@@ -184,14 +184,16 @@ class Flamingo_Outbound_Messages_List_Table extends WP_List_Table {
 
 	protected function column_default( $item, $column_name ) {
 		do_action( 'manage_flamingo_outbound_posts_custom_column',
-			$column_name, $item->id );
+			$column_name, $item->id()
+		);
 	}
 
 	protected function column_cb( $item ) {
 		return sprintf(
 			'<input type="checkbox" name="%1$s[]" value="%2$s" />',
 			$this->_args['singular'],
-			$item->id );
+			$item->id()
+		);
 	}
 
 	protected function column_subject( $item ) {
@@ -200,7 +202,7 @@ class Flamingo_Outbound_Messages_List_Table extends WP_List_Table {
 		}
 
 		$actions = array();
-		$post_id = absint( $item->id );
+		$post_id = absint( $item->id() );
 
 		$edit_link = add_query_arg(
 			array(
@@ -233,7 +235,7 @@ class Flamingo_Outbound_Messages_List_Table extends WP_List_Table {
 	}
 
 	protected function column_date( $item ) {
-		$datetime = get_post_datetime( $item->id );
+		$datetime = get_post_datetime( $item->id() );
 
 		if ( false === $datetime ) {
 			return '';

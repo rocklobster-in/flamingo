@@ -137,27 +137,28 @@ class Flamingo_Contacts_List_Table extends WP_List_Table {
 
 	protected function column_default( $item, $column_name ) {
 		do_action( 'manage_flamingo_contact_posts_custom_column',
-			$column_name, $item->id );
+			$column_name, $item->id()
+		);
 	}
 
 	protected function column_cb( $item ) {
 		return sprintf(
 			'<input type="checkbox" name="%1$s[]" value="%2$s" />',
 			$this->_args['singular'],
-			$item->id
+			$item->id()
 		);
 	}
 
 	protected function column_email( $item ) {
 		$edit_link = add_query_arg(
 			array(
-				'post' => $item->id,
+				'post' => $item->id(),
 				'action' => 'edit',
 			),
 			menu_page_url( 'flamingo', false )
 		);
 
-		if ( current_user_can( 'flamingo_edit_contact', $item->id ) ) {
+		if ( current_user_can( 'flamingo_edit_contact', $item->id() ) ) {
 			return sprintf(
 				'<strong><a class="row-title" href="%1$s" aria-label="%2$s">%3$s</a></strong>',
 				esc_url( $edit_link ),
@@ -184,13 +185,13 @@ class Flamingo_Contacts_List_Table extends WP_List_Table {
 
 		$link = add_query_arg(
 			array(
-				'post' => $item->id,
+				'post' => $item->id(),
 				'action' => 'edit',
 			),
 			menu_page_url( 'flamingo', false )
 		);
 
-		if ( current_user_can( 'flamingo_edit_contact', $item->id ) ) {
+		if ( current_user_can( 'flamingo_edit_contact', $item->id() ) ) {
 			$actions['edit'] = sprintf(
 				'<a href="%1$s">%2$s</a>',
 				esc_url( $link ),

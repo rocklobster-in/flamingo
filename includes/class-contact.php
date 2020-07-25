@@ -156,6 +156,10 @@ class Flamingo_Contact {
 		}
 	}
 
+	public function id() {
+		return $this->id;
+	}
+
 	public function save() {
 		$post_title = $this->email;
 		$post_name = strtr( $this->email, '@', '-' );
