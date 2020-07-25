@@ -87,7 +87,7 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 
 		$this->items = Flamingo_Inbound_Message::find( $args );
 
-		$total_items = Flamingo_Inbound_Message::$found_items;
+		$total_items = Flamingo_Inbound_Message::count();
 		$total_pages = ceil( $total_items / $per_page );
 
 		$this->set_pagination_args( array(
@@ -107,7 +107,7 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 			'post_status' => 'any',
 		) );
 
-		$posts_in_inbox = Flamingo_Inbound_Message::$found_items;
+		$posts_in_inbox = Flamingo_Inbound_Message::count();
 
 		$inbox = sprintf(
 			_nx( 'Inbox <span class="count">(%s)</span>',
@@ -126,7 +126,7 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 			'post_status' => Flamingo_Inbound_Message::spam_status,
 		) );
 
-		$posts_in_spam = Flamingo_Inbound_Message::$found_items;
+		$posts_in_spam = Flamingo_Inbound_Message::count();
 
 		$spam = sprintf(
 			_nx( 'Spam <span class="count">(%s)</span>',
@@ -151,7 +151,7 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 			'post_status' => 'trash',
 		) );
 
-		$posts_in_trash = Flamingo_Inbound_Message::$found_items;
+		$posts_in_trash = Flamingo_Inbound_Message::count();
 
 		if ( empty( $posts_in_trash ) ) {
 			return $status_links;

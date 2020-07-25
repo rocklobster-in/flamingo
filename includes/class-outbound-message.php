@@ -4,7 +4,7 @@ class Flamingo_Outbound_Message {
 
 	const post_type = 'flamingo_outbound';
 
-	public static $found_items = 0;
+	private static $found_items = 0;
 
 	public $id;
 	public $to;
@@ -52,6 +52,19 @@ class Flamingo_Outbound_Message {
 		}
 
 		return $objs;
+	}
+
+	public static function count( $args = '' ) {
+		if ( $args ) {
+			$args = wp_parse_args( $args, array(
+				'offset' => 0,
+				'post_status' => 'publish',
+			) );
+
+			self::find( $args );
+		}
+
+		return absint( self::$found_items );
 	}
 
 	public static function add( $args = '' ) {
