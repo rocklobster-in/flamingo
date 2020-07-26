@@ -8,7 +8,7 @@ class Flamingo_Inbound_Message {
 
 	private static $found_items = 0;
 
-	public $id;
+	private $id;
 	public $channel;
 	public $subject;
 	public $from;
@@ -198,6 +198,25 @@ class Flamingo_Inbound_Message {
 			} else {
 				$this->spam = isset( $this->akismet['spam'] ) && $this->akismet['spam'];
 			}
+		}
+	}
+
+	public function __get( $name ) {
+		/* translators: 1: Property, 2: Version, 3: Class, 4: Method. */
+		$message = __( 'The visibility of the %1$s property has been changed in %2$s. Now the property may only be accessed by the %3$s class. You can use the %4$s method instead.', 'flamingo' );
+
+		if ( 'id' == $name ) {
+			if ( WP_DEBUG ) {
+				trigger_error( sprintf(
+					$message,
+					sprintf( '<code>%s</code>', 'id' ),
+					esc_html( __( 'Flamingo 2.2', 'flamingo' ) ),
+					sprintf( '<code>%s</code>', self::class ),
+					sprintf( '<code>%s</code>', 'id()' )
+				) );
+			}
+
+			return $this->id;
 		}
 	}
 
