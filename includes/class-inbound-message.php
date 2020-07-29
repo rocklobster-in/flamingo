@@ -10,6 +10,7 @@ class Flamingo_Inbound_Message {
 
 	private $id;
 	public $channel;
+	public $submission_status;
 	public $subject;
 	public $from;
 	public $from_name;
@@ -119,6 +120,7 @@ class Flamingo_Inbound_Message {
 	public static function add( $args = '' ) {
 		$defaults = array(
 			'channel' => '',
+			'status' => '',
 			'subject' => '',
 			'from' => '',
 			'from_name' => '',
@@ -140,6 +142,7 @@ class Flamingo_Inbound_Message {
 		$obj = new self();
 
 		$obj->channel = $args['channel'];
+		$obj->submission_status = $args['status'];
 		$obj->subject = $args['subject'];
 		$obj->from = $args['from'];
 		$obj->from_name = $args['from_name'];
@@ -180,6 +183,10 @@ class Flamingo_Inbound_Message {
 					}
 				}
 			}
+
+			$this->submission_status = get_post_meta( $post->ID,
+				'_submission_status', true
+			);
 
 			$this->meta = get_post_meta( $post->ID, '_meta', true );
 			$this->akismet = get_post_meta( $post->ID, '_akismet', true );
@@ -270,6 +277,10 @@ class Flamingo_Inbound_Message {
 				// delete spam meta time to stop trashing in cron job
 				delete_post_meta( $post_id, '_spam_meta_time' );
 			}
+
+			update_post_meta( $post_id, '_submission_status',
+				$this->submission_status
+			);
 
 			update_post_meta( $post_id, '_subject', $this->subject );
 			update_post_meta( $post_id, '_from', $this->from );
