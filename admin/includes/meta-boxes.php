@@ -152,6 +152,25 @@ function flamingo_inbound_submit_meta_box( $post ) {
 	</span>
 	</div>
 <?php
+	if ( ! empty( $post->submission_status ) ) {
+		echo '<div class="misc-pub-section submission-status">', "\n";
+
+		$submission_status = sprintf(
+			/* translators: %s: Result of the submission. */
+			esc_html( __( 'Submission result: %s', 'flamingo' ) ),
+			sprintf( '<b>%s</b>', esc_html( $post->submission_status ) )
+		);
+
+		echo sprintf(
+			'<span class="dashicons-before %1$s"> %2$s</span>',
+			in_array( $post->submission_status, array( 'mail_failed', 'spam' ) )
+				? 'dashicons-no' : 'dashicons-yes',
+			$submission_status
+		);
+
+		echo '</div>', "\n";
+	}
+
 	if ( ! empty( $post->spam_log ) ) {
 		echo '<div class="misc-pub-section spam-log">', "\n";
 

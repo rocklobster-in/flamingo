@@ -48,7 +48,7 @@ table.message-fields td.field-value li {
 	margin: 0 8px 0 0;
 }
 
-#misc-publishing-actions .spam-log .dashicons-before::before {
+#misc-publishing-actions .dashicons-before::before {
 	position: relative;
 	top: -1px;
 	margin-left: -1px;
