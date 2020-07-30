@@ -1,8 +1,8 @@
 === Flamingo ===
 Contributors: takayukister, megumithemes, itpixelz
 Tags: bird, contact, mail, crm
-Requires at least: 5.2
-Tested up to: 5.3
+Requires at least: 5.4
+Tested up to: 5.5
 Stable tag: 2.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -41,8 +41,3 @@ This plugin stores submission data collected through contact forms, which may in
 
 * UI improvements in displaying JSON reCAPTCHA logs in the Inbound Message editor page.
 * Moves to trash automatically after every 30 days of the creation of spam messages.
-
-= 2.0 =
-
-* Displays spam logs in the Inbound Message editor page.
-* Displays reCAPTCHA logs in the Inbound Message editor page.
