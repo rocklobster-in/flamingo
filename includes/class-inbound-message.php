@@ -23,6 +23,7 @@ class Flamingo_Inbound_Message {
 	public $spam_log;
 	public $consent;
 	private $timestamp = null;
+	private $hash = null;
 
 	public static function register_post_type() {
 		register_post_type( self::post_type, array(
@@ -66,6 +67,7 @@ class Flamingo_Inbound_Message {
 			'tax_query' => array(),
 			'channel' => '',
 			'channel_id' => 0,
+			'hash' => '',
 		);
 
 		$args = wp_parse_args( $args, $defaults );
@@ -85,6 +87,13 @@ class Flamingo_Inbound_Message {
 				'taxonomy' => self::channel_taxonomy,
 				'terms' => $args['channel'],
 				'field' => 'slug',
+			);
+		}
+
+		if ( ! empty( $args['hash'] ) ) {
+			$args['meta_query'][] = array(
+				'key' => '_hash',
+				'value' => $args['hash'],
 			);
 		}
 
@@ -133,6 +142,7 @@ class Flamingo_Inbound_Message {
 			'spam_log' => array(),
 			'consent' => array(),
 			'timestamp' => null,
+			'posted_data_hash' => null,
 		);
 
 		$args = apply_filters( 'flamingo_add_inbound',
@@ -157,6 +167,10 @@ class Flamingo_Inbound_Message {
 
 		if ( $args['timestamp'] ) {
 			$obj->timestamp = $args['timestamp'];
+		}
+
+		if ( $args['posted_data_hash'] ) {
+			$obj->hash = $args['posted_data_hash'];
 		}
 
 		$obj->save();
@@ -205,6 +219,8 @@ class Flamingo_Inbound_Message {
 			} else {
 				$this->spam = isset( $this->akismet['spam'] ) && $this->akismet['spam'];
 			}
+
+			$this->hash = get_post_meta( $post->ID, '_hash', true );
 		}
 	}
 
@@ -299,6 +315,7 @@ class Flamingo_Inbound_Message {
 			update_post_meta( $post_id, '_recaptcha', $this->recaptcha );
 			update_post_meta( $post_id, '_spam_log', $this->spam_log );
 			update_post_meta( $post_id, '_consent', $this->consent );
+			update_post_meta( $post_id, '_hash', $this->hash );
 
 			if ( term_exists( $this->channel, self::channel_taxonomy ) ) {
 				wp_set_object_terms( $this->id, $this->channel,
