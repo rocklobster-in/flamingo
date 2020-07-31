@@ -453,7 +453,7 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 			/* translators: date format, see https://www.php.net/date */
 			$datetime->format( __( 'Y/m/d', 'flamingo' ) ),
 			/* translators: time format, see https://www.php.net/date */
-			$datetime->format( __( 'g:i a', 'flamingo' ) ),
+			$datetime->format( __( 'g:i a', 'flamingo' ) )
 		);
 
 		return $t_time;
