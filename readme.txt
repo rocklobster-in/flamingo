@@ -32,6 +32,15 @@ This plugin stores submission data collected through contact forms, which may in
 
 == Changelog ==
 
+= 2.2 =
+
+* Sets the `post_date` of an inbound message based on the submission timestamp.
+* Allows users to search and filter messages within the Spam subgroup.
+* Changes the visibility of the `$found_items` property to private and introduces the `count()` method as an alternative.
+* Changes the visibility of the `$id` property to private and introduces the `id()` method as an alternative.
+* Introduces the submission result in the inbound message viewer screen.
+* Stores the `posted_data_hash` value for search.
+
 = 2.1.1 =
 
 * Security enhancement, CSV: Prefixes a field when its value begins with `=`, `+`, `-`, or `@`. See https://contactform7.com/2020/01/15/heads-up-about-spreadsheet-vulnerabilities/ for details.
