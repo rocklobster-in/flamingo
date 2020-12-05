@@ -6,35 +6,45 @@ require_once FLAMINGO_PLUGIN_DIR . '/admin/includes/privacy.php';
 add_action( 'admin_menu', 'flamingo_admin_menu', 8, 0 );
 
 function flamingo_admin_menu() {
-	global $_wp_last_object_menu;
-
-	$_wp_last_object_menu++;
-
 	add_menu_page(
 		__( 'Flamingo Address Book', 'flamingo' ),
 		__( 'Flamingo', 'flamingo' ),
-		'flamingo_edit_contacts', 'flamingo',
-		'flamingo_contact_admin_page', 'dashicons-feedback',
-		$_wp_last_object_menu
+		'flamingo_edit_contacts',
+		'flamingo',
+		'flamingo_contact_admin_page',
+		'dashicons-feedback',
+		28
 	);
 
-	$contact_admin = add_submenu_page( 'flamingo',
+	$contact_admin = add_submenu_page(
+		'flamingo',
 		__( 'Flamingo Address Book', 'flamingo' ),
 		__( 'Address Book', 'flamingo' ),
-		'flamingo_edit_contacts', 'flamingo',
+		'flamingo_edit_contacts',
+		'flamingo',
 		'flamingo_contact_admin_page'
 	);
 
-	add_action( 'load-' . $contact_admin, 'flamingo_load_contact_admin', 10, 0 );
+	add_action(
+		'load-' . $contact_admin,
+		'flamingo_load_contact_admin',
+		10, 0
+	);
 
-	$inbound_admin = add_submenu_page( 'flamingo',
+	$inbound_admin = add_submenu_page(
+		'flamingo',
 		__( 'Flamingo Inbound Messages', 'flamingo' ),
 		__( 'Inbound Messages', 'flamingo' ),
-		'flamingo_edit_inbound_messages', 'flamingo_inbound',
+		'flamingo_edit_inbound_messages',
+		'flamingo_inbound',
 		'flamingo_inbound_admin_page'
 	);
 
-	add_action( 'load-' . $inbound_admin, 'flamingo_load_inbound_admin', 10, 0 );
+	add_action(
+		'load-' . $inbound_admin,
+		'flamingo_load_inbound_admin',
+		10, 0
+	);
 }
 
 add_filter( 'set-screen-option', 'flamingo_set_screen_options', 10, 3 );
