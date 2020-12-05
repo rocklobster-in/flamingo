@@ -48,9 +48,6 @@ if ( is_admin() ) {
 /* Init */
 
 add_action( 'init', function() {
-	/* L10N */
-	load_plugin_textdomain( 'flamingo', false, 'flamingo/languages' );
-
 	/* Custom Post Types */
 	Flamingo_Contact::register_post_type();
 	Flamingo_Inbound_Message::register_post_type();
