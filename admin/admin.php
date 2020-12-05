@@ -396,6 +396,15 @@ function flamingo_load_inbound_admin() {
 
 	$redirect_to = menu_page_url( 'flamingo_inbound', false );
 
+	if ( isset( $_GET['post_status'] ) ) {
+		$redirect_to = add_query_arg(
+			array(
+				'post_status' => $_GET['post_status'],
+			),
+			$redirect_to
+		);
+	}
+
 	if ( 'save' == $action and ! empty( $_REQUEST['post'] ) ) {
 		$post = new Flamingo_Inbound_Message( $_REQUEST['post'] );
 
@@ -459,7 +468,11 @@ function flamingo_load_inbound_admin() {
 
 		if ( ! empty( $trashed ) ) {
 			$redirect_to = add_query_arg(
-				array( 'message' => 'inboundtrashed' ), $redirect_to );
+				array(
+					'message' => 'inboundtrashed',
+				),
+				$redirect_to
+			);
 		}
 
 		wp_safe_redirect( $redirect_to );
@@ -497,7 +510,10 @@ function flamingo_load_inbound_admin() {
 
 		if ( ! empty( $untrashed ) ) {
 			$redirect_to = add_query_arg(
-				array( 'message' => 'inbounduntrashed' ), $redirect_to );
+				array(
+					'message' => 'inbounduntrashed',
+				), $redirect_to
+			);
 		}
 
 		wp_safe_redirect( $redirect_to );
@@ -544,7 +560,11 @@ function flamingo_load_inbound_admin() {
 
 		if ( ! empty( $deleted ) ) {
 			$redirect_to = add_query_arg(
-				array( 'message' => 'inbounddeleted' ), $redirect_to );
+				array(
+					'message' => 'inbounddeleted',
+				),
+				$redirect_to
+			);
 		}
 
 		wp_safe_redirect( $redirect_to );
@@ -579,7 +599,11 @@ function flamingo_load_inbound_admin() {
 
 		if ( ! empty( $submitted ) ) {
 			$redirect_to = add_query_arg(
-				array( 'message' => 'inboundspammed' ), $redirect_to );
+				array(
+					'message' => 'inboundspammed',
+				),
+				$redirect_to
+			);
 		}
 
 		wp_safe_redirect( $redirect_to );
@@ -615,7 +639,11 @@ function flamingo_load_inbound_admin() {
 
 		if ( ! empty( $submitted ) ) {
 			$redirect_to = add_query_arg(
-				array( 'message' => 'inboundunspammed' ), $redirect_to );
+				array(
+					'message' => 'inboundunspammed',
+				),
+				$redirect_to
+			);
 		}
 
 		wp_safe_redirect( $redirect_to );
