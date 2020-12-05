@@ -1,7 +1,7 @@
 Flamingo
 ========
 
-This is the development repository for Flamingo, a message storage plugin originally created for Contact Form 7, which doesn’t store submitted messages. A copy of the plugin package is downloadable from the [WordPress.org Plugin Directory](https://wordpress.org/plugins/flamingo/).
+This is the development repository for Flamingo, a WordPress plugin that stores messages collected through contact forms. A copy of the plugin package is downloadable from the [WordPress.org Plugin Directory](https://wordpress.org/plugins/flamingo/).
 
 
 License
