@@ -103,14 +103,14 @@ class Flamingo_Contact {
 	}
 
 	public static function add( $args = '' ) {
-		$defaults = array(
+		$args = wp_parse_args( $args, array(
 			'email' => '',
 			'name' => '',
 			'props' => array(),
-		);
+			'last_contacted' => '0000-00-00 00:00:00',
+		) );
 
-		$args = apply_filters( 'flamingo_add_contact',
-			wp_parse_args( $args, $defaults ) );
+		$args = apply_filters( 'flamingo_add_contact', $args );
 
 		if ( empty( $args['email'] ) or ! is_email( $args['email'] ) ) {
 			return;
@@ -126,10 +126,10 @@ class Flamingo_Contact {
 			$obj->props = (array) $args['props'];
 		}
 
-		if ( ! empty( $args['last_contacted'] ) ) {
+		if ( '0000-00-00 00:00:00' !== $args['last_contacted'] ) {
 			$obj->last_contacted = $args['last_contacted'];
-		} else {
-			$obj->last_contacted = wp_date( 'Y-m-d H:i:s' );
+		} elseif ( $datetime = date_create_immutable( 'now', wp_timezone() ) ) {
+			$obj->last_contacted = $datetime->format( 'Y-m-d H:i:s' );
 		}
 
 		$obj->save();
