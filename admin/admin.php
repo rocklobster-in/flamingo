@@ -47,8 +47,6 @@ function flamingo_admin_menu() {
 	);
 }
 
-add_filter( 'set-screen-option', 'flamingo_set_screen_options', 10, 3 );
-
 add_filter( 'set_screen_option_flamingo_contacts_per_page',
 	'flamingo_set_screen_options', 10, 3
 );
