@@ -127,7 +127,7 @@ class Flamingo_Inbound_Message {
 	}
 
 	public static function add( $args = '' ) {
-		$defaults = array(
+		$args = wp_parse_args( $args, array(
 			'channel' => '',
 			'status' => '',
 			'subject' => '',
@@ -143,11 +143,9 @@ class Flamingo_Inbound_Message {
 			'consent' => array(),
 			'timestamp' => null,
 			'posted_data_hash' => null,
-		);
+		) );
 
-		$args = apply_filters( 'flamingo_add_inbound',
-			wp_parse_args( $args, $defaults )
-		);
+		$args = apply_filters( 'flamingo_add_inbound', $args );
 
 		$obj = new self();
 
@@ -275,8 +273,10 @@ class Flamingo_Inbound_Message {
 			'post_date' => $this->get_post_date(),
 		);
 
-		if ( $this->timestamp ) {
-			$postarr['post_date'] = wp_date( 'Y-m-d H:i:s', $this->timestamp );
+		if ( $this->timestamp
+		and $datetime = date_create( '@' . $this->timestamp ) ) {
+			$datetime->setTimezone( wp_timezone() );
+			$postarr['post_date'] = $datetime->format( 'Y-m-d H:i:s' );
 		}
 
 		$post_id = wp_insert_post( $postarr );
