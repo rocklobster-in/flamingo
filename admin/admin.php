@@ -725,7 +725,7 @@ function flamingo_load_inbound_admin() {
 				$row[] = $col;
 			}
 
-			$row[] = get_post_time( 'c', true, $item->id() ); // Date
+			$row[] = get_post_time( 'c', false, $item->id() ); // Date
 
 			echo "\r\n" . flamingo_csv_row( $row );
 		}
