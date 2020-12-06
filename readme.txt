@@ -32,6 +32,16 @@ This plugin stores submission data collected through contact forms, which may in
 
 == Changelog ==
 
+= 2.2.1 =
+
+* Outputs a local date/time in a CSV export file.
+* Removes `load_plugin_textdomain()` calls.
+* Removes a reference to `$_wp_last_object_menu`.
+* Removes the `set-screen-option` filter.
+* Inherits `post_status` from the previous admin page.
+* Avoids using `wp_date()` for MySQL DATETIME values.
+* Has been tested with WordPress 5.6.
+
 = 2.2 =
 
 * Sets the `post_date` of an inbound message based on the submission timestamp.
