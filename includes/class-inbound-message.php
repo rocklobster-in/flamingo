@@ -196,6 +196,8 @@ class Flamingo_Inbound_Message {
 				}
 			}
 
+			$this->fields = apply_filters( 'flamingo_display_inbound_fields', $this->fields );
+
 			$this->submission_status = get_post_meta( $post->ID,
 				'_submission_status', true
 			);
