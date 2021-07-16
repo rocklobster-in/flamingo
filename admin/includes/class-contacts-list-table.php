@@ -115,7 +115,9 @@ class Flamingo_Contacts_List_Table extends WP_List_Table {
 <div class="alignleft actions">
 <?php
 		if ( 'top' == $which ) {
-			wp_dropdown_categories( array(
+			$filters = array();
+
+			$filters[] = wp_dropdown_categories( array(
 				'taxonomy' => Flamingo_Contact::contact_tag_taxonomy,
 				'name' => 'contact_tag_id',
 				'show_option_all' => __( 'View all tags', 'flamingo' ),
@@ -125,8 +127,11 @@ class Flamingo_Contacts_List_Table extends WP_List_Table {
 				'selected' => $tag,
 			) );
 
-			submit_button( __( 'Filter', 'flamingo' ),
-				'secondary', false, false, array( 'id' => 'post-query-submit' ) );
+			if ( array_filter( $filters ) ) {
+				submit_button( __( 'Filter', 'flamingo' ),
+					'secondary', false, false, array( 'id' => 'post-query-submit' )
+				);
+			}
 
 			submit_button( __( 'Export', 'flamingo' ), 'secondary', 'export', false );
 		}
