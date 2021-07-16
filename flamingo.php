@@ -5,21 +5,24 @@ Description: A trustworthy message storage plugin for Contact Form 7.
 Author: Takayuki Miyoshi
 Text Domain: flamingo
 Domain Path: /languages/
-Version: 2.2.1
+Version: 2.2.2
 */
 
-define( 'FLAMINGO_VERSION', '2.2.1' );
+define( 'FLAMINGO_VERSION', '2.2.2' );
 
 define( 'FLAMINGO_PLUGIN', __FILE__ );
 
 define( 'FLAMINGO_PLUGIN_BASENAME',
-	plugin_basename( FLAMINGO_PLUGIN ) );
+	plugin_basename( FLAMINGO_PLUGIN )
+);
 
 define( 'FLAMINGO_PLUGIN_NAME',
-	trim( dirname( FLAMINGO_PLUGIN_BASENAME ), '/' ) );
+	trim( dirname( FLAMINGO_PLUGIN_BASENAME ), '/' )
+);
 
 define( 'FLAMINGO_PLUGIN_DIR',
-	untrailingslashit( dirname( FLAMINGO_PLUGIN ) ) );
+	untrailingslashit( dirname( FLAMINGO_PLUGIN ) )
+);
 
 if ( ! defined( 'FLAMINGO_MOVE_TRASH_DAYS' ) ) {
 	define( 'FLAMINGO_MOVE_TRASH_DAYS', 30 );
@@ -27,7 +30,8 @@ if ( ! defined( 'FLAMINGO_MOVE_TRASH_DAYS' ) ) {
 
 // Deprecated, not used in the plugin core. Use flamingo_plugin_url() instead.
 define( 'FLAMINGO_PLUGIN_URL',
-	untrailingslashit( plugins_url( '', FLAMINGO_PLUGIN ) ) );
+	untrailingslashit( plugins_url( '', FLAMINGO_PLUGIN ) )
+);
 
 require_once FLAMINGO_PLUGIN_DIR . '/includes/functions.php';
 require_once FLAMINGO_PLUGIN_DIR . '/includes/formatting.php';
