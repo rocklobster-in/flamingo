@@ -31,6 +31,10 @@ table.message-fields td.field-title {
 	width: 24%;
 }
 
+table.message-fields td.field-value p {
+	overflow-wrap: anywhere;
+}
+
 table.message-fields td.field-value ul {
 	margin: 0;
 }
