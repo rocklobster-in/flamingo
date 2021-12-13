@@ -3,7 +3,7 @@ Contributors: takayukister, megumithemes, itpixelz
 Tags: bird, contact, mail, crm
 Requires at least: 5.4
 Tested up to: 5.8
-Stable tag: 2.2.1
+Stable tag: 2.2.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,6 +31,10 @@ This plugin stores submission data collected through contact forms, which may in
 == Screenshots ==
 
 == Changelog ==
+
+= 2.2.3 =
+
+* Fixed: Cron jobs clean-up on plugin deactivation was failing to work.
 
 = 2.2.2 =
 
