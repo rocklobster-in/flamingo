@@ -27,7 +27,7 @@ function flamingo_schedule_activation() {
 
 
 // deactivate cron job on deactivation of the plugin on plugin's deactivation
-register_deactivation_hook( __FILE__, 'flamingo_schedule_deactivate' );
+register_deactivation_hook( FLAMINGO_PLUGIN, 'flamingo_schedule_deactivate' );
 
 /**
  * Function to deactivate the cron job
