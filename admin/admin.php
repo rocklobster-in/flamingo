@@ -705,7 +705,12 @@ function flamingo_load_inbound_admin() {
 			exit();
 		}
 
-		$labels = array_keys( $items[0]->fields );
+		$all_labels = array();
+		foreach ( $items as $item ) {
+			$all_labels = array_merge( $all_labels, array_keys( $item->fields ) );
+		}
+
+		$labels = array_values( array_unique( $all_labels ) );
 
 		echo flamingo_csv_row(
 			array_merge( $labels, array( __( 'Date', 'flamingo' ) ) ) );
