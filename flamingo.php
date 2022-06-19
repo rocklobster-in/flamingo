@@ -57,5 +57,26 @@ add_action( 'init', function() {
 	Flamingo_Inbound_Message::register_post_type();
 	Flamingo_Outbound_Message::register_post_type();
 
+	add_filter(
+		'wp_untrash_post_status',
+		'flamingo_untrash_post_status',
+		10, 3
+	);
+
 	do_action( 'flamingo_init' );
 }, 10, 0 );
+
+
+function flamingo_untrash_post_status( $new_status, $post_id, $prev_status ) {
+	$flamingo_post_types = array(
+		Flamingo_Contact::post_type,
+		Flamingo_Inbound_Message::post_type,
+		Flamingo_Outbound_Message::post_type,
+	);
+
+	if ( in_array( get_post_type( $post_id ), $flamingo_post_types, true ) ) {
+		return $prev_status;
+	}
+
+	return $new_status;
+}
