@@ -8,12 +8,12 @@ function flamingo_akismet_submit_ham( $comment ) {
 	return flamingo_akismet_submit( $comment, 'ham' );
 }
 
-function flamingo_akismet_submit( $comment, $as = 'spam' ) {
+function flamingo_akismet_submit( $comment, $spam_or_ham = 'spam' ) {
 	if ( ! flamingo_akismet_is_active() ) {
 		return false;
 	}
 
-	if ( ! in_array( $as, array( 'spam', 'ham' ) ) ) {
+	if ( ! in_array( $spam_or_ham, array( 'spam', 'ham' ) ) ) {
 		return false;
 	}
 
@@ -24,7 +24,7 @@ function flamingo_akismet_submit( $comment, $as = 'spam' ) {
 			$key . '=' . urlencode( wp_unslash( (string) $data ) ) . '&';
 	}
 
-	$response = Akismet::http_post( $query_string, 'submit-' . $as );
+	$response = Akismet::http_post( $query_string, 'submit-' . $spam_or_ham );
 
 	return (bool) $response[1];
 }
