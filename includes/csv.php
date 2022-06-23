@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Retrieves text that represents a CSV row.
+ */
 function flamingo_csv_row( $inputs = array() ) {
 	$row = array();
 
@@ -12,8 +15,12 @@ function flamingo_csv_row( $inputs = array() ) {
 	return implode( $separator, $row );
 }
 
+
 add_filter( 'flamingo_csv_quotation', 'flamingo_csv_quote', 10, 1 );
 
+/**
+ * Retrieves text that represents a CSV cell with quotation.
+ */
 function flamingo_csv_quote( $input ) {
 	$prefix = apply_filters( 'flamingo_csv_field_prefix', '', $input );
 	$input = trim( sprintf( '%1$s %2$s', $prefix, $input ) );
@@ -21,14 +28,17 @@ function flamingo_csv_quote( $input ) {
 	return sprintf( '"%s"', str_replace( '"', '""', $input ) );
 }
 
-/*
- * https://contactform7.com/2020/01/15/heads-up-about-spreadsheet-vulnerabilities/
- */
+
 add_filter( 'flamingo_csv_field_prefix',
 	'flamingo_csv_field_prefix_text',
 	10, 2
 );
 
+/**
+ * Adds a security alert at the head of a cell.
+ *
+ * @see https://contactform7.com/2020/01/15/heads-up-about-spreadsheet-vulnerabilities/
+ */
 function flamingo_csv_field_prefix_text( $prefix, $input ) {
 	$formula_triggers = array( '=', '+', '-', '@' );
 
