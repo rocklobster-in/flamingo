@@ -32,6 +32,10 @@ This plugin stores submission data collected through contact forms, which may in
 
 == Changelog ==
 
+= 2.3 =
+
+* Sets status to previous when restoring data.
+
 = 2.2.3 =
 
 * Fixed: Cron jobs clean-up on plugin deactivation was failing to work.
@@ -58,13 +62,3 @@ This plugin stores submission data collected through contact forms, which may in
 * Changes the visibility of the `$id` property to private and introduces the `id()` method as an alternative.
 * Introduces the submission result in the inbound message viewer screen.
 * Stores the `posted_data_hash` value for search.
-
-= 2.1.1 =
-
-* Security enhancement, CSV: Prefixes a field when its value begins with `=`, `+`, `-`, or `@`. See https://contactform7.com/2020/01/15/heads-up-about-spreadsheet-vulnerabilities/ for details.
-* New filter hook: flamingo_csv_field_prefix
-
-= 2.1 =
-
-* UI improvements in displaying JSON reCAPTCHA logs in the Inbound Message editor page.
-* Moves to trash automatically after every 30 days of the creation of spam messages.
