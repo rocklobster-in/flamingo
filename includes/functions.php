@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Retrieves a URL of a file under the Flamingo plugin directory.
+ */
 function flamingo_plugin_url( $path = '' ) {
 	$url = plugins_url( $path, FLAMINGO_PLUGIN );
 
@@ -10,6 +13,10 @@ function flamingo_plugin_url( $path = '' ) {
 	return $url;
 }
 
+
+/**
+ * Converts a multidimensional array to a flat array.
+ */
 function flamingo_array_flatten( $input ) {
 	if ( ! is_array( $input ) ) {
 		return array( $input );
@@ -24,13 +31,11 @@ function flamingo_array_flatten( $input ) {
 	return $output;
 }
 
+
 /**
- * Move a spam to the Trash
+ * Moves a spam to the Trash.
  *
  * @since 2.1
- *
- * @see wp_trash_post()
- *
  */
 function flamingo_schedule_move_trash() {
 
