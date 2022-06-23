@@ -1,14 +1,17 @@
 <?php
 /**
-** Module for WordPress comment.
-**/
+ * Module for WordPress comments handling
+ */
 
 add_action( 'wp_insert_comment', 'flamingo_insert_comment', 10, 1 );
 
+/**
+ * Creates a Flamingo_Contact record for the given comment.
+ */
 function flamingo_insert_comment( $comment_id ) {
 	$comment = get_comment( $comment_id );
 
-	if ( 1 != (int) $comment->comment_approved ) {
+	if ( 1 !== (int) $comment->comment_approved ) {
 		return;
 	}
 
@@ -19,13 +22,17 @@ function flamingo_insert_comment( $comment_id ) {
 	) );
 }
 
+
 add_action( 'transition_comment_status',
 	'flamingo_transition_comment_status',
 	10, 3
 );
 
+/**
+ * Creates a Flamingo_Contact record when the comment status changes.
+ */
 function flamingo_transition_comment_status( $new_status, $old_status, $comment ) {
-	if ( 'approved' != $new_status ) {
+	if ( 'approved' !== $new_status ) {
 		return;
 	}
 
@@ -39,12 +46,15 @@ function flamingo_transition_comment_status( $new_status, $old_status, $comment 
 	) );
 }
 
-/* Collect contact info from existing comments when activating plugin */
+
 add_action( 'activate_' . FLAMINGO_PLUGIN_BASENAME,
 	'flamingo_collect_contacts_from_comments',
 	10, 0
 );
 
+/**
+ * Creates Flamingo_Contact records for existing comments.
+ */
 function flamingo_collect_contacts_from_comments() {
 	$comments = get_comments( array(
 		'status' => 'approve',
