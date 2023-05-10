@@ -1,12 +1,12 @@
 <?php
 /*
-Plugin Name: Flamingo
-Description: A trustworthy message storage plugin for Contact Form 7.
-Author: Takayuki Miyoshi
-Text Domain: flamingo
-Domain Path: /languages/
-Version: 2.4-dev
-*/
+ * Plugin Name: Flamingo
+ * Description: A trustworthy message storage plugin for Contact Form 7.
+ * Author: Takayuki Miyoshi
+ * Text Domain: flamingo
+ * Domain Path: /languages/
+ * Version: 2.4-dev
+ */
 
 define( 'FLAMINGO_VERSION', '2.4-dev' );
 
