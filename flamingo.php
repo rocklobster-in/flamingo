@@ -44,7 +44,6 @@ require_once FLAMINGO_PLUGIN_DIR . '/includes/csv.php';
 require_once FLAMINGO_PLUGIN_DIR . '/includes/capabilities.php';
 require_once FLAMINGO_PLUGIN_DIR . '/includes/class-contact.php';
 require_once FLAMINGO_PLUGIN_DIR . '/includes/class-inbound-message.php';
-require_once FLAMINGO_PLUGIN_DIR . '/includes/class-outbound-message.php';
 require_once FLAMINGO_PLUGIN_DIR . '/includes/user.php';
 require_once FLAMINGO_PLUGIN_DIR . '/includes/comment.php';
 require_once FLAMINGO_PLUGIN_DIR . '/includes/akismet.php';
@@ -60,7 +59,6 @@ add_action( 'init', function() {
 	/* Custom Post Types */
 	Flamingo_Contact::register_post_type();
 	Flamingo_Inbound_Message::register_post_type();
-	Flamingo_Outbound_Message::register_post_type();
 
 	add_filter(
 		'wp_untrash_post_status',
@@ -76,7 +74,6 @@ function flamingo_untrash_post_status( $new_status, $post_id, $prev_status ) {
 	$flamingo_post_types = array(
 		Flamingo_Contact::post_type,
 		Flamingo_Inbound_Message::post_type,
-		Flamingo_Outbound_Message::post_type,
 	);
 
 	if ( in_array( get_post_type( $post_id ), $flamingo_post_types, true ) ) {
