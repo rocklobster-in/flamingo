@@ -217,63 +217,14 @@ function flamingo_load_contact_admin() {
 	if ( ! empty( $_GET['export'] ) ) {
 		check_admin_referer( 'bulk-posts' );
 
-		$sitename = sanitize_key( get_bloginfo( 'name' ) );
-
-		$filename = ( empty( $sitename ) ? '' : $sitename . '-' )
-			. sprintf( 'flamingo-contact-%s.csv', wp_date( 'Y-m-d' ) );
-
-		header( 'Content-Description: File Transfer' );
-		header( "Content-Disposition: attachment; filename=$filename" );
-		header( 'Content-Type: text/csv; charset=' . get_option( 'blog_charset' ) );
-
-		$labels = array(
-			__( 'Email', 'flamingo' ),
-			__( 'Full name', 'flamingo' ),
-			__( 'First name', 'flamingo' ),
-			__( 'Last name', 'flamingo' ),
+		$csv_class = apply_filters( 'flamingo_contact_csv_class',
+			'Flamingo_Contact_CSV'
 		);
 
-		echo flamingo_csv_row( $labels );
-
-		$args = array(
-			'posts_per_page' => -1,
-			'orderby' => 'meta_value',
-			'order' => 'ASC',
-			'meta_key' => '_email',
-		);
-
-		if ( ! empty( $_GET['s'] ) ) {
-			$args['s'] = $_GET['s'];
-		}
-
-		if ( ! empty( $_GET['orderby'] ) ) {
-			if ( 'email' == $_GET['orderby'] ) {
-				$args['meta_key'] = '_email';
-			} elseif ( 'name' == $_GET['orderby'] ) {
-				$args['meta_key'] = '_name';
-			}
-		}
-
-		if ( ! empty( $_GET['order'] )
-		and 'asc' === strtolower( $_GET['order'] ) ) {
-			$args['order'] = 'ASC';
-		}
-
-		if ( ! empty( $_GET['contact_tag_id'] ) ) {
-			$args['contact_tag_id'] = explode( ',', $_GET['contact_tag_id'] );
-		}
-
-		$items = Flamingo_Contact::find( $args );
-
-		foreach ( $items as $item ) {
-			$row = array(
-				$item->email,
-				$item->get_prop( 'name' ),
-				$item->get_prop( 'first_name' ),
-				$item->get_prop( 'last_name' ),
-			);
-
-			echo "\r\n" . flamingo_csv_row( $row );
+		if ( is_subclass_of( $csv_class, 'Flamingo_CSV' ) ) {
+			$csv_obj = new $csv_class;
+			$csv_obj->send_http_headers();
+			$csv_obj->print_data();
 		}
 
 		exit();
