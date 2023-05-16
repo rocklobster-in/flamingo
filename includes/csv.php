@@ -89,6 +89,92 @@ class Flamingo_Contact_CSV extends Flamingo_CSV {
 }
 
 
+class Flamingo_Inbound_CSV extends Flamingo_CSV {
+
+	public function get_file_name() {
+		return sprintf(
+			'%1$s-flamingo-inbound-%2$s.csv',
+			sanitize_key( get_bloginfo( 'name' ) ),
+			wp_date( 'Y-m-d' )
+		);
+	}
+
+	public function print_data() {
+		$args = array(
+			'posts_per_page' => -1,
+			'orderby' => 'date',
+			'order' => 'DESC',
+		);
+
+		if ( ! empty( $_REQUEST['s'] ) ) {
+			$args['s'] = $_REQUEST['s'];
+		}
+
+		if ( ! empty( $_REQUEST['orderby'] ) ) {
+			if ( 'subject' === $_REQUEST['orderby'] ) {
+				$args['meta_key'] = '_subject';
+				$args['orderby'] = 'meta_value';
+			} elseif ( 'from' === $_REQUEST['orderby'] ) {
+				$args['meta_key'] = '_from';
+				$args['orderby'] = 'meta_value';
+			}
+		}
+
+		if ( ! empty( $_REQUEST['order'] )
+		and 'asc' === strtolower( $_REQUEST['order'] ) ) {
+			$args['order'] = 'ASC';
+		}
+
+		if ( ! empty( $_REQUEST['m'] ) ) {
+			$args['m'] = $_REQUEST['m'];
+		}
+
+		if ( ! empty( $_REQUEST['channel_id'] ) ) {
+			$args['channel_id'] = $_REQUEST['channel_id'];
+		}
+
+		if ( ! empty( $_REQUEST['channel'] ) ) {
+			$args['channel'] = $_REQUEST['channel'];
+		}
+
+		$items = Flamingo_Inbound_Message::find( $args );
+
+		if ( empty( $items ) ) {
+			return;
+		}
+
+		$labels = array_keys( $items[0]->fields );
+
+		echo flamingo_csv_row(
+			array_merge( $labels, array( __( 'Date', 'flamingo' ) ) )
+		);
+
+		foreach ( $items as $item ) {
+			echo "\r\n";
+
+			$row = array();
+
+			foreach ( $labels as $label ) {
+				$col = isset( $item->fields[$label] ) ? $item->fields[$label] : '';
+
+				if ( is_array( $col ) ) {
+					$col = flamingo_array_flatten( $col );
+					$col = array_filter( array_map( 'trim', $col ) );
+					$col = implode( ', ', $col );
+				}
+
+				$row[] = $col;
+			}
+
+			$row[] = get_post_time( 'c', false, $item->id() ); // Date
+
+			echo flamingo_csv_row( $row );
+		}
+	}
+
+}
+
+
 /**
  * Retrieves text that represents a CSV row.
  */
