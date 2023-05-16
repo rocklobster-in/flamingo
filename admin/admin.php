@@ -217,63 +217,14 @@ function flamingo_load_contact_admin() {
 	if ( ! empty( $_GET['export'] ) ) {
 		check_admin_referer( 'bulk-posts' );
 
-		$sitename = sanitize_key( get_bloginfo( 'name' ) );
-
-		$filename = ( empty( $sitename ) ? '' : $sitename . '-' )
-			. sprintf( 'flamingo-contact-%s.csv', wp_date( 'Y-m-d' ) );
-
-		header( 'Content-Description: File Transfer' );
-		header( "Content-Disposition: attachment; filename=$filename" );
-		header( 'Content-Type: text/csv; charset=' . get_option( 'blog_charset' ) );
-
-		$labels = array(
-			__( 'Email', 'flamingo' ),
-			__( 'Full name', 'flamingo' ),
-			__( 'First name', 'flamingo' ),
-			__( 'Last name', 'flamingo' ),
+		$csv_class = apply_filters( 'flamingo_contact_csv_class',
+			'Flamingo_Contact_CSV'
 		);
 
-		echo flamingo_csv_row( $labels );
-
-		$args = array(
-			'posts_per_page' => -1,
-			'orderby' => 'meta_value',
-			'order' => 'ASC',
-			'meta_key' => '_email',
-		);
-
-		if ( ! empty( $_GET['s'] ) ) {
-			$args['s'] = $_GET['s'];
-		}
-
-		if ( ! empty( $_GET['orderby'] ) ) {
-			if ( 'email' == $_GET['orderby'] ) {
-				$args['meta_key'] = '_email';
-			} elseif ( 'name' == $_GET['orderby'] ) {
-				$args['meta_key'] = '_name';
-			}
-		}
-
-		if ( ! empty( $_GET['order'] )
-		and 'asc' === strtolower( $_GET['order'] ) ) {
-			$args['order'] = 'ASC';
-		}
-
-		if ( ! empty( $_GET['contact_tag_id'] ) ) {
-			$args['contact_tag_id'] = explode( ',', $_GET['contact_tag_id'] );
-		}
-
-		$items = Flamingo_Contact::find( $args );
-
-		foreach ( $items as $item ) {
-			$row = array(
-				$item->email,
-				$item->get_prop( 'name' ),
-				$item->get_prop( 'first_name' ),
-				$item->get_prop( 'last_name' ),
-			);
-
-			echo "\r\n" . flamingo_csv_row( $row );
+		if ( is_subclass_of( $csv_class, 'Flamingo_CSV' ) ) {
+			$csv_obj = new $csv_class;
+			$csv_obj->send_http_headers();
+			$csv_obj->print_data();
 		}
 
 		exit();
@@ -644,82 +595,14 @@ function flamingo_load_inbound_admin() {
 	if ( ! empty( $_GET['export'] ) ) {
 		check_admin_referer( 'bulk-posts' );
 
-		$sitename = sanitize_key( get_bloginfo( 'name' ) );
-
-		$filename = ( empty( $sitename ) ? '' : $sitename . '-' )
-			. sprintf( 'flamingo-inbound-%s.csv', wp_date( 'Y-m-d' ) );
-
-		header( 'Content-Description: File Transfer' );
-		header( "Content-Disposition: attachment; filename=$filename" );
-		header( 'Content-Type: text/csv; charset=' . get_option( 'blog_charset' ) );
-
-		$args = array(
-			'posts_per_page' => -1,
-			'orderby' => 'date',
-			'order' => 'DESC',
+		$csv_class = apply_filters( 'flamingo_inbound_csv_class',
+			'Flamingo_Inbound_CSV'
 		);
 
-		if ( ! empty( $_REQUEST['s'] ) ) {
-			$args['s'] = $_REQUEST['s'];
-		}
-
-		if ( ! empty( $_REQUEST['orderby'] ) ) {
-			if ( 'subject' == $_REQUEST['orderby'] ) {
-				$args['meta_key'] = '_subject';
-				$args['orderby'] = 'meta_value';
-			} elseif ( 'from' == $_REQUEST['orderby'] ) {
-				$args['meta_key'] = '_from';
-				$args['orderby'] = 'meta_value';
-			}
-		}
-
-		if ( ! empty( $_REQUEST['order'] )
-		and 'asc' == strtolower( $_REQUEST['order'] ) ) {
-			$args['order'] = 'ASC';
-		}
-
-		if ( ! empty( $_REQUEST['m'] ) ) {
-			$args['m'] = $_REQUEST['m'];
-		}
-
-		if ( ! empty( $_REQUEST['channel_id'] ) ) {
-			$args['channel_id'] = $_REQUEST['channel_id'];
-		}
-
-		if ( ! empty( $_REQUEST['channel'] ) ) {
-			$args['channel'] = $_REQUEST['channel'];
-		}
-
-		$items = Flamingo_Inbound_Message::find( $args );
-
-		if ( empty( $items ) ) {
-			exit();
-		}
-
-		$labels = array_keys( $items[0]->fields );
-
-		echo flamingo_csv_row(
-			array_merge( $labels, array( __( 'Date', 'flamingo' ) ) )
-		);
-
-		foreach ( $items as $item ) {
-			$row = array();
-
-			foreach ( $labels as $label ) {
-				$col = isset( $item->fields[$label] ) ? $item->fields[$label] : '';
-
-				if ( is_array( $col ) ) {
-					$col = flamingo_array_flatten( $col );
-					$col = array_filter( array_map( 'trim', $col ) );
-					$col = implode( ', ', $col );
-				}
-
-				$row[] = $col;
-			}
-
-			$row[] = get_post_time( 'c', false, $item->id() ); // Date
-
-			echo "\r\n" . flamingo_csv_row( $row );
+		if ( is_subclass_of( $csv_class, 'Flamingo_CSV' ) ) {
+			$csv_obj = new $csv_class;
+			$csv_obj->send_http_headers();
+			$csv_obj->print_data();
 		}
 
 		exit();
