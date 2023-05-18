@@ -55,7 +55,7 @@ if ( is_admin() ) {
 
 /* Init */
 
-add_action( 'init', function() {
+add_action( 'init', static function () {
 	/* Custom Post Types */
 	Flamingo_Contact::register_post_type();
 	Flamingo_Inbound_Message::register_post_type();
