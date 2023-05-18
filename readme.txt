@@ -47,30 +47,3 @@ This plugin stores submission data collected through contact forms, which may in
 = 2.3 =
 
 * Sets status to previous when restoring data.
-
-= 2.2.3 =
-
-* Fixed: Cron jobs clean-up on plugin deactivation was failing to work.
-
-= 2.2.2 =
-
-* Address Book: Hides the Filter button if there is no working filter.
-
-= 2.2.1 =
-
-* Outputs a local date/time in a CSV export file.
-* Removes `load_plugin_textdomain()` calls.
-* Removes a reference to `$_wp_last_object_menu`.
-* Removes the `set-screen-option` filter.
-* Inherits `post_status` from the previous admin page.
-* Avoids using `wp_date()` for MySQL DATETIME values.
-* Has been tested with WordPress 5.6.
-
-= 2.2 =
-
-* Sets the `post_date` of an inbound message based on the submission timestamp.
-* Allows users to search and filter messages within the Spam subgroup.
-* Changes the visibility of the `$found_items` property to private and introduces the `count()` method as an alternative.
-* Changes the visibility of the `$id` property to private and introduces the `id()` method as an alternative.
-* Introduces the submission result in the inbound message viewer screen.
-* Stores the `posted_data_hash` value for search.
