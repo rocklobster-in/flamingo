@@ -6,7 +6,7 @@
  */
 
 
-add_action( 'wp', 'flamingo_schedule_activation', 10, 0 );
+add_action( 'admin_init', 'flamingo_schedule_activation', 10, 0 );
 
 /**
  * Creates a scheduled event, if it does not exist.
