@@ -85,27 +85,21 @@ function flamingo_contact_tags_meta_box( $post ) {
 <br />
 
 <?php foreach ( $most_used_tags as $tag ) {
-	echo '<a href="#" class="append-this-to-contact-tags">' . esc_html( $tag ) . '</a> ';
+	echo '<a href="#" class="append-this-to-contact-tags" onclick="appendTag( this.text )">' . esc_html( $tag ) . '</a> ';
 } ?>
 </p>
-<script type='text/javascript'>
-/* <![CDATA[ */
-( function( $ ) {
-	$( function() {
-		$( 'a.append-this-to-contact-tags' ).click( function() {
-			var tagsinput = $( '#tax-input-<?php echo esc_js( $taxonomy->name ); ?>' );
-			tagsinput.val( $.trim( tagsinput.val() ) );
+<script>
+const appendTag = ( tag ) => {
+	const tagsInput = document.querySelector(
+		'#tax-input-<?php echo esc_js( $taxonomy->name ); ?>'
+	);
 
-			if ( tagsinput.val() ) {
-				tagsinput.val( tagsinput.val() + ', ' );
-			}
+	const tags = tagsInput.value.split( /\s*,\s*/ );
+	tags.push( tag );
+	tagsInput.value = tags.filter( tag => '' !== tag ).join( ', ' );
 
-			tagsinput.val( tagsinput.val() + $( this ).text() );
-			return false;
-		} );
-	} );
-} )( jQuery );
-/* ]]> */
+	return false;
+};
 </script>
 <?php endif; ?>
 </div>
