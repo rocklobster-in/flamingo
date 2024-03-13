@@ -8,12 +8,12 @@
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: flamingo
  * Domain Path: /languages/
- * Version: 2.4
- * Requires at least: 6.1
+ * Version: 2.5-dev
+ * Requires at least: 6.4
  * Requires PHP: 7.4
  */
 
-define( 'FLAMINGO_VERSION', '2.4' );
+define( 'FLAMINGO_VERSION', '2.5-dev' );
 
 define( 'FLAMINGO_PLUGIN', __FILE__ );
 
