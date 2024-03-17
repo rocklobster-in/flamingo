@@ -98,9 +98,8 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 	}
 
 	protected function get_views() {
-		$status_links = array();
-		$post_status = empty( $_REQUEST['post_status'] )
-			? '' : $_REQUEST['post_status'];
+		$base_url = menu_page_url( 'flamingo_inbound', false );
+		$link_data = array();
 
 		// Inbox
 		Flamingo_Inbound_Message::find( array(
@@ -112,14 +111,16 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 		$inbox = sprintf(
 			_nx( 'Inbox <span class="count">(%s)</span>',
 				'Inbox <span class="count">(%s)</span>',
-				$posts_in_inbox, 'posts', 'flamingo' ),
+				$posts_in_inbox, 'posts', 'flamingo'
+			),
 			number_format_i18n( $posts_in_inbox )
 		);
 
-		$status_links['inbox'] = sprintf( '<a href="%1$s"%2$s>%3$s</a>',
-			menu_page_url( 'flamingo_inbound', false ),
-			( $this->is_trash || $this->is_spam ) ? '' : ' class="current"',
-			$inbox );
+		$link_data['inbox'] = array(
+			'url' => $base_url,
+			'label' => $inbox,
+			'current' => ! $this->is_trash && ! $this->is_spam,
+		);
 
 		// Spam
 		Flamingo_Inbound_Message::find( array(
@@ -131,19 +132,15 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 		$spam = sprintf(
 			_nx( 'Spam <span class="count">(%s)</span>',
 				'Spam <span class="count">(%s)</span>',
-				$posts_in_spam, 'posts', 'flamingo' ),
+				$posts_in_spam, 'posts', 'flamingo'
+			),
 			number_format_i18n( $posts_in_spam )
 		);
 
-		$status_links['spam'] = sprintf( '<a href="%1$s"%2$s>%3$s</a>',
-			esc_url( add_query_arg(
-				array(
-					'post_status' => 'spam',
-				),
-				menu_page_url( 'flamingo_inbound', false )
-			) ),
-			'spam' == $post_status ? ' class="current"' : '',
-			$spam
+		$link_data['spam'] = array(
+			'url' => add_query_arg( 'post_status', 'spam', $base_url ),
+			'label' => $spam,
+			'current' => $this->is_spam,
 		);
 
 		// Trash
@@ -153,29 +150,23 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 
 		$posts_in_trash = Flamingo_Inbound_Message::count();
 
-		if ( empty( $posts_in_trash ) ) {
-			return $status_links;
+		if ( $posts_in_trash ) {
+			$trash = sprintf(
+				_nx( 'Trash <span class="count">(%s)</span>',
+					'Trash <span class="count">(%s)</span>',
+					$posts_in_trash, 'posts', 'flamingo'
+				),
+				number_format_i18n( $posts_in_trash )
+			);
+
+			$link_data['trash'] = array(
+				'url' => add_query_arg( 'post_status', 'trash', $base_url ),
+				'label' => $trash,
+				'current' => $this->is_trash,
+			);
 		}
 
-		$trash = sprintf(
-			_nx( 'Trash <span class="count">(%s)</span>',
-				'Trash <span class="count">(%s)</span>',
-				$posts_in_trash, 'posts', 'flamingo' ),
-			number_format_i18n( $posts_in_trash )
-		);
-
-		$status_links['trash'] = sprintf( '<a href="%1$s"%2$s>%3$s</a>',
-			esc_url( add_query_arg(
-				array(
-					'post_status' => 'trash',
-				),
-				menu_page_url( 'flamingo_inbound', false )
-			) ),
-			'trash' == $post_status ? ' class="current"' : '',
-			$trash
-		);
-
-		return $status_links;
+		return $this->get_views_links( $link_data );
 	}
 
 	public function get_columns() {
