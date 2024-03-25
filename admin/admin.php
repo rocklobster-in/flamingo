@@ -231,7 +231,7 @@ function flamingo_load_contact_admin() {
 	}
 
 	if ( 'edit' === $action ) {
-		$post_id = isset( $_REQUEST['post'] ) ? (int) $_REQUEST['post'] : 0;
+		$post_id = (int) ( $_REQUEST['post'] ?? '0' );
 
 		if ( ! $post_id ) {
 			wp_safe_redirect( $redirect_to );
@@ -351,8 +351,7 @@ function flamingo_load_inbound_admin() {
 
 			check_admin_referer( 'flamingo-update-inbound_' . $post->id() );
 
-			$status = isset( $_POST['inbound']['status'] )
-				? $_POST['inbound']['status'] : '';
+			$status = $_POST['inbound']['status'] ?? '';
 
 			if ( ! $post->spam and 'spam' === $status ) {
 				$post->spam();
@@ -609,7 +608,7 @@ function flamingo_load_inbound_admin() {
 	}
 
 	if ( 'edit' === $action ) {
-		$post_id = isset( $_REQUEST['post'] ) ? (int) $_REQUEST['post'] : 0;
+		$post_id = (int) ( $_REQUEST['post'] ?? '0' );
 
 		if ( ! $post_id ) {
 			wp_safe_redirect( $redirect_to );
