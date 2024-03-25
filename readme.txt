@@ -2,8 +2,8 @@
 Contributors: takayukister, megumithemes, itpixelz
 Tags: bird, contact, mail, crm
 Requires at least: 6.4
-Tested up to: 6.2
-Stable tag: 2.3
+Tested up to: 6.5
+Stable tag: 2.4
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -34,6 +34,13 @@ This plugin stores submission data collected through contact forms, which may in
 
 == Changelog ==
 
+= 2.5 =
+
+* Bumps up the minimum required WordPress version to 6.4.
+* Uses `wp_json_encode()` instead of `json_encode()`.
+* Uses `get_views_links()`.
+* Uses null coalescing operators.
+
 = 2.4 =
 
 * Bumps up the minimum required WordPress version to 6.1.
@@ -43,7 +50,3 @@ This plugin stores submission data collected through contact forms, which may in
 * New filter hook: `flamingo_contact_csv_class`
 * New filter hook: `flamingo_inbound_csv_class`
 * Uses `admin_init` for cron job scheduling.
-
-= 2.3 =
-
-* Sets status to previous when restoring data.
