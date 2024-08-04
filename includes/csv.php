@@ -143,35 +143,53 @@ class Flamingo_Inbound_CSV extends Flamingo_CSV {
 			return;
 		}
 
-		$labels = array_keys( $items[0]->fields );
+		$form_field_keys = array_keys( $items[0]->fields );
 
-		echo flamingo_csv_row(
-			array_merge( $labels, array( __( 'Date', 'flamingo' ) ) )
+		// Print header
+		$csv_header = array_merge(
+			array(
+				'id' => __( 'ID', 'flamingo' ),
+				'date' => __( 'Date', 'flamingo' )
+			),
+			array_combine( $form_field_keys, $form_field_keys )
 		);
+		$csv_header = apply_filters( 'flamingo_inbound_csv_header', $csv_header, $items );
+
+		echo flamingo_csv_row( $csv_header );
+
+		// Print items
+		$template_row = array_fill_keys( array_keys( $csv_header ), '' );
 
 		foreach ( $items as $item ) {
 			echo "\r\n";
 
-			$row = array();
+			$row = $template_row;
 
-			foreach ( $labels as $label ) {
-				$col = isset( $item->fields[$label] ) ? $item->fields[$label] : '';
+			// Iterate form fields
+			foreach ( $form_field_keys as $field_key ) {
 
-				if ( is_array( $col ) ) {
-					$col = flamingo_array_flatten( $col );
-					$col = array_filter( array_map( 'trim', $col ) );
-					$col = implode( ', ', $col );
+				if ( array_key_exists( $field_key, $row ) ) {
+
+					$col = isset( $item->fields[ $field_key ] ) ? $item->fields[ $field_key ] : '';
+
+					if ( is_array( $col ) ) {
+						$col = flamingo_array_flatten( $col );
+						$col = array_filter( array_map( 'trim', $col ) );
+						$col = implode( ', ', $col );
+					}
+
+					$row[ $field_key ] = $col;
 				}
-
-				$row[] = $col;
 			}
 
-			$row[] = get_post_time( 'c', false, $item->id() ); // Date
+			$row['id'] = $item->id(); // Post ID
+			$row['date'] = get_post_time( 'c', false, $item->id() ); // Date
+
+			$row = apply_filters( 'flamingo_inbound_csv_item', $row, $item, $csv_header );
 
 			echo flamingo_csv_row( $row );
 		}
 	}
-
 }
 
 
