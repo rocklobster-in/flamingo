@@ -1,19 +1,18 @@
 <?php
 /*
  * Plugin Name: Flamingo
+ * Plugin URI: https://contactform7.com/save-submitted-messages-with-flamingo/
  * Description: A trustworthy message storage plugin for Contact Form 7.
  * Author: Takayuki Miyoshi
  * Author URI: https://ideasilo.wordpress.com/
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: flamingo
- * Domain Path: /languages/
- * Version: 2.5
- * Requires at least: 6.4
+ * Version: 2.6-dev
+ * Requires at least: 6.7
  * Requires PHP: 7.4
  */
 
-define( 'FLAMINGO_VERSION', '2.5' );
+define( 'FLAMINGO_VERSION', '2.6-dev' );
 
 define( 'FLAMINGO_PLUGIN', __FILE__ );
 
