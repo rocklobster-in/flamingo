@@ -149,7 +149,9 @@ function flamingo_load_contact_admin() {
 
 		if ( ! empty( $post ) ) {
 			if ( ! current_user_can( 'flamingo_edit_contact', $post->id() ) ) {
-				wp_die( __( 'You are not allowed to edit this item.', 'flamingo' ) );
+				wp_die(
+					wp_kses_data( __( 'You are not allowed to edit this item.', 'flamingo' ) )
+				);
 			}
 
 			check_admin_referer( 'flamingo-update-contact_' . $post->id() );
@@ -194,11 +196,15 @@ function flamingo_load_contact_admin() {
 			}
 
 			if ( ! current_user_can( 'flamingo_delete_contact', $post->id() ) ) {
-				wp_die( __( 'You are not allowed to delete this item.', 'flamingo' ) );
+				wp_die(
+					wp_kses_data( __( 'You are not allowed to delete this item.', 'flamingo' ) )
+				);
 			}
 
 			if ( ! $post->delete() ) {
-				wp_die( __( 'Error in deleting.', 'flamingo' ) );
+				wp_die(
+					wp_kses_data( __( 'Error in deleting.', 'flamingo' ) )
+				);
 			}
 
 			$deleted += 1;
@@ -240,7 +246,9 @@ function flamingo_load_contact_admin() {
 
 		if ( ! current_user_can( 'flamingo_edit_contact', $post_id )
 		or Flamingo_Contact::post_type !== get_post_type( $post_id ) ) {
-			wp_die( __( "You are not allowed to edit this item.", 'flamingo' ) );
+			wp_die(
+				wp_kses_data( __( 'You are not allowed to edit this item.', 'flamingo' ) )
+			);
 		}
 
 		add_meta_box( 'submitdiv', __( 'Save', 'flamingo' ),
@@ -346,7 +354,9 @@ function flamingo_load_inbound_admin() {
 
 		if ( ! empty( $post ) ) {
 			if ( ! current_user_can( 'flamingo_edit_inbound_message', $post->id() ) ) {
-				wp_die( __( 'You are not allowed to edit this item.', 'flamingo' ) );
+				wp_die(
+					wp_kses_data( __( 'You are not allowed to edit this item.', 'flamingo' ) )
+				);
 			}
 
 			check_admin_referer( 'flamingo-update-inbound_' . $post->id() );
@@ -392,11 +402,15 @@ function flamingo_load_inbound_admin() {
 
 			if ( ! current_user_can(
 			'flamingo_delete_inbound_message', $post->id() ) ) {
-				wp_die( __( 'You are not allowed to move this item to the Trash.', 'flamingo' ) );
+				wp_die(
+					wp_kses_data( __( 'You are not allowed to move this item to the Trash.', 'flamingo' ) )
+				);
 			}
 
 			if ( ! $post->trash() ) {
-				wp_die( __( 'Error in moving to Trash.', 'flamingo' ) );
+				wp_die(
+					wp_kses_data( __( 'Error in moving to Trash.', 'flamingo' ) )
+				);
 			}
 
 			$trashed += 1;
@@ -435,11 +449,15 @@ function flamingo_load_inbound_admin() {
 
 			if ( ! current_user_can(
 			'flamingo_delete_inbound_message', $post->id() ) ) {
-				wp_die( __( 'You are not allowed to restore this item from the Trash.', 'flamingo' ) );
+				wp_die(
+					wp_kses_data( __( 'You are not allowed to restore this item from the Trash.', 'flamingo' ) )
+				);
 			}
 
 			if ( ! $post->untrash() ) {
-				wp_die( __( 'Error in restoring from Trash.', 'flamingo' ) );
+				wp_die(
+					wp_kses_data( __( 'Error in restoring from Trash.', 'flamingo' ) )
+				);
 			}
 
 			$untrashed += 1;
@@ -487,11 +505,15 @@ function flamingo_load_inbound_admin() {
 
 			if ( ! current_user_can(
 			'flamingo_delete_inbound_message', $post->id() ) ) {
-				wp_die( __( 'You are not allowed to delete this item.', 'flamingo' ) );
+				wp_die(
+					wp_kses_data( __( 'You are not allowed to delete this item.', 'flamingo' ) )
+				);
 			}
 
 			if ( ! $post->delete() ) {
-				wp_die( __( 'Error in deleting.', 'flamingo' ) );
+				wp_die(
+					wp_kses_data( __( 'Error in deleting.', 'flamingo' ) )
+				);
 			}
 
 			$deleted += 1;
@@ -529,7 +551,9 @@ function flamingo_load_inbound_admin() {
 			}
 
 			if ( ! current_user_can( 'flamingo_spam_inbound_message', $post->id() ) ) {
-				wp_die( __( 'You are not allowed to spam this item.', 'flamingo' ) );
+				wp_die(
+					wp_kses_data( __( 'You are not allowed to spam this item.', 'flamingo' ) )
+				);
 			}
 
 			if ( $post->spam() ) {
@@ -570,7 +594,9 @@ function flamingo_load_inbound_admin() {
 
 			if ( ! current_user_can(
 			'flamingo_unspam_inbound_message', $post->id() ) ) {
-				wp_die( __( 'You are not allowed to unspam this item.', 'flamingo' ) );
+				wp_die(
+					wp_kses_data( __( 'You are not allowed to unspam this item.', 'flamingo' ) )
+				);
 			}
 
 			if ( $post->unspam() ) {
@@ -617,7 +643,9 @@ function flamingo_load_inbound_admin() {
 
 		if ( ! current_user_can( 'flamingo_edit_inbound_message', $post_id )
 		or Flamingo_Inbound_Message::post_type !== get_post_type( $post_id ) ) {
-			wp_die( __( "You are not allowed to edit this item.", 'flamingo' ) );
+			wp_die(
+				wp_kses_data( __( 'You are not allowed to edit this item.', 'flamingo' ) )
+			);
 		}
 
 		$post = new Flamingo_Inbound_Message( $post_id );
