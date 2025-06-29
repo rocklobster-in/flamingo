@@ -283,7 +283,9 @@ class Flamingo_Contacts_List_Table extends WP_List_Table {
 		}
 
 		// Contact channels
-		$terms = get_terms( Flamingo_Inbound_Message::channel_taxonomy );
+		$terms = get_terms( array(
+			'taxonomy' => Flamingo_Inbound_Message::channel_taxonomy,
+		) );
 
 		if ( ! empty( $terms ) and ! is_wp_error( $terms ) ) {
 			foreach ( (array) $terms as $term ) {

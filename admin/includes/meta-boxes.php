@@ -62,7 +62,8 @@ function flamingo_contact_tags_meta_box( $post ) {
 
 	$tag_names = implode( ', ', $tag_names );
 
-	$most_used_tags = get_terms( Flamingo_Contact::contact_tag_taxonomy, array(
+	$most_used_tags = get_terms( array(
+		'taxonomy' => Flamingo_Contact::contact_tag_taxonomy,
 		'orderby' => 'count',
 		'order' => 'DESC',
 		'number' => 10,
