@@ -112,7 +112,9 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 		$posts_in_inbox = Flamingo_Inbound_Message::count();
 
 		$inbox = sprintf(
-			_nx( 'Inbox <span class="count">(%s)</span>',
+			/* translators: %s: Number of items. */
+			_nx(
+				'Inbox <span class="count">(%s)</span>',
 				'Inbox <span class="count">(%s)</span>',
 				$posts_in_inbox, 'posts', 'flamingo'
 			),
@@ -133,7 +135,9 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 		$posts_in_spam = Flamingo_Inbound_Message::count();
 
 		$spam = sprintf(
-			_nx( 'Spam <span class="count">(%s)</span>',
+			/* translators: %s: Number of items. */
+			_nx(
+				'Spam <span class="count">(%s)</span>',
 				'Spam <span class="count">(%s)</span>',
 				$posts_in_spam, 'posts', 'flamingo'
 			),
@@ -155,7 +159,9 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 
 		if ( $posts_in_trash ) {
 			$trash = sprintf(
-				_nx( 'Trash <span class="count">(%s)</span>',
+				/* translators: %s: Number of items. */
+				_nx(
+					'Trash <span class="count">(%s)</span>',
 					'Trash <span class="count">(%s)</span>',
 					$posts_in_trash, 'posts', 'flamingo'
 				),
@@ -301,7 +307,8 @@ class Flamingo_Inbound_Messages_List_Table extends WP_List_Table {
 				'<strong><a class="row-title" href="%1$s" aria-label="%2$s">%3$s</a></strong>',
 				esc_url( $edit_link ),
 				esc_attr( sprintf(
-					__( 'Edit &#8220;%s&#8221;', 'flamingo' ),
+					/* translators: %s: Item title. */
+					__( '&#8220;%s&#8221; (Edit)', 'flamingo' ),
 					$item->subject
 				) ),
 				esc_html( $item->subject )
