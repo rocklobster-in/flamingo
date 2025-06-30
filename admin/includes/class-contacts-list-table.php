@@ -168,7 +168,8 @@ class Flamingo_Contacts_List_Table extends WP_List_Table {
 				'<strong><a class="row-title" href="%1$s" aria-label="%2$s">%3$s</a></strong>',
 				esc_url( $edit_link ),
 				esc_attr( sprintf(
-					__( 'Edit &#8220;%s&#8221;', 'flamingo' ),
+					/* translators: %s: Item title. */
+					__( '&#8220;%s&#8221; (Edit)', 'flamingo' ),
 					$item->email
 				) ),
 				esc_html( $item->email )
@@ -270,6 +271,7 @@ class Flamingo_Contacts_List_Table extends WP_List_Table {
 			$history[] = sprintf(
 				'<a href="%2$s">%1$s</a>',
 				esc_html( sprintf(
+					/* translators: %d: Number of comments. */
 					__( 'Comment (%d)', 'flamingo' ),
 					$comment_count
 				) ),
