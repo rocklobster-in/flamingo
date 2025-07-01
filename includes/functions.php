@@ -6,7 +6,7 @@
 function flamingo_plugin_url( $path = '' ) {
 	$url = plugins_url( $path, FLAMINGO_PLUGIN );
 
-	if ( is_ssl() and 'http:' == substr( $url, 0, 5 ) ) {
+	if ( is_ssl() and 'http:' === substr( $url, 0, 5 ) ) {
 		$url = 'https:' . substr( $url, 5 );
 	}
 

@@ -50,7 +50,7 @@ function flamingo_privacy_contact_eraser( $email_address, $page = 1 ) {
 			$items_retained = true;
 
 			$messages = array(
-				__( "Flamingo Address Book: You are not allowed to delete contact data.", 'flamingo' ),
+				__( 'Flamingo Address Book: You are not allowed to delete contact data.', 'flamingo' ),
 			);
 
 			continue;
@@ -96,7 +96,7 @@ function flamingo_privacy_inbound_eraser( $email_address, $page = 1 ) {
 			$items_retained = true;
 
 			$messages = array(
-				__( "Flamingo Inbound Messages: You are not allowed to delete inbound messages.", 'flamingo' ),
+				__( 'Flamingo Inbound Messages: You are not allowed to delete inbound messages.', 'flamingo' ),
 			);
 
 			continue;
