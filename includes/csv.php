@@ -61,8 +61,10 @@ class Flamingo_Contact_CSV extends Flamingo_CSV {
 			}
 		}
 
-		if ( ! empty( $_GET['order'] )
-		and 'asc' === strtolower( $_GET['order'] ) ) {
+		if (
+			! empty( $_GET['order'] ) and
+			'asc' === strtolower( $_GET['order'] )
+		) {
 			$args['order'] = 'ASC';
 		}
 
@@ -120,8 +122,10 @@ class Flamingo_Inbound_CSV extends Flamingo_CSV {
 			}
 		}
 
-		if ( ! empty( $_REQUEST['order'] )
-		and 'asc' === strtolower( $_REQUEST['order'] ) ) {
+		if (
+			! empty( $_REQUEST['order'] ) and
+			'asc' === strtolower( $_REQUEST['order'] )
+		) {
 			$args['order'] = 'ASC';
 		}
 
