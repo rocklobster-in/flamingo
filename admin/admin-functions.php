@@ -19,8 +19,9 @@ function flamingo_current_action() {
 function flamingo_get_all_ids_in_trash( $post_type ) {
 	global $wpdb;
 
-	$q = "SELECT ID FROM $wpdb->posts WHERE post_status = 'trash'"
-		. $wpdb->prepare( " AND post_type = %s", $post_type );
-
-	return $wpdb->get_col( $q );
+	return $wpdb->get_col( $wpdb->prepare(
+		"SELECT ID FROM %i WHERE post_status = 'trash' AND post_type = %s",
+		$wpdb->posts,
+		$post_type
+	) );
 }
