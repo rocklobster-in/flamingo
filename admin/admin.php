@@ -129,11 +129,11 @@ function flamingo_admin_updated_message() {
 		$message = __( 'Messages got marked as not spam.', 'flamingo' );
 	}
 
-	if ( isset( $message ) and '' !== $message ) {
-		echo sprintf(
-			'<div id="message" class="notice notice-success is-dismissible"><p>%s</p></div>',
-			esc_html( $message )
-		);
+	if ( ! empty( $message ) ) {
+		wp_admin_notice( $message, array(
+			'type' => 'success',
+			'dismissible' => true,
+		) );
 	}
 }
 
