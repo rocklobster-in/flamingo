@@ -76,19 +76,19 @@ function flamingo_admin_enqueue_scripts( $hook_suffix ) {
 	}
 
 	wp_enqueue_style( 'flamingo-admin',
-		flamingo_plugin_url( 'admin/css/style.css' ),
+		flamingo_plugin_url( 'admin/includes/css/style.css' ),
 		array(), FLAMINGO_VERSION, 'all'
 	);
 
 	if ( is_rtl() ) {
 		wp_enqueue_style( 'flamingo-admin-rtl',
-			flamingo_plugin_url( 'admin/css/style-rtl.css' ),
+			flamingo_plugin_url( 'admin/includes/css/style-rtl.css' ),
 			array(), FLAMINGO_VERSION, 'all'
 		);
 	}
 
 	wp_enqueue_script( 'flamingo-admin',
-		flamingo_plugin_url( 'admin/js/script.js' ),
+		flamingo_plugin_url( 'admin/includes/js/script.js' ),
 		array( 'postbox' ), FLAMINGO_VERSION, true
 	);
 
