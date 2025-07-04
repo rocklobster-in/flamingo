@@ -94,9 +94,15 @@ function flamingo_admin_enqueue_scripts( $hook_suffix ) {
 
 	$current_screen = get_current_screen();
 
-	wp_localize_script( 'flamingo-admin', 'flamingo', array(
-		'screenId' => $current_screen->id,
-	) );
+	wp_add_inline_script( 'flamingo-admin',
+		sprintf(
+			'var flamingo = %s;',
+			wp_json_encode( array(
+				'screenId' => $current_screen->id,
+			), JSON_PRETTY_PRINT )
+		),
+		'before'
+	);
 }
 
 /* Updated Message */
