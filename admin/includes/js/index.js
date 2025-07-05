@@ -1,0 +1,1 @@
+(()=>{"use strict";window.wp.i18n,document.addEventListener("DOMContentLoaded",e=>{})})();
