@@ -87,10 +87,21 @@ function flamingo_admin_enqueue_scripts( $hook_suffix ) {
 		);
 	}
 
+	$assets = include FLAMINGO_PLUGIN_DIR . '/admin/includes/js/index.asset.php';
+
+	$assets = wp_parse_args( $assets, array(
+		'dependencies' => array(),
+		'version' => FLAMINGO_VERSION,
+	) );
+
 	wp_enqueue_script( 'flamingo-admin',
-		flamingo_plugin_url( 'admin/includes/js/script.js' ),
-		array( 'postbox' ), FLAMINGO_VERSION, true
+		flamingo_plugin_url( 'admin/includes/js/index.js' ),
+		$assets['dependencies'],
+		$assets['version'],
+		array( 'in_footer' => true )
 	);
+
+	wp_set_script_translations( 'flamingo-admin', 'flamingo' );
 
 	$current_screen = get_current_screen();
 
