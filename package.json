@@ -1,0 +1,24 @@
+{
+	"name": "flamingo",
+	"version": "2.6.0",
+	"description": "JavaScript packages for Flamingo.",
+	"private": true,
+	"scripts": {
+		"start:admin": "wp-scripts start admin/includes/js/src/index.js --output-path=admin/includes/js",
+		"build:admin": "wp-scripts build admin/includes/js/src/index.js --output-path=admin/includes/js",
+		"packages-update": "wp-scripts packages-update"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/rocklobster-in/flamingo.git"
+	},
+	"author": "takayukister",
+	"license": "GPL-2.0-only",
+	"bugs": {
+		"url": "https://github.com/rocklobster-in/flamingo/issues"
+	},
+	"homepage": "https://github.com/rocklobster-in/flamingo#readme",
+	"devDependencies": {
+		"@wordpress/scripts": "^30.19.0"
+	}
+}
