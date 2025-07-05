@@ -1,1 +1,1 @@
-(()=>{"use strict";window.wp.i18n,document.addEventListener("DOMContentLoaded",e=>{})})();
+(()=>{"use strict";window.wp.i18n,document.addEventListener("DOMContentLoaded",e=>{postboxes.add_postbox_toggles(flamingo.screenId)})})();
