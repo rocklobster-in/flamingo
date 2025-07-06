@@ -45,7 +45,7 @@ function flamingo_schedule_move_trash() {
 	}
 
 	$posts_to_move = Flamingo_Inbound_Message::find( array(
-		'posts_per_page' => 100,
+		'posts_per_page' => 20,
 		'meta_key' => '_spam_meta_time',
 		'meta_value' => time() - ( DAY_IN_SECONDS * FLAMINGO_MOVE_TRASH_DAYS ),
 		'meta_compare' => '<',
