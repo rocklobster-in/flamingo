@@ -79,7 +79,7 @@ function flamingo_contact_tags_meta_box( $post ) {
 
 ?>
 <div class="tagsdiv" id="<?php echo esc_attr( $taxonomy->name ); ?>">
-<textarea name="<?php echo "tax_input[$taxonomy->name]"; ?>" rows="3" cols="20" class="the-tags" id="tax-input-<?php echo $taxonomy->name; ?>"><?php echo esc_textarea( $tag_names ); ?></textarea>
+<textarea name="<?php echo esc_attr( "tax_input[{$taxonomy->name}]" ); ?>" rows="3" cols="20" class="the-tags" id="<?php echo esc_attr( "tax-input-{$taxonomy->name}" ); ?>"><?php echo esc_textarea( $tag_names ); ?></textarea>
 
 <p class="howto"><?php echo esc_html( __( 'Separate tags with commas', 'flamingo' ) ); ?></p>
 
@@ -162,7 +162,7 @@ function flamingo_inbound_submit_meta_box( $post ) {
 			'<span class="dashicons-before %1$s"> %2$s</span>',
 			in_array( $post->submission_status, array( 'mail_failed', 'spam' ) )
 				? 'dashicons-no' : 'dashicons-yes',
-			$submission_status
+			wp_kses_data( $submission_status )
 		);
 
 		echo '</div>', "\n";
@@ -274,7 +274,7 @@ function flamingo_inbound_fields_meta_box( $post ) {
 <?php foreach ( (array) $post->fields as $key => $value ) : ?>
 <tr>
 <td class="field-title"><?php echo esc_html( $key ); ?></td>
-<td class="field-value"><?php echo flamingo_htmlize( $value ); ?></td>
+<td class="field-value"><?php echo wp_kses_post( flamingo_htmlize( $value ) ); ?></td>
 </tr>
 <?php endforeach; ?>
 
@@ -331,7 +331,7 @@ function flamingo_inbound_meta_meta_box( $post ) {
 <?php foreach ( (array) $post->meta as $key => $value ) : ?>
 <tr>
 <td class="field-title"><?php echo esc_html( $key ); ?></td>
-<td class="field-value"><?php echo flamingo_htmlize( $value ); ?></td>
+<td class="field-value"><?php echo wp_kses_post( flamingo_htmlize( $value ) ); ?></td>
 </tr>
 <?php endforeach; ?>
 

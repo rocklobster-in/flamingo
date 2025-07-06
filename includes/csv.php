@@ -40,6 +40,7 @@ class Flamingo_Contact_CSV extends Flamingo_CSV {
 			__( 'Last name', 'flamingo' ),
 		);
 
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo flamingo_csv_row( $labels );
 
 		$args = array(
@@ -84,6 +85,7 @@ class Flamingo_Contact_CSV extends Flamingo_CSV {
 				$item->get_prop( 'last_name' ),
 			);
 
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo flamingo_csv_row( $row );
 		}
 	}
@@ -149,6 +151,7 @@ class Flamingo_Inbound_CSV extends Flamingo_CSV {
 
 		$labels = array_keys( $items[0]->fields );
 
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo flamingo_csv_row(
 			array_merge( $labels, array( __( 'Date', 'flamingo' ) ) )
 		);
@@ -172,6 +175,7 @@ class Flamingo_Inbound_CSV extends Flamingo_CSV {
 
 			$row[] = get_post_time( 'c', false, $item->id() ); // Date
 
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo flamingo_csv_row( $row );
 		}
 	}
@@ -223,7 +227,7 @@ function flamingo_csv_field_prefix_text( $prefix, $input ) {
 
 	if ( in_array( substr( $input, 0, 1 ), $formula_triggers, true ) ) {
 		/* translators: %s: URL */
-		$prefix = __( "(Security Alert: Suspicious content is detected. See %s for details.)", 'flamingo' );
+		$prefix = __( '(Security Alert: Suspicious content is detected. See %s for details.)', 'flamingo' );
 
 		if ( in_array( substr( $prefix, 0, 1 ), $formula_triggers, true ) ) {
 			$prefix = '\'' . $prefix;
