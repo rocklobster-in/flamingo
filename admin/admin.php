@@ -323,10 +323,15 @@ function flamingo_contact_admin_page() {
 ?></h1>
 
 <?php
-	if ( ! empty( $_REQUEST['s'] ) ) {
-		echo sprintf( '<span class="subtitle">'
-			. __( 'Search results for &#8220;%s&#8221;', 'flamingo' )
-			. '</span>', esc_html( $_REQUEST['s'] ) );
+	if ( isset( $_REQUEST['s'] ) and strlen( $_REQUEST['s'] ) ) {
+		echo sprintf(
+			'<span class="subtitle">%s</span>',
+			wp_kses_data( sprintf(
+				/* translators: %s: Search query. */
+				__( 'Search results for: <strong>%s</strong>', 'flamingo' ),
+				esc_html( $_REQUEST['s'] )
+			) )
+		);
 	}
 ?>
 
@@ -744,10 +749,15 @@ function flamingo_inbound_admin_page() {
 ?></h1>
 
 <?php
-	if ( ! empty( $_REQUEST['s'] ) ) {
-		echo sprintf( '<span class="subtitle">'
-			. __( 'Search results for &#8220;%s&#8221;', 'flamingo' )
-			. '</span>', esc_html( $_REQUEST['s'] ) );
+	if ( isset( $_REQUEST['s'] ) and strlen( $_REQUEST['s'] ) ) {
+		echo sprintf(
+			'<span class="subtitle">%s</span>',
+			wp_kses_data( sprintf(
+				/* translators: %s: Search query. */
+				__( 'Search results for: <strong>%s</strong>', 'flamingo' ),
+				esc_html( $_REQUEST['s'] )
+			) )
+		);
 	}
 ?>
 
