@@ -8,22 +8,24 @@ function flamingo_contact_submit_meta_box( $post ) {
 <div id="delete-action">
 <?php
 	if ( current_user_can( 'flamingo_delete_contact', $post->id() ) ) {
-		$delete_text = __( 'Delete', 'flamingo' );
-
-		$delete_link = add_query_arg(
-			array(
-				'post' => $post->id(),
-				'action' => 'delete',
-			),
-			menu_page_url( 'flamingo', false )
-		);
-
 		$delete_link = wp_nonce_url(
-			$delete_link,
+			add_query_arg(
+				array(
+					'post' => $post->id(),
+					'action' => 'delete',
+				),
+				menu_page_url( 'flamingo', false )
+			),
 			'flamingo-delete-contact_' . $post->id()
 		);
 
-?><a class="submitdelete deletion" href="<?php echo esc_url( $delete_link ); ?>" onclick="if (confirm('<?php echo esc_js( sprintf( __( "You are about to delete this contact '%s'\n 'Cancel' to stop, 'OK' to delete.", 'flamingo' ), $post->email ) ); ?>')) {return true;} return false;"><?php echo esc_html( $delete_text ); ?></a><?php } ?>
+		echo sprintf(
+			'<a class="submitdelete deletion" href="%1$s">%2$s</a>',
+			esc_url( $delete_link ),
+			esc_html( __( 'Delete', 'flamingo' ) )
+		);
+	}
+?>
 </div>
 
 <div id="publishing-action">

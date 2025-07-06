@@ -1,1 +1,1 @@
-(()=>{"use strict";window.wp.i18n,document.addEventListener("DOMContentLoaded",e=>{postboxes.add_postbox_toggles(flamingo.screenId)})})();
+(()=>{"use strict";const e=window.wp.i18n;document.addEventListener("DOMContentLoaded",t=>{document.querySelectorAll(".submitdelete").forEach(t=>{t.addEventListener("click",t=>{if(window.confirm((0,e.__)("You are about to delete this item.\n 'Cancel' to stop, 'OK' to delete.","flamingo")))return!0;t.preventDefault()})}),postboxes.add_postbox_toggles(flamingo.screenId)})})();
