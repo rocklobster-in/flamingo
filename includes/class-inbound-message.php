@@ -5,6 +5,7 @@ class Flamingo_Inbound_Message {
 	const post_type = 'flamingo_inbound';
 	const spam_status = 'flamingo-spam';
 	const channel_taxonomy = 'flamingo_inbound_channel';
+	const spam_to_trash_cron_hook = 'flamingo_daily_cron_job';
 
 	private static $found_items = 0;
 
