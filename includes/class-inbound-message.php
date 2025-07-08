@@ -261,8 +261,10 @@ class Flamingo_Inbound_Message {
 			'post_date' => $this->get_post_date(),
 		);
 
-		if ( $this->timestamp
-		and $datetime = date_create( '@' . $this->timestamp ) ) {
+		if (
+			$this->timestamp and
+			$datetime = date_create( '@' . $this->timestamp )
+		) {
 			$datetime->setTimezone( wp_timezone() );
 			$postarr['post_date'] = $datetime->format( 'Y-m-d H:i:s' );
 		}
@@ -306,8 +308,11 @@ class Flamingo_Inbound_Message {
 			update_post_meta( $post_id, '_hash', $this->hash );
 
 			if ( term_exists( $this->channel, self::channel_taxonomy ) ) {
-				wp_set_object_terms( $this->id, $this->channel,
-					self::channel_taxonomy );
+				wp_set_object_terms(
+					$this->id,
+					$this->channel,
+					self::channel_taxonomy
+				);
 			}
 		}
 
