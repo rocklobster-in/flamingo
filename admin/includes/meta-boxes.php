@@ -121,7 +121,7 @@ function flamingo_inbound_submit_meta_box( $post ) {
 	</fieldset>
 
 	<div class="misc-pub-section curtime misc-pub-curtime">
-	<span id="timestamp">
+	<span class="dashicons-before dashicons-calendar">
 <?php
 	$submitted_timestamp = get_post_timestamp( $post->id() );
 
@@ -140,11 +140,11 @@ function flamingo_inbound_submit_meta_box( $post ) {
 		)
 	);
 
-	echo sprintf(
-		/* translators: %s: message submission date */
-		esc_html( __( 'Submitted on: %s', 'flamingo' ) ),
-		'<b>' . esc_html( $submitted_on ) . '</b>'
-	);
+	echo wp_kses_data( sprintf(
+		/* translators: %s: Message submission date. */
+		__( 'Submitted on: <b>%s</b>', 'flamingo' ),
+		$submitted_on
+	) );
 ?>
 	</span>
 	</div>
@@ -152,17 +152,15 @@ function flamingo_inbound_submit_meta_box( $post ) {
 	if ( ! empty( $post->submission_status ) ) {
 		echo '<div class="misc-pub-section submission-status">', "\n";
 
-		$submission_status = sprintf(
-			/* translators: %s: Result of the submission. */
-			esc_html( __( 'Submission result: %s', 'flamingo' ) ),
-			sprintf( '<b>%s</b>', esc_html( $post->submission_status ) )
-		);
-
 		echo sprintf(
 			'<span class="dashicons-before %1$s"> %2$s</span>',
 			in_array( $post->submission_status, array( 'mail_failed', 'spam' ) )
 				? 'dashicons-no' : 'dashicons-yes',
-			wp_kses_data( $submission_status )
+			wp_kses_data( sprintf(
+				/* translators: %s: Result of the submission. */
+				__( 'Submission result: <b>%s</b>', 'flamingo' ),
+				$post->submission_status
+			) )
 		);
 
 		echo '</div>', "\n";
