@@ -14,16 +14,8 @@ add_action( 'admin_init', 'flamingo_schedule_activation', 10, 0 );
  * @since 2.1
  */
 function flamingo_schedule_activation() {
-	$timestamp = wp_next_scheduled(
-		Flamingo_Inbound_Message::spam_to_trash_cron_hook
-	);
-
-	if ( false === $timestamp ) {
-		wp_schedule_event(
-			time(),
-			'hourly',
-			Flamingo_Inbound_Message::spam_to_trash_cron_hook
-		);
+	if ( ! wp_next_scheduled( 'flamingo_daily_cron_job' ) ) {
+		wp_schedule_event( time(), 'daily', 'flamingo_daily_cron_job' );
 	}
 }
 
@@ -39,22 +31,13 @@ register_deactivation_hook( FLAMINGO_PLUGIN, 'flamingo_schedule_deactivate' );
 function flamingo_schedule_deactivate() {
 
 	// Timestamp of when the last event was scheduled
-	$timestamp = wp_next_scheduled(
-		Flamingo_Inbound_Message::spam_to_trash_cron_hook
-	);
+	$timestamp = wp_next_scheduled( 'flamingo_daily_cron_job' );
 
-	wp_unschedule_event(
-		$timestamp,
-		Flamingo_Inbound_Message::spam_to_trash_cron_hook
-	);
+	wp_unschedule_event( $timestamp, 'flamingo_daily_cron_job' );
 }
 
 
-add_action(
-	Flamingo_Inbound_Message::spam_to_trash_cron_hook,
-	'flamingo_schedule_function',
-	10, 0
-);
+add_action( 'flamingo_daily_cron_job', 'flamingo_schedule_function', 10, 0 );
 
 /**
  * The cron job.
