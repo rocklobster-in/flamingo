@@ -17,8 +17,6 @@ function flamingo_schedule_activation() {
 	if ( ! wp_next_scheduled( 'flamingo_hourly_cron_job' ) ) {
 		wp_schedule_event( time(), 'hourly', 'flamingo_hourly_cron_job' );
 	}
-
-	wp_clear_scheduled_hook( 'flamingo_daily_cron_job' );
 }
 
 
