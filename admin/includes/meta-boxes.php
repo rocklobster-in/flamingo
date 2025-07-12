@@ -166,29 +166,20 @@ function flamingo_inbound_submit_meta_box( $post ) {
 		echo '</div>', "\n";
 	}
 
-	if ( ! empty( $post->spam_log ) ) {
-		echo '<div class="misc-pub-section spam-log">', "\n";
+	foreach ( (array) $post->spam_log as $log ) {
+		echo '<div class="misc-pub-section spam-log">';
 
-		foreach ( (array) $post->spam_log as $log ) {
-			$agent = isset( $log['agent'] ) ? trim( $log['agent'] ) : '';
-			$reason = isset( $log['reason'] ) ? trim( $log['reason'] ) : '';
+		echo sprintf(
+			'<span class="dashicons-before dashicons-shield %1$s"> %2$s</span>',
+			esc_attr( $log['agent'] ?? '' ),
+			wp_kses_data( sprintf(
+				/* translators: %s: reason why this message is regarded as spam */
+				__( 'Spam log: %s', 'flamingo' ),
+				$log['reason'] ?? ''
+			) )
+		);
 
-			if ( '' !== $reason ) {
-				$reason = sprintf(
-					/* translators: %s: reason why this message is regarded as spam */
-					__( 'Spam log: %s', 'flamingo' ),
-					$reason
-				);
-
-				echo sprintf(
-					'<span class="dashicons-before dashicons-shield %1$s"> %2$s</span>',
-					esc_attr( $agent ),
-					esc_html( $reason )
-				);
-			}
-		}
-
-		echo '</div>', "\n";
+		echo '</div>';
 	}
 ?>
 </div><!-- #misc-publishing-actions -->
