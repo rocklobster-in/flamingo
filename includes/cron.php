@@ -20,6 +20,18 @@ function flamingo_schedule_activation() {
 }
 
 
+add_action( 'flamingo_hourly_cron_job', 'flamingo_schedule_function', 10, 0 );
+
+/**
+ * The cron job.
+ *
+ * @since 2.1
+ */
+function flamingo_schedule_function() {
+	flamingo_schedule_move_trash();
+}
+
+
 // Unscheduling cron jobs on plugin deactivation.
 register_deactivation_hook( FLAMINGO_PLUGIN, 'flamingo_schedule_deactivate' );
 
@@ -31,16 +43,4 @@ register_deactivation_hook( FLAMINGO_PLUGIN, 'flamingo_schedule_deactivate' );
 function flamingo_schedule_deactivate() {
 	wp_clear_scheduled_hook( 'flamingo_hourly_cron_job' );
 	wp_clear_scheduled_hook( 'flamingo_daily_cron_job' );
-}
-
-
-add_action( 'flamingo_hourly_cron_job', 'flamingo_schedule_function', 10, 0 );
-
-/**
- * The cron job.
- *
- * @since 2.1
- */
-function flamingo_schedule_function() {
-	flamingo_schedule_move_trash();
 }
