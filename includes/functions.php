@@ -53,12 +53,6 @@ function flamingo_schedule_move_trash() {
 	) );
 
 	foreach ( $posts_to_move as $post ) {
-
-		if ( $post->trash() ) {
-
-			// delete spam meta time to stop trashing in cron job
-			delete_post_meta( $post->id(), '_spam_meta_time' );
-		}
-
+		$post->trash();
 	}
 }
