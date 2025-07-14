@@ -4,6 +4,7 @@
 	"description": "JavaScript packages for Flamingo.",
 	"private": true,
 	"scripts": {
+		"build:all": "npm run build:admin",
 		"start:admin": "wp-scripts start admin/includes/js/src/index.js --output-path=admin/includes/js",
 		"build:admin": "wp-scripts build admin/includes/js/src/index.js --output-path=admin/includes/js",
 		"packages-update": "wp-scripts packages-update"

@@ -34,19 +34,15 @@ This plugin stores submission data collected through contact forms, which may in
 
 == Changelog ==
 
+= 2.6 =
+
+* Bumps up the minimum required WordPress version to 6.7.
+* Fixes errors reported by PCP.
+* Performs a tune-up for the cron job scheduling.
+
 = 2.5 =
 
 * Bumps up the minimum required WordPress version to 6.4.
 * Uses `wp_json_encode()` instead of `json_encode()`.
 * Uses `get_views_links()`.
 * Uses null coalescing operators.
-
-= 2.4 =
-
-* Bumps up the minimum required WordPress version to 6.1.
-* Bumps up the minimum required PHP version to 7.4.
-* Removes unused Outbound Messages codes.
-* Introduces `Flamingo_CSV` classes for fully customizable CSV generation.
-* New filter hook: `flamingo_contact_csv_class`
-* New filter hook: `flamingo_inbound_csv_class`
-* Uses `admin_init` for cron job scheduling.
