@@ -34,6 +34,12 @@ This plugin stores submission data collected through contact forms, which may in
 
 == Changelog ==
 
+= 2.6 =
+
+* Bumps up the minimum required WordPress version to 6.7.
+* Fixes errors reported by PCP.
+* Performs a tune-up for the cron job scheduling.
+
 = 2.5 =
 
 * Bumps up the minimum required WordPress version to 6.4.
