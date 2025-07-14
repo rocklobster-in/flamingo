@@ -1,6 +1,6 @@
 <?php
 
-require_once FLAMINGO_PLUGIN_DIR . '/admin/admin-functions.php';
+require_once FLAMINGO_PLUGIN_DIR . '/admin/includes/admin-functions.php';
 require_once FLAMINGO_PLUGIN_DIR . '/admin/includes/privacy.php';
 
 add_action( 'admin_menu', 'flamingo_admin_menu', 8, 0 );

@@ -49,16 +49,12 @@ function flamingo_schedule_move_trash() {
 		'meta_key' => '_spam_meta_time',
 		'meta_value' => time() - ( DAY_IN_SECONDS * FLAMINGO_MOVE_TRASH_DAYS ),
 		'meta_compare' => '<',
+		'orderby' => 'meta_value_num',
+		'order' => 'ASC',
 		'post_status' => Flamingo_Inbound_Message::spam_status,
 	) );
 
 	foreach ( $posts_to_move as $post ) {
-
-		if ( $post->trash() ) {
-
-			// delete spam meta time to stop trashing in cron job
-			delete_post_meta( $post->id(), '_spam_meta_time' );
-		}
-
+		$post->trash();
 	}
 }

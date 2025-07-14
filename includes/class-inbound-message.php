@@ -5,7 +5,6 @@ class Flamingo_Inbound_Message {
 	const post_type = 'flamingo_inbound';
 	const spam_status = 'flamingo-spam';
 	const channel_taxonomy = 'flamingo_inbound_channel';
-	const spam_to_trash_cron_hook = 'flamingo_daily_cron_job';
 
 	private static $found_items = 0;
 
@@ -274,14 +273,15 @@ class Flamingo_Inbound_Message {
 		if ( $post_id ) {
 			$this->id = $post_id;
 
-			if ( $post_status === self::spam_status ) {
-
-				// set spam meta time for later use to trash
-				update_post_meta( $post_id, '_spam_meta_time', time() );
-			} else {
-
-				// delete spam meta time to stop trashing in cron job
-				delete_post_meta( $post_id, '_spam_meta_time' );
+			switch ( $post_status ) {
+				case self::spam_status:
+					update_post_meta( $post_id, '_spam_meta_time', time() );
+					break;
+				case 'trash':
+					// Do nothing.
+					break;
+				default:
+					delete_post_meta( $post_id, '_spam_meta_time' );
 			}
 
 			update_post_meta( $post_id, '_submission_status',
