@@ -1,6 +1,6 @@
 {
 	"name": "flamingo",
-	"version": "2.6.0",
+	"version": "2.6.1",
 	"description": "JavaScript packages for Flamingo.",
 	"private": true,
 	"scripts": {
@@ -20,6 +20,6 @@
 	},
 	"homepage": "https://github.com/rocklobster-in/flamingo#readme",
 	"devDependencies": {
-		"@wordpress/scripts": "^30.19.0"
+		"@wordpress/scripts": "^31.1.0"
 	}
 }
