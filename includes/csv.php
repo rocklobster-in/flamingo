@@ -205,7 +205,10 @@ add_filter( 'flamingo_csv_quotation', 'flamingo_csv_quote', 10, 1 );
  * Retrieves text that represents a CSV cell with quotation.
  */
 function flamingo_csv_quote( $input ) {
+	$input = trim( $input );
+
 	$prefix = apply_filters( 'flamingo_csv_field_prefix', '', $input );
+
 	$input = trim( sprintf( '%1$s %2$s', $prefix, $input ) );
 
 	return sprintf( '"%s"', str_replace( '"', '""', $input ) );
