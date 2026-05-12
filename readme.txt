@@ -34,6 +34,12 @@ This plugin stores submission data collected through contact forms, which may in
 
 == Changelog ==
 
+= 2.6.2 =
+
+* Security enhancement: Blocks a potential bypass of a known spreadsheet vulnerability.
+* Updates Node modules.
+* Confirmed WordPress 7.0 compatibility.
+
 = 2.6.1 =
 
 * Updates Node modules.
